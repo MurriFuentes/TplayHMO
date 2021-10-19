@@ -1,0 +1,19 @@
+
+.Section{
+  max-width: 1140px;
+}
+
+.Home,
+.Cotizador,
+.Internet,
+.TvInternet {
+  display: flex;
+  position: static;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  font-size: 3rem;
+  color: rgb(235, 229, 229);
+  background-image: url("./images/PlaceHolder.jpg");
+  background-size: cover;
+}
