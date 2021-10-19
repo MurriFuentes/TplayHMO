@@ -9,7 +9,8 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
-    position: fixed;
+    position: sticky;
+    top: 0;
 }
 
 .navbar-logo{
