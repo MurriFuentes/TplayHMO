@@ -9,23 +9,24 @@ import PageCotizador from './pages/Cotizador';
 import PageTvInternet from './pages/Tv+Internet';
 import PageInternet from './pages/Internet';
 import PageLogin from './pages/Login';
+import { UserContextProvider } from './context/UserContext';
 
 function App() {
   return (
-    <>
+    <UserContextProvider>
       <BrowserRouter>
-          <Navbar />
-          <Switch>
-            <Route path="/" exact component={PageHome}></Route>
-            <Route path="/Tv-Internet" exact component={PageTvInternet}></Route>
-            <Route path="/Internet" exact component={PageInternet}></Route>
-            <Route path="/Cotizador" exact component={PageCotizador}></Route>
-            <Route path="/Login" exact component={PageLogin}></Route>
-          </Switch>
-      <PageHome />
-      <Footer /> 
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={PageHome}></Route>
+          <Route path="/Tv-Internet" exact component={PageTvInternet}></Route>
+          <Route path="/Internet" exact component={PageInternet}></Route>
+          <Route path="/Cotizador" exact component={PageCotizador}></Route>
+          <Route path="/Login" exact component={PageLogin}></Route>
+        </Switch>
+        <PageHome />
+        <Footer />
       </BrowserRouter>
-    </>
+    </UserContextProvider>
   );
 }
 
