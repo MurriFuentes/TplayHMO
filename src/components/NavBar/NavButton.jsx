@@ -1,14 +1,18 @@
 import useUser from "../../hooks/useUser";
 import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import Context from "../../context/UserContext";
 
 export default function NavButton() {
     //islogged = false
-    const { isLogged, logout } = useUser()
-
+    const { isLogged, logout ,jwt } = useUser()
     const handleClick = e => {
         e.preventDefault();
         logout();
     }
+    useEffect(()=>{
+        console.log(isLogged)
+    },[jwt])
 
     return (
         <header>

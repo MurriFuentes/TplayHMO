@@ -3,17 +3,17 @@ import Context from "../context/UserContext";
 import loginservice from "../services/login"
 
 export default function useUser (){
-    const {jwt, setJWT} = useContext(Context)
+    let {jwt, setJWT} =   (Context)
     const [state, setState] = useState({loading: false,
     error: false})
 
     const login = useCallback((username, password) => {
         setState({loading: true, error: false})
         loginservice(username,password)
-            .then(jwt => {
+            .then(jwtResponse => {
                 setState({loading: false, error: false})
-                console.log(jwt);
-                setJWT(jwt)
+                jwt=jwtResponse;
+                
             })
             .catch(err =>{
                 setState({loading: false, error: true})
@@ -28,6 +28,7 @@ export default function useUser (){
 
     return {
         isLogged: Boolean(jwt),
+        jwt,
         isLogginLoading: state.loading,
         hasLogginError: state.error,
         login,
