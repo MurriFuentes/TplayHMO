@@ -9,7 +9,7 @@ export default function useUser (){
 
     const login = useCallback((username, password) => {
         setState({loading: true, error: false})
-        loginservice({username,password})
+        loginservice(username,password)
             .then(jwt => {
                 setState({loading: false, error: false})
                 console.log(jwt);

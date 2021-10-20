@@ -1,7 +1,6 @@
 import useUser from "../hooks/useUser";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 export default function Page_Login() {
     const [username, setUsername] = useState("");
@@ -16,17 +15,6 @@ export default function Page_Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         login({ username, password });
-
-        /*
-        if (!name || !password) alert("Llena los campos correctamente");
-        axios.post("/authenticate", {
-            nombre: name,
-            password: password
-        }).then((response) => {
-            sessionStorage.setItem("token", response.data.token)
-            console.log(response.data.token)
-        })
-        */
     }
 
     return (

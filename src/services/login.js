@@ -1,7 +1,7 @@
-const ENDPOINT ="http://localhost:8000";
+const ENDPOINT ="http://localhost:8080";
 
 export default function login ({username,password}) {
-    return fetch(`${ENDPOINT}/authentification`, {
+    return fetch(`${ENDPOINT}/Authorization`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -11,7 +11,8 @@ export default function login ({username,password}) {
         if (!rest.ok) throw new Error("Response is NOT ok");
         return rest.json()
     }).then(res =>{
-        const {jwt} = res
-        return jwt
+        const {token} = res
+        console.log(token)        
+        return token
     })
 }
