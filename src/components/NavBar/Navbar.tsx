@@ -38,11 +38,12 @@ export default function Navbar () {
 
     return (
     <>
-        <nav className="navbar">
+        <nav id="navbar">
             <Link to="/" className="navbar-logo" onClick={() => setTogglebar(false)}>
                 <icons.RiGooglePlayLine/>
                 Totalplay
             </Link>
+            
             {!mobile && (
                 <ul className="nav-items">
                     {navItems.map((item) => (
