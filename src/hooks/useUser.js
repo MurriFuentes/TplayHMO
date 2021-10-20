@@ -3,7 +3,7 @@ import Context from "../context/UserContext";
 import loginservice from "../services/login"
 
 export default function useUser (){
-    let {jwt, setJWT} =   (Context)
+    const {jwt, setJWT} =   (Context)
     const [state, setState] = useState({loading: false,
     error: false})
 
