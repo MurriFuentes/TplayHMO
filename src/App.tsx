@@ -1,23 +1,31 @@
 import './css/NavBar.css';
+import './css/Footer.css';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from "./components/NavBar/Navbar";
-import Page_Home from './pages/Home';
-import Page_Cotizador from './pages/Cotizador';
-import Page_TvInternet from './pages/Tv+Internet';
-import Page_Internet from './pages/Internet';
+import Footer from './components/Footer';
+import PageHome from './pages/Home';
+import PageCotizador from './pages/Cotizador';
+import PageTvInternet from './pages/Tv+Internet';
+import PageInternet from './pages/Internet';
+import PageLogin from './pages/Login';
 
 function App() {
   return (
-    <BrowserRouter>
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={Page_Home}></Route>
-          <Route path="/Tv-Internet" exact component={Page_TvInternet}></Route>
-          <Route path="/Internet" exact component={Page_Internet}></Route>
-          <Route path="/Cotizador" exact component={Page_Cotizador}></Route>
-        </Switch>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={PageHome}></Route>
+            <Route path="/Tv-Internet" exact component={PageTvInternet}></Route>
+            <Route path="/Internet" exact component={PageInternet}></Route>
+            <Route path="/Cotizador" exact component={PageCotizador}></Route>
+            <Route path="/Login" exact component={PageLogin}></Route>
+          </Switch>
+      <PageHome />
+      <Footer /> 
+      </BrowserRouter>
+    </>
   );
 }
 
