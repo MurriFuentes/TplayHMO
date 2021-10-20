@@ -6,6 +6,9 @@ export default function Page_Home() {
             <div className="Section Home">
                     <h1>HOME</h1>
             </div>
+            <div className="Section Home">
+                    <h1>HOME</h1>
+            </div>
         </>
     );
 }
