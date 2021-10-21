@@ -10,9 +10,10 @@ export default function NavButton() {
         e.preventDefault();
         logout();
     }
+    
     useEffect(()=>{
         console.log(isLogged)
-    },[jwt])
+    },[isLogged, jwt])
 
     return (
         <header>

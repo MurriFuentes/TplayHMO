@@ -1,5 +1,6 @@
 import './css/NavBar.css';
 import './css/Footer.css';
+import './css/Cards.css';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from "./components/NavBar/Navbar";
@@ -23,7 +24,6 @@ function App() {
           <Route path="/Cotizador" exact component={PageCotizador}></Route>
           <Route path="/Login" exact component={PageLogin}></Route>
         </Switch>
-        <PageHome />
         <Footer />
       </BrowserRouter>
     </UserContextProvider>

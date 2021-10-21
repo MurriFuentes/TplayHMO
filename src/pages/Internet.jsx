@@ -2,8 +2,10 @@
 export default function Page_Internet() {
 
     return(
-        <div>
-            <h1>INTERNET</h1>
-        </div>
+        <>
+            <div className="Section">
+                <h1>Seccion de paquetes</h1>
+            </div>
+        </>
     );
 }
