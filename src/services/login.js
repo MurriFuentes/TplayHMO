@@ -2,7 +2,7 @@ import {getList} from "../services/contactListService"
 const ENDPOINT ="http://localhost:8080";
 
 export default function login ({username,password}) {
-    console.log(getList())
+    
     return Promise.resolve("sdafwerq")
     
     return fetch(`${ENDPOINT}/Authorization`, {

@@ -11,7 +11,7 @@ export default function useUser (){
         loginservice(username,password)
             .then(jwt => {
                 window.sessionStorage.setItem('jwt', jwt)
-                setState({loading: false, error: false})
+                setState({loading: false, error: false})        
                 setJWT(jwt);
             })
             .catch(err =>{
@@ -23,13 +23,13 @@ export default function useUser (){
 
     const logout = useCallback(() => {
         window.sessionStorage.removeItem('jwt')
+        setState({isLogged:false})
         setJWT(null)
     }, [setJWT])
-
-
+    
+    
     return {
         isLogged: Boolean(jwt),
-        jwt,
         isLogginLoading: state.loading,
         hasLogginError: state.error,
         login,

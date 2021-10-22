@@ -2,15 +2,20 @@ import useUser from "../hooks/useUser";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export default function Page_Login() {
+export default function Page_Login({onLogin}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const { isLogginLoading, hasLoginError, login, isLogged } = useUser();
     let history = useHistory();
+    
+    let jwt = sessionStorage.getItem("jwt")
 
     useEffect(() => {
-        if (isLogged) history.push("./")
-    }, [isLogged, history])
+        if (jwt) {
+            history.push("./")
+            onLogin && onLogin()
+        }
+    }, [history, onLogin, jwt])
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,7 +25,7 @@ export default function Page_Login() {
     return (
         <div className="Section">
             <h1>Identificate</h1>
-            {isLogginLoading && <span>Checking  Credentials</span>}
+            {isLogginLoading && <strong>Checking  Credentials</strong>}
             {!isLogginLoading &&
                 <form onSubmit={handleSubmit}>
                     <label>Nombre:
@@ -40,9 +45,7 @@ export default function Page_Login() {
                         />
                     </label>
                     <label>
-                        <button type="submit">
-                            Enviar
-                        </button>
+                        <button type="submit">Enviar</button>
                     </label>
                 </form>
             }

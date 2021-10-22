@@ -1,4 +1,5 @@
 import axios from "axios"
+import { useContext } from "react";
 import Context from "../context/UserContext"
 const DEV_ENDPOINT ="http://localhost:8080";
 const mockResponseListar =
@@ -31,8 +32,11 @@ const mockResponseListar =
 
 export const getList = () =>{
     // comment line 40 when api is setup
-    let {jwt} =  (Context)
-    return Promise.resolve(mockResponseListar)
+    let jwt = sessionStorage.getItem("jwt")
+    if (!jwt) return [];
+
+    return mockResponseListar;
+    
     axios.get(`${DEV_ENDPOINT}/Listar`,{
         headers: {
             'Authorization': `Bearer ${jwt}` 
@@ -45,12 +49,19 @@ export const getList = () =>{
     })
 }
 
-export const saveContact = (nombre,paquete,telefono)=>{
-    axios.get(`${DEV_ENDPOINT}/Listar`,{
+export const guardarCliente = (nombre,paquete,telefono)=>{
+    console.log({
+        nombre,
+        paquete,
+        telefono
+    })
+    axios.post(`${DEV_ENDPOINT}/guardar`,{
         nombre,
         paquete,
         telefono
     }).then((response)=>{
         return response.status
+    }).catch((error)=>{
+        console.log(error)
     })
 }

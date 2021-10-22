@@ -7,8 +7,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
-  box-shadow: 0 0 10px 0 rgb(176 176 176 / 50%);
 }
 
 label{
@@ -16,6 +14,13 @@ label{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.formContratar{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .Home,

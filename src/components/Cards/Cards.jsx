@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom"
+import {Button} from "reactstrap"
 export default function Card(){
     return(
+        <>
             <div className="cardContainer">
                 <div className="cardHeader">
                     Internet 20 megas   
@@ -15,8 +16,9 @@ export default function Card(){
                     <div className="cardInfo">
                         Informacion Extra
                     </div>
-                    <Link to="./Login" className="btnContratar">Contratar</Link>
+                    <Button href="./Contratar" className="btnContratar">Contratar</Button>
                 </div>
             </div>
+        </>
     )
 }
