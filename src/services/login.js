@@ -5,7 +5,7 @@ export default function login ({username,password}) {
     
     return Promise.resolve("sdafwerq")
     
-    return fetch(`${ENDPOINT}/Authorization`, {
+    return fetch(`${ENDPOINT}/authenticate`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

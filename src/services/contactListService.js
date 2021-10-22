@@ -35,11 +35,25 @@ export const getList = () =>{
     let jwt = sessionStorage.getItem("jwt")
     if (!jwt) return [];
 
-    return mockResponseListar;
-    
+    //return mockResponseListar;
+
+    return fetch(`${DEV_ENDPOINT}/authenticate`, {
+        method: "GET",
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+            "Content-Type": "application/json" 
+        },  
+    }).then(res =>{
+        if (!res.ok) throw new Error("Response is NOT ok");
+        return res.json()
+    }).then(res =>{       
+        return res.data
+    })
+    /*
     axios.get(`${DEV_ENDPOINT}/Listar`,{
         headers: {
-            'Authorization': `Bearer ${jwt}` 
+            'Authorization': `Bearer ${jwt}`,
+            "Content-Type": "application/json" 
         }
     }
     ).then((resp)=>{
@@ -47,6 +61,7 @@ export const getList = () =>{
     }).catch((error)=>{
         console.log(error)
     })
+    */
 }
 
 export const guardarCliente = (nombre,paquete,telefono)=>{
@@ -55,6 +70,20 @@ export const guardarCliente = (nombre,paquete,telefono)=>{
         paquete,
         telefono
     })
+
+    return fetch(`${DEV_ENDPOINT}/guardar`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(nombre,paquete,telefono)     
+    }).then(res =>{
+        if (!res.ok) throw new Error("Response is NOT ok");
+        return res.json()
+    }).then(res =>{    
+        return res.data
+    })
+    /*
     axios.post(`${DEV_ENDPOINT}/guardar`,{
         nombre,
         paquete,
@@ -64,4 +93,5 @@ export const guardarCliente = (nombre,paquete,telefono)=>{
     }).catch((error)=>{
         console.log(error)
     })
+    */
 }
