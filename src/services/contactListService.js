@@ -37,7 +37,7 @@ export const getList = () =>{
 
     //return mockResponseListar;
 
-    return fetch(`${DEV_ENDPOINT}/authenticate`, {
+    return fetch(`${DEV_ENDPOINT}/listar`, {
         method: "GET",
         headers: {
             'Authorization': `Bearer ${jwt}`,
