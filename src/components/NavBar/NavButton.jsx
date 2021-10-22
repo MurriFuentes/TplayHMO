@@ -1,31 +1,34 @@
 import useUser from "../../hooks/useUser";
-import { Link } from "react-router-dom";
-import { useEffect } from 'react';
-import Context from "../../context/UserContext";
+import { Link, useRouteMatch} from "react-router-dom";
 
 export default function NavButton() {
     //islogged = false
-    const { isLogged, logout ,jwt } = useUser()
+    const { isLogged, logout } = useUser()
+    //CAMBIAR cuando este funciondo el login
+    const match = useRouteMatch("/Login")
+
     const handleClick = e => {
         e.preventDefault();
-        logout();
+        logout()
+    }
+
+    const renderLoginButtons = ({isLogged}) => {
+        return isLogged
+                ? <Link to="./" onClick={handleClick}>
+                    <button className="navButton">Logout</button>
+                </Link>
+                : <Link to="./Login">
+                    <button className="navButton">Login</button>
+                </Link>
     }
     
-    useEffect(()=>{
-        console.log(isLogged)
-    },[isLogged, jwt])
+    const content = match
+    ? null
+    : renderLoginButtons({isLogged})
 
     return (
-        <header>
-            {
-                isLogged
-                    ? <Link to="#" onClick={handleClick}>
-                        <button className="navButton">Logout</button>
-                    </Link>
-                    : <Link to="./Login">
-                        <button className="navButton">Login</button>
-                    </Link>
-            }
+        <header className='gf-header'>
+          {content}
         </header>
-    );
+      )
 }

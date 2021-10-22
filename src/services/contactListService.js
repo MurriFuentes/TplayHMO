@@ -24,15 +24,16 @@ const mockResponseListar =
     {
         "id": 7,
         "nombre": "Tigrillo",
-        "paquete": "Internet 100 megas"
+        "paquete": "Internet 100 megas",
+        "telefono": "6678565641"
     }
 ]
 
 export const getList = () =>{
     // comment line 40 when api is setup
-    let {jwt} =   (Context)
+    let {jwt} =  (Context)
     return Promise.resolve(mockResponseListar)
-    axios.get(`${DEV_ENDPOINT}/listar`,{
+    axios.get(`${DEV_ENDPOINT}/Listar`,{
         headers: {
             'Authorization': `Bearer ${jwt}` 
         }
@@ -45,7 +46,7 @@ export const getList = () =>{
 }
 
 export const saveContact = (nombre,paquete,telefono)=>{
-    axios.get(`${DEV_ENDPOINT}/listar`,{
+    axios.get(`${DEV_ENDPOINT}/Listar`,{
         nombre,
         paquete,
         telefono

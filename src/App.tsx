@@ -10,6 +10,7 @@ import PageCotizador from './pages/Cotizador';
 import PageTvInternet from './pages/Tv+Internet';
 import PageInternet from './pages/Internet';
 import PageLogin from './pages/Login';
+import PageListar from './pages/Listar';
 import { UserContextProvider } from './context/UserContext';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/Internet" exact component={PageInternet}></Route>
           <Route path="/Cotizador" exact component={PageCotizador}></Route>
           <Route path="/Login" exact component={PageLogin}></Route>
+          <Route path="/Listar" exact component={PageListar}></Route>
         </Switch>
         <Footer />
       </BrowserRouter>
