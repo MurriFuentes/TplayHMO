@@ -1,3 +1,4 @@
+import * as icons from 'react-icons/bs';
 import {Button} from "reactstrap"
 export default function Card(){
     return(
@@ -10,6 +11,10 @@ export default function Card(){
                     <p className="cardPrice">
                         $500
                     </p>
+                    <div>
+                        <icons.BsArrowDown/>
+                        <icons.BsArrowUp/>
+                    </div>
                     <div className="Megas">
                         100 40
                     </div>

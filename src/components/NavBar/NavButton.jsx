@@ -11,19 +11,18 @@ export default function NavButton() {
         logout()
 
     }
-    let jwt = sessionStorage.getItem("jwt")
-    console.log(jwt)
+    
     const renderLoginButtons = ({isLogged}) => {
-        return jwt
+        return isLogged
                 ? <Link to="./" onClick={handleClick}>
-                    <button className="navButton">
+                    <div className="navButton">
                         Logout
-                    </button>
+                    </div>
                 </Link>
                 : <Link to="./Login">
-                    <button className="navButton">
+                    <div className="navButton">
                         Login
-                    </button>
+                    </div>
                 </Link>
     }
     

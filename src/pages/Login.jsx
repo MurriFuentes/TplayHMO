@@ -5,17 +5,15 @@ import { useEffect, useState } from "react";
 export default function Page_Login({onLogin}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const { isLogginLoading, hasLoginError, login, isLogged } = useUser();
+    const { isLogginLoading, hasLoginError, login, isLogged} = useUser();
     let history = useHistory();
-    
-    let jwt = sessionStorage.getItem("jwt")
 
     useEffect(() => {
-        if (jwt) {
+        if (isLogged) {
             history.push("./")
             onLogin && onLogin()
         }
-    }, [history, onLogin, jwt])
+    }, [history, onLogin, isLogged])
 
     const handleSubmit = (event) => {
         event.preventDefault();

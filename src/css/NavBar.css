@@ -1,5 +1,6 @@
 *{
     font-family: 'Montserrat', sans-serif;
+    text-decoration: none !important;
 }
 
 #navbar{
@@ -24,12 +25,12 @@
 }
 
 .navButton{
+    display: flex;
     background: tomato;
     border: none;
     border-radius: 5px;
     padding: 8px 18px;
     font-size: 1.3rem;
-    cursor: pointer;
     transition: 0.3s all ease-out;
     align-items: center;
     justify-content: center;
@@ -91,7 +92,6 @@
     width: 100%;
     background: #332f2f;
     position: fixed;
-    top: 10vh;
     right: -130%;
     transition: 0.3s all ease-in-out;
     z-index: 10;

@@ -10,7 +10,7 @@ export default function Page_Contratar() {
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        guardarCliente(nombre,telefono,paquete);
+        guardarCliente(nombre,paquete,telefono);
     }
 
     return(

@@ -1,6 +1,4 @@
 import axios from "axios"
-import { useContext } from "react";
-import Context from "../context/UserContext"
 const DEV_ENDPOINT ="http://localhost:8080";
 const mockResponseListar =
 [
@@ -35,63 +33,41 @@ export const getList = () =>{
     let jwt = sessionStorage.getItem("jwt")
     if (!jwt) return [];
 
-    //return mockResponseListar;
-
-    return fetch(`${DEV_ENDPOINT}/listar`, {
-        method: "GET",
-        headers: {
-            'Authorization': `Bearer ${jwt}`,
-            "Content-Type": "application/json" 
-        },  
-    }).then(res =>{
-        if (!res.ok) throw new Error("Response is NOT ok");
-        return res.json()
-    }).then(res =>{       
-        return res.data
-    })
+    return mockResponseListar;
+    
     /*
-    axios.get(`${DEV_ENDPOINT}/Listar`,{
-        headers: {
-            'Authorization': `Bearer ${jwt}`,
-            "Content-Type": "application/json" 
-        }
-    }
-    ).then((resp)=>{
-        return resp.data
-    }).catch((error)=>{
+    try {
+        const resp = await axios.get(`${DEV_ENDPOINT}/listar`,{
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    "Content-Type": "application/json" 
+                }
+            }
+        );
+    
+        return resp.data;
+    } catch (error) {
         console.log(error)
-    })
+
+        throw error;
+    }
     */
 }
 
 export const guardarCliente = (nombre,paquete,telefono)=>{
-    console.log({
-        nombre,
-        paquete,
-        telefono
-    })
-
-    return fetch(`${DEV_ENDPOINT}/guardar`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(nombre,paquete,telefono)     
-    }).then(res =>{
-        if (!res.ok) throw new Error("Response is NOT ok");
-        return res.json()
-    }).then(res =>{    
-        return res.data
-    })
-    /*
-    axios.post(`${DEV_ENDPOINT}/guardar`,{
-        nombre,
-        paquete,
-        telefono
-    }).then((response)=>{
-        return response.status
-    }).catch((error)=>{
+    try {
+        axios.post(`${DEV_ENDPOINT}/guardar`,{
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nombre,
+                paquete,
+                telefono
+            })  
+        });
+    } catch (error) {
         console.log(error)
-    })
-    */
+        throw error;
+    }
 }

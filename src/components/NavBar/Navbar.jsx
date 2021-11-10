@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { navItems } from './NavbarItems';
 import NavButton from './NavButton';
+import useUser from '../../hooks/useUser';
 import * as icons from 'react-icons/ri';
 import * as icons2 from 'react-icons/fa';
 
 export default function Navbar() {
     const [mobile, setMobile] = useState(false);
     const [togglebar, setTogglebar] = useState(false);
+    const { isLogged } = useUser();
+    var [navOptions, setNavOptions] = useState(navItems) ;
 
     useEffect(() => {
         if (window.innerWidth < 1065) {
             setMobile(true);
         }
 
-    }, [])
-
-    useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 1065) {
                 setMobile(true);
@@ -32,8 +32,16 @@ export default function Navbar() {
         return () => {
             window.removeEventListener("resize", handleResize);
         }
+    }, [])
 
-    }, []);
+    useEffect(() => {
+        if (!isLogged){
+            setNavOptions(navItems.filter(item => item.title !== "LISTAR"))
+        }else{
+            setNavOptions(navItems)
+        }
+
+    }, [isLogged])
 
     return (
         <>
@@ -42,18 +50,20 @@ export default function Navbar() {
                     <icons.RiGooglePlayLine />
                     Totalplay
                 </Link>
-
+                
                 {!mobile && (
-                    <ul className="nav-items">
-                        {navItems.map((item) => (
-                            <li key={item.id} className={item.cName}>
-                                <Link to={item.path}>{item.title}</Link>
-                            </li>
-                        ))}
-                    </ul>
+                    <>
+                        <ul className="nav-items">
+                            {navOptions.map((item) => (
+                                <li key={item.id} className={item.cName}>
+                                    <Link to={item.path}>{item.title}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                        <NavButton />
+                    </>
                 )}
 
-                {!mobile && <NavButton />}
 
                 {mobile && (
                     <div className="toggleButton">
@@ -69,15 +79,19 @@ export default function Navbar() {
 
             <div className="ToggleMenu">
                 <ul className={togglebar ? "nav-items-toggled active" : "nav-items-toggled"}>
-                    {navItems.map((item) => {
+                    {navOptions
+                    .map((item) => {
                         return (
-                            <li key={item.id} className={item.dName} onClick={() => setTogglebar(false)}>
-                                <Link to={item.path}>
-                                    {item.title}
-                                </Link>
-                            </li>
+                                <li key={item.id} className={item.dName} onClick={() => setTogglebar(false)}>
+                                    <Link to={item.path}>
+                                        {item.title}
+                                    </Link>
+                                </li>
                         );
                     })}
+                    <div onClick={() => setTogglebar(false)}>
+                        <NavButton />
+                    </div>
                 </ul>
             </div>
         </>

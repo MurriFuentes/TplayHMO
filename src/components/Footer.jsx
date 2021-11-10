@@ -10,8 +10,8 @@ export default function Footer(){
                     Totalplay
                 </Link>
                 <div className="nav-items">
-                    <p className="pFooter"> Terminos y condiciones</p>
-                    <p className="pFooter">Aviso legal y políticas de privacidad</p>
+                    <p className="pFooter"> Terminos</p>
+                    <p className="pFooter">Aviso legal</p>
                 </div>
             </div>
         </>

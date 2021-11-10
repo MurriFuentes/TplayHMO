@@ -5,7 +5,7 @@ import loginservice from "../services/login"
 export default function useUser (){
     const {jwt, setJWT} = useContext(Context)
     const [state, setState] = useState({loading: false, error: false})
-
+    
     const login = useCallback((username, password) => {
         setState({loading: true, error: false})
         loginservice(username,password)
@@ -23,7 +23,6 @@ export default function useUser (){
 
     const logout = useCallback(() => {
         window.sessionStorage.removeItem('jwt')
-        setState({isLogged:false})
         setJWT(null)
     }, [setJWT])
     
