@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Cotizador.css";
+import { guardarCotizacion } from "../../services/Service_Cotizar";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { ToggleButton } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -12,7 +13,30 @@ export default function Cotizador() {
   const [streamingValue, setStreamingValue] = useState("0");
   const [wifiExtenderValue, setWifiExtenderValue] = useState(0);
   const [tvPremiumValue, setTvPremiumValue] = useState("0");
+  const [telefono, setTelefono] = useState(null);
+  const [correo, setCorreo] = useState("");
   const [toggleState, setToggleState] = useState(1);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    let paquete = {
+      velocidadInternet: megasValue,
+      television: false,
+      nuevoTotalPlayTv: false,
+      netflix: streamingValue === "1" ? true : false,
+      amazon: streamingValue === "2" ? true : false,
+      cantidadPantallasNetflix: null,
+      wifiExtender: wifiExtenderValue,
+      tvAdicional: tvExtraValue,
+      nuevoTotalPlayTvAdicional: null,
+      canales140: canalesValue === "1" ? true : false,
+      canales230: canalesValue === "2" ? true : false,
+      canales280: canalesValue === "3" ? true : false,
+    };
+
+    guardarCotizacion({ paquete, telefono, correo });
+  };
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -170,35 +194,44 @@ export default function Cotizador() {
                 </div>
               </div>
               <div className="tab_InnerSection">
-                  <h2>¿Television Extra?</h2>
-                  <div className="button_container">
-                    <Button
-                      variant="primary"
-                      onClick={() => setTvExtraValue(tvExtraValue - 1)}
-                      disabled={tvExtraValue <= 0 ? true : false}
-                    >
-                      -
-                    </Button>
-                    <h3>{tvExtraValue}</h3>
-                    <Button
-                      variant="primary"
-                      onClick={() => setTvExtraValue(tvExtraValue + 1)}
-                      disabled={tvExtraValue >= 5 ? true : false}
-                    >
-                      +
-                    </Button>
-                  </div>
+                <h2>¿Television Extra?</h2>
+                <div className="button_container">
+                  <Button
+                    variant="primary"
+                    onClick={() => setTvExtraValue(tvExtraValue - 1)}
+                    disabled={tvExtraValue <= 0 ? true : false}
+                  >
+                    -
+                  </Button>
+                  <h3>{tvExtraValue}</h3>
+                  <Button
+                    variant="primary"
+                    onClick={() => setTvExtraValue(tvExtraValue + 1)}
+                    disabled={tvExtraValue >= 5 ? true : false}
+                  >
+                    +
+                  </Button>
                 </div>
+              </div>
             </div>
             <div className="tab_infoContainer">
               <div className="tab_InnerSection">
-                <Form>
+                <Form onSubmit={handleSubmit}>
                   <Row>
                     <Col>
-                      <Form.Control type="email" placeholder="Correo" />
+                      <Form.Control
+                        type="email"
+                        placeholder="Correo (Opcional)"
+                        value={correo}
+                        onChange={(e) => setCorreo(e.target.value)}
+                      />
                     </Col>
                     <Col>
-                      <Form.Control placeholder="Telefono" />
+                      <Form.Control
+                        placeholder="Telefono (Opcional)"
+                        value={telefono}
+                        onChange={(e) => setTelefono(e.target.value)}
+                      />
                     </Col>
                     <Col>
                       <Button variant="primary" type="submit" size="lg">

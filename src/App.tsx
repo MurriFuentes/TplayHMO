@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from "./components/NavBar/Navbar";
 import Footer from './components/Footer';
 import PageHome from './pages/Home';
-import PageCotizador from './pages/Cotizador';
+import PageCotizador from './pages/Cotizar';
 import PageTvInternet from './pages/Tv+Internet';
 import PageInternet from './pages/Internet';
 import PageLogin from './pages/Login';
