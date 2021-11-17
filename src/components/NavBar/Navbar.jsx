@@ -36,7 +36,7 @@ export default function Navbar() {
 
     useEffect(() => {
         if (!isLogged){
-            setNavOptions(navItems.filter(item => item.title !== "LISTAR"))
+            setNavOptions(navItems.filter(item => item.title !== "LISTAR" ))
         }else{
             setNavOptions(navItems)
         }

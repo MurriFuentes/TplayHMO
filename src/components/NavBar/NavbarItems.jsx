@@ -26,5 +26,12 @@ export const navItems = [
         path: "./Listar",
         cName: "nav-item",
         dName: "drop-item",
+    },
+    {
+        id: 5,
+        title: "COTIZACIONES",
+        path: "./Cotizaciones",
+        cName: "nav-item",
+        dName: "drop-item",
     }
 ];

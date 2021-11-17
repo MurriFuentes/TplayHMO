@@ -14,7 +14,7 @@ export default function Cotizador() {
   const [streamingValue, setStreamingValue] = useState("0");
   const [wifiExtenderValue, setWifiExtenderValue] = useState(0);
   const [tvPremiumValue, setTvPremiumValue] = useState("0");
-  const [telefono, setTelefono] = useState(null);
+  const [telefono, setTelefono] = useState(0);
   const [tv, setTV] = useState(false);
   const [correo, setCorreo] = useState("");
   const [toggleState, setToggleState] = useState(1);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getList } from "../services/contactListService"
+import { getListCotizaciones } from "../services/contactListService"
 import { useHistory } from "react-router-dom";
 import useUser from "../hooks/useUser";
 
@@ -16,7 +16,7 @@ export default function Page_Listar() {
     }, [history, isLogged])
 
     const getListData = async () => {
-        const data = await getList();
+        const data = await getListCotizaciones();
         setDataList(data ? data : []);
         setDataLoaded(true);
     }
@@ -33,10 +33,10 @@ export default function Page_Listar() {
                 <div className="Section">
                     <ul className="lista-items">
                         {dataList.map((item) => (
-                            <li key={item.id} >
-                                <p>{item.nombre}</p>
+                            <li key={item.idCotizacion} >
                                 <p>{item.paquete}</p>
-                                <p>{item.telefono}</p>
+                                <p>{item.numeroTelefono}</p>
+                                <p>{item.correoElectronico}</p>
                             </li>
                         ))}
                     </ul>

@@ -28,7 +28,7 @@ const mockResponseListar =
     }
 ]
 
-export const getList = () =>{
+export const getList = async () =>{
     // comment line 40 when api is setup
     let jwt = sessionStorage.getItem("jwt")
     if (!jwt) return [];
@@ -68,6 +68,28 @@ export const guardarCliente = (nombre,paquete,telefono)=>{
         });
     } catch (error) {
         console.log(error)
+        throw error;
+    }
+}
+
+export const getListCotizaciones = async () =>{
+    // comment line 40 when api is setup
+    let jwt = sessionStorage.getItem("jwt")
+    if (!jwt) return [];
+    
+    try {
+        const resp = await axios.get(`${DEV_ENDPOINT}/listarCotizaciones`,{
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    "Content-Type": "application/json" 
+                }
+            }
+        );
+    
+        return resp.data;
+    } catch (error) {
+        console.log(error)
+
         throw error;
     }
 }
