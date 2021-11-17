@@ -5,6 +5,7 @@ import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { ToggleButton } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
+import { Switch } from "antd";
 
 export default function Cotizador() {
   const [megasValue, setMegasValue] = useState("1");
@@ -14,6 +15,7 @@ export default function Cotizador() {
   const [wifiExtenderValue, setWifiExtenderValue] = useState(0);
   const [tvPremiumValue, setTvPremiumValue] = useState("0");
   const [telefono, setTelefono] = useState(null);
+  const [tv, setTV] = useState(false);
   const [correo, setCorreo] = useState("");
   const [toggleState, setToggleState] = useState(1);
 
@@ -37,6 +39,10 @@ export default function Cotizador() {
 
     guardarCotizacion({ paquete, telefono, correo });
   };
+
+  const TV = () => {
+    tv ? setTV(false):setTV(true);
+  }
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -111,6 +117,9 @@ export default function Cotizador() {
                   ))}
                 </ButtonGroup>
               </div>
+            </div>
+
+            <div className="Row">
               <div className="tab_InnerSection">
                 <h2>¿TV Premium?</h2>
                 <div className="button_container"></div>
@@ -131,6 +140,15 @@ export default function Cotizador() {
                   ))}
                 </ButtonGroup>
               </div>
+              <div className="tab_InnerSection">
+                <h2>Television</h2>
+                <div className="button_container">
+                  <Switch onClick={TV}/>
+                </div>
+              </div>
+            </div>
+
+            <div className="Row">
               <div className="tab_InnerSection">
                 <h2>¿Servicio de Streaming?</h2>
                 <div className="button_container"></div>
@@ -172,6 +190,7 @@ export default function Cotizador() {
                 </ButtonGroup>
               </div>
             </div>
+
             <div className="Row">
               <div className="tab_InnerSection">
                 <h2>¿Wifi Extender?</h2>
