@@ -9,6 +9,14 @@
   align-items: center;
 }
 
+.Row{
+  flex-direction: row;
+  display: flex;
+  align-content: space-around;
+  justify-content: space-around;
+  padding-bottom: 15px;
+}
+
 label{
   display: flex;
   flex-direction: column;
@@ -35,4 +43,13 @@ label{
   color: rgb(235, 229, 229);
   background-image: url("./images/PlaceHolder.jpg");
   background-size: cover;
+}
+
+.Cot_Message_Container{
+  max-width: 25%;
+  background-color:rgba(23, 110, 192, 0.5);
+  border-radius: 5px;
+  padding: 3rem;
+  margin: 5%;
+  align-items: center;
 }

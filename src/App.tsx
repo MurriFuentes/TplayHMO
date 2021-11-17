@@ -2,7 +2,8 @@ import './css/NavBar.css';
 import './css/Footer.css';
 import './css/Cards.css';
 import './App.css';
-import './css/PeticionContrato.css'
+import './css/PeticionContrato.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from "./components/NavBar/Navbar";
 import Footer from './components/Footer';
