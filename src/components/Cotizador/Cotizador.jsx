@@ -5,7 +5,6 @@ import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { ToggleButton } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
-import { Switch } from "antd";
 
 export default function Cotizador() {
   const [megasValue, setMegasValue] = useState("1");
@@ -71,11 +70,11 @@ export default function Cotizador() {
   ];
 
   const MegasDisp = [
-    { name: "10 Mb", value: "1" },
-    { name: "20 Mb", value: "2" },
-    { name: "50 Mb", value: "3" },
-    { name: "100 Mb", value: "4" },
-    { name: "150 Mb", value: "5" },
+    { name: "10 Mb", value: "10" },
+    { name: "20 Mb", value: "20" },
+    { name: "50 Mb", value: "50" },
+    { name: "100 Mb", value: "100" },
+    { name: "150 Mb", value: "150" },
   ];
 
   return (
