@@ -29,13 +29,12 @@ const mockResponseListar =
 ]
 
 export const getList = async () =>{
-    // comment line 40 when api is setup
     let jwt = sessionStorage.getItem("jwt")
     if (!jwt) return [];
 
     return mockResponseListar;
     
-    /*
+    
     try {
         const resp = await axios.get(`${DEV_ENDPOINT}/listar`,{
                 headers: {
@@ -51,7 +50,7 @@ export const getList = async () =>{
 
         throw error;
     }
-    */
+    
 }
 
 export const guardarCliente = (nombre,paquete,telefono)=>{

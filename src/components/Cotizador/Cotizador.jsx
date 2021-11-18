@@ -10,7 +10,7 @@ export default function Cotizador() {
   const [megasValue, setMegasValue] = useState("1");
   const [canalesValue, setCanalesValue] = useState("0");
   const [televisionValue, setTelevisionValue] = useState("0");
-  const [tvExtraValue, setTvExtraValue] = useState("0");
+  const [tvExtraValue, setTvExtraValue] = useState(0);
   const [streamingValue, setStreamingValue] = useState("0");
   const [wifiExtenderValue, setWifiExtenderValue] = useState(0);
   const [tvPremiumValue, setTvPremiumValue] = useState("0");
@@ -28,7 +28,7 @@ export default function Cotizador() {
       nuevoTotalPlayTv: televisionValue === "1"? true: false,
       netflix: streamingValue === "1" ? true : false,
       amazon: streamingValue === "2" ? true : false,
-      cantidadPantallasNetflix: null,
+      cantidadPantallasNetflix: 1,
       wifiExtender: wifiExtenderValue,
       tvAdicional: tvExtraValue,
       nuevoTotalPlayTvAdicional: televisionValue === "2"? true: false,
@@ -37,7 +37,7 @@ export default function Cotizador() {
       canales280: canalesValue === "3" ? true : false,
     };
 
-    guardarCotizacion({ paquete, telefono, correo });
+    guardarCotizacion(paquete, telefono, correo );
   };
 
   const TV = () => {
