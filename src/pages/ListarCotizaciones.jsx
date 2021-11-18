@@ -34,7 +34,7 @@ export default function Page_Listar() {
                     <ul className="lista-items">
                         {dataList.map((item) => (
                             <li key={item.idCotizacion} >
-                                <p>{item.paquete}</p>
+                                <p>{item.paquete.velocidadInternet}</p>
                                 <p>{item.numeroTelefono}</p>
                                 <p>{item.correoElectronico}</p>
                             </li>

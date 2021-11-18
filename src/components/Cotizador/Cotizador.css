@@ -78,7 +78,7 @@ button {
   display: flex;
   flex-direction: column;
   margin: 10px 20px 0 20px;
-  
+  text-align: center;
 }
 
 .tab_infoContainer{
@@ -93,4 +93,8 @@ button {
 
 .row{
   align-items: center;
+}
+
+.disabled{
+  background-color: gray;
 }

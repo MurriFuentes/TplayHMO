@@ -10,11 +10,12 @@ import { Switch } from "antd";
 export default function Cotizador() {
   const [megasValue, setMegasValue] = useState("1");
   const [canalesValue, setCanalesValue] = useState("0");
-  const [tvExtraValue, setTvExtraValue] = useState(0);
+  const [televisionValue, setTelevisionValue] = useState("0");
+  const [tvExtraValue, setTvExtraValue] = useState("0");
   const [streamingValue, setStreamingValue] = useState("0");
   const [wifiExtenderValue, setWifiExtenderValue] = useState(0);
   const [tvPremiumValue, setTvPremiumValue] = useState("0");
-  const [telefono, setTelefono] = useState(0);
+  const [telefono, setTelefono] = useState("");
   const [tv, setTV] = useState(false);
   const [correo, setCorreo] = useState("");
   const [toggleState, setToggleState] = useState(1);
@@ -24,14 +25,14 @@ export default function Cotizador() {
 
     let paquete = {
       velocidadInternet: megasValue,
-      television: false,
-      nuevoTotalPlayTv: false,
+      television: televisionValue !== "0"? true: false,
+      nuevoTotalPlayTv: televisionValue === "1"? true: false,
       netflix: streamingValue === "1" ? true : false,
       amazon: streamingValue === "2" ? true : false,
       cantidadPantallasNetflix: null,
       wifiExtender: wifiExtenderValue,
       tvAdicional: tvExtraValue,
-      nuevoTotalPlayTvAdicional: null,
+      nuevoTotalPlayTvAdicional: televisionValue === "2"? true: false,
       canales140: canalesValue === "1" ? true : false,
       canales230: canalesValue === "2" ? true : false,
       canales280: canalesValue === "3" ? true : false,
@@ -41,8 +42,8 @@ export default function Cotizador() {
   };
 
   const TV = () => {
-    tv ? setTV(false):setTV(true);
-  }
+    tv ? setTV(false) : setTV(true);
+  };
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -52,6 +53,11 @@ export default function Cotizador() {
     { name: "140", value: "1" },
     { name: "230", value: "2" },
     { name: "280", value: "3" },
+  ];
+
+  const Television = [
+    { name: "TotalPlayTv", value: "1" },
+    { name: "TotalPlayTv+", value: "2" },
   ];
 
   const Streaming = [
@@ -91,11 +97,7 @@ export default function Cotizador() {
         </div>
 
         <div className="content-tabs">
-          <div
-            className={
-              toggleState === 1 ? "content  active-content" : "content"
-            }
-          >
+          <div className="content  active-content">
             <div className="tab_infoContainer">
               <div className="tab_InnerSection">
                 <h2>Elige tu velocidad de internet</h2>
@@ -133,6 +135,7 @@ export default function Cotizador() {
                       name="Premium"
                       value={Premium.value}
                       checked={tvPremiumValue === Premium.value}
+                      disabled={toggleState === 2}
                       onChange={(e) => setTvPremiumValue(e.currentTarget.value)}
                     >
                       {Premium.name}
@@ -143,7 +146,25 @@ export default function Cotizador() {
               <div className="tab_InnerSection">
                 <h2>Television</h2>
                 <div className="button_container">
-                  <Switch onClick={TV}/>
+                  <ButtonGroup>
+                    {Television.map((Television, idx) => (
+                      <ToggleButton
+                        key={idx}
+                        id={`Television-${idx}`}
+                        type="radio"
+                        variant={idx % 2 ? "outline-success" : "outline-danger"}
+                        name="Telev"
+                        value={Television.value}
+                        checked={televisionValue === Television.value}
+                        disabled={toggleState === 2}
+                        onChange={(e) =>
+                          setTelevisionValue(e.currentTarget.value)
+                        }
+                      >
+                        {Television.name}
+                      </ToggleButton>
+                    ))}
+                  </ButtonGroup>
                 </div>
               </div>
             </div>
@@ -182,6 +203,7 @@ export default function Cotizador() {
                       name="canal"
                       value={canal.value}
                       checked={canalesValue === canal.value}
+                      disabled={toggleState === 2}
                       onChange={(e) => setCanalesValue(e.currentTarget.value)}
                     >
                       {canal.name}
@@ -206,7 +228,9 @@ export default function Cotizador() {
                   <Button
                     variant="primary"
                     onClick={() => setWifiExtenderValue(wifiExtenderValue + 1)}
-                    disabled={wifiExtenderValue >= 5 ? true : false}
+                    disabled={
+                      wifiExtenderValue >= 5 ? true : false || toggleState === 2
+                    }
                   >
                     +
                   </Button>
@@ -218,7 +242,9 @@ export default function Cotizador() {
                   <Button
                     variant="primary"
                     onClick={() => setTvExtraValue(tvExtraValue - 1)}
-                    disabled={tvExtraValue <= 0 ? true : false}
+                    disabled={
+                      tvExtraValue <= 0 ? true : false || toggleState === 2
+                    }
                   >
                     -
                   </Button>
@@ -226,7 +252,9 @@ export default function Cotizador() {
                   <Button
                     variant="primary"
                     onClick={() => setTvExtraValue(tvExtraValue + 1)}
-                    disabled={tvExtraValue >= 5 ? true : false}
+                    disabled={
+                      tvExtraValue >= 5 ? true : false || toggleState === 2
+                    }
                   >
                     +
                   </Button>
@@ -261,18 +289,6 @@ export default function Cotizador() {
                 </Form>
               </div>
             </div>
-          </div>
-          <div
-            className={
-              toggleState === 2 ? "content  active-content" : "content"
-            }
-          >
-            <h2>Content 2</h2>
-            <hr />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-              voluptatum qui adipisci.
-            </p>
           </div>
         </div>
       </div>
