@@ -19,6 +19,19 @@ const initialState = {
 };
 
 export default function Cotizador() {
+<<<<<<< HEAD
+=======
+  const [megasValue, setMegasValue] = useState("1");
+  const [canalesValue, setCanalesValue] = useState("0");
+  const [televisionValue, setTelevisionValue] = useState("0");
+  const [tvExtraValue, setTvExtraValue] = useState(0);
+  const [streamingValue, setStreamingValue] = useState("0");
+  const [wifiExtenderValue, setWifiExtenderValue] = useState(0);
+  const [tvPremiumValue, setTvPremiumValue] = useState("0");
+  const [telefono, setTelefono] = useState("");
+  const [tv, setTV] = useState(false);
+  const [correo, setCorreo] = useState("");
+>>>>>>> 356e0bd708db0707d69f53de66ab9d546481f7f1
   const [toggleState, setToggleState] = useState(1);
   
   const [formState,setFormState] = useState(initialState);
@@ -27,6 +40,7 @@ export default function Cotizador() {
     event.preventDefault();
 
     let paquete = {
+<<<<<<< HEAD
       velocidadInternet: formState.megasValue,
       television: formState.televisionValue !== "0"? true: false,
       nuevoTotalPlayTv: formState.televisionValue === "1"? true: false,
@@ -42,6 +56,23 @@ export default function Cotizador() {
     };
 
     guardarCotizacion( paquete, formState.telefono, formState.correo );
+=======
+      velocidadInternet: megasValue,
+      television: televisionValue !== "0"? true: false,
+      nuevoTotalPlayTv: televisionValue === "1"? true: false,
+      netflix: streamingValue === "1" ? true : false,
+      amazon: streamingValue === "2" ? true : false,
+      cantidadPantallasNetflix: 1,
+      wifiExtender: wifiExtenderValue,
+      tvAdicional: tvExtraValue,
+      nuevoTotalPlayTvAdicional: televisionValue === "2"? true: false,
+      canales140: canalesValue === "1" ? true : false,
+      canales230: canalesValue === "2" ? true : false,
+      canales280: canalesValue === "3" ? true : false,
+    };
+
+    guardarCotizacion(paquete, telefono, correo );
+>>>>>>> 356e0bd708db0707d69f53de66ab9d546481f7f1
   };
 
   const onChange = (event) =>{

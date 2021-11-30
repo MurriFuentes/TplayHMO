@@ -63,17 +63,17 @@ export default function Page_Listar() {
                         {dataList.map((item) => (
                             <tr key={item.idCotizacion} >
                                 <td className="tabla-elemento">{item.paquete.velocidadInternet}</td>
-                                <td className="tabla-elemento">{item.paquete.television}</td>
-                                <td className="tabla-elemento">{item.paquete.nuevoTotalPlayTv}</td>
-                                <td className="tabla-elemento">{item.paquete.netflix}</td>
-                                <td className="tabla-elemento">{item.paquete.amazon}</td>
+                                <td className="tabla-elemento">{item.paquete.television?"Si":"NO"}</td>
+                                <td className="tabla-elemento">{item.paquete.nuevoTotalPlayTv?"Si":"NO"}</td>
+                                <td className="tabla-elemento">{item.paquete.netflix?"Si":"NO"}</td>
+                                <td className="tabla-elemento">{item.paquete.amazon?"Si":"NO"}</td>
                                 <td className="tabla-elemento">{item.paquete.cantidadPantallasNetflix}</td>
                                 <td className="tabla-elemento">{item.paquete.wifiExtender}</td>
                                 <td className="tabla-elemento">{item.paquete.tvAdicional}</td>
                                 <td className="tabla-elemento">{item.paquete.nuevoTotalPlayTvAdicional}</td>
-                                <td className="tabla-elemento">{item.paquete.canales140}</td>
-                                <td className="tabla-elemento">{item.paquete.canales230}</td>
-                                <td className="tabla-elemento">{item.paquete.canales280}</td>
+                                <td className="tabla-elemento">{item.paquete.canales140?"Si":"NO"}</td>
+                                <td className="tabla-elemento">{item.paquete.canales230?"Si":"NO"}</td>
+                                <td className="tabla-elemento">{item.paquete.canales280?"Si":"NO"}</td>
                                 <td className="tabla-elemento">{item.numeroTelefono}</td>
                                 <td className="tabla-elemento">{item.correoElectronico}</td>
                             </tr>
