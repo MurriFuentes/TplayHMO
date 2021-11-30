@@ -26,7 +26,6 @@ export default function useUser (){
         setJWT(null)
     }, [setJWT])
     
-    
     return {
         isLogged: Boolean(jwt),
         isLogginLoading: state.loading,

@@ -6,43 +6,79 @@ import { ToggleButton } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
 
+const initialState = {
+  megasValue: "1",
+  canalesValue: "0",
+  televisionValue: "0",
+  tvExtraValue: 0,
+  streamingValue: "0",
+  wifiExtenderValue: 0,
+  tvPremiumValue: "0",
+  telefono: "",
+  correo: "",
+};
+
 export default function Cotizador() {
-  const [megasValue, setMegasValue] = useState("1");
-  const [canalesValue, setCanalesValue] = useState("0");
-  const [televisionValue, setTelevisionValue] = useState("0");
-  const [tvExtraValue, setTvExtraValue] = useState("0");
-  const [streamingValue, setStreamingValue] = useState("0");
-  const [wifiExtenderValue, setWifiExtenderValue] = useState(0);
-  const [tvPremiumValue, setTvPremiumValue] = useState("0");
-  const [telefono, setTelefono] = useState("");
-  const [tv, setTV] = useState(false);
-  const [correo, setCorreo] = useState("");
   const [toggleState, setToggleState] = useState(1);
+  
+  const [formState,setFormState] = useState(initialState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     let paquete = {
-      velocidadInternet: megasValue,
-      television: televisionValue !== "0"? true: false,
-      nuevoTotalPlayTv: televisionValue === "1"? true: false,
-      netflix: streamingValue === "1" ? true : false,
-      amazon: streamingValue === "2" ? true : false,
-      cantidadPantallasNetflix: null,
-      wifiExtender: wifiExtenderValue,
-      tvAdicional: tvExtraValue,
-      nuevoTotalPlayTvAdicional: televisionValue === "2"? true: false,
-      canales140: canalesValue === "1" ? true : false,
-      canales230: canalesValue === "2" ? true : false,
-      canales280: canalesValue === "3" ? true : false,
+      velocidadInternet: formState.megasValue,
+      television: formState.televisionValue !== "0"? true: false,
+      nuevoTotalPlayTv: formState.televisionValue === "1"? true: false,
+      netflix: formState.streamingValue === "1" ? true : false,
+      amazon: formState.streamingValue === "2" ? true : false,
+      cantidadPantallasNetflix: 1,
+      wifiExtender:formState.wifiExtenderValue,
+      tvAdicional: formState.tvExtraValue,
+      nuevoTotalPlayTvAdicional: formState.televisionValue === "2"? true: false,
+      canales140: formState.canalesValue === "1" ? true : false,
+      canales230: formState.canalesValue === "2" ? true : false,
+      canales280: formState.canalesValue === "3" ? true : false,
     };
 
-    guardarCotizacion({ paquete, telefono, correo });
+    guardarCotizacion( paquete, formState.telefono, formState.correo );
   };
 
-  const TV = () => {
-    tv ? setTV(false) : setTV(true);
-  };
+  const onChange = (event) =>{
+    
+    setFormState(prev => ({
+      ...prev,
+      [event.target.name]:event.target.value
+    }))
+  }
+  
+  const onDecrementWifi = (event)=>{
+    setFormState(prev =>({
+      ...prev,
+      wifiExtenderValue: prev.wifiExtenderValue -1
+    }))
+  }
+
+  const onIncrementWifi = (event)=>{
+    setFormState(prev =>({
+      ...prev,
+      wifiExtenderValue: prev.wifiExtenderValue +1
+    }))
+  }
+
+  const onDecrementTvExtra = (event)=>{
+    setFormState(prev =>({
+      ...prev,
+      tvExtraValue: prev.wifiExtenderValue -1
+    }))
+  }
+
+  const onIncrementTvExtra = (event)=>{
+    setFormState(prev =>({
+      ...prev,
+      tvExtraValue: prev.tvExtraValue +1
+    }))
+  }
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -108,10 +144,10 @@ export default function Cotizador() {
                       id={`radio-${idx}`}
                       type="radio"
                       variant={idx % 2 ? "outline-success" : "outline-danger"}
-                      name="radio"
+                      name="megasValue"
                       value={radio.value}
-                      checked={megasValue === radio.value}
-                      onChange={(e) => setMegasValue(e.currentTarget.value)}
+                      checked={formState.megasValue === radio.value}
+                      onChange={onChange}
                     >
                       {radio.name}
                     </ToggleButton>
@@ -131,11 +167,11 @@ export default function Cotizador() {
                       id={`Premium-${idx}`}
                       type="radio"
                       variant={idx % 2 ? "outline-success" : "outline-danger"}
-                      name="Premium"
+                      name="tvPremiumValue"
                       value={Premium.value}
-                      checked={tvPremiumValue === Premium.value}
+                      checked={formState.tvPremiumValue === Premium.value}
                       disabled={toggleState === 2}
-                      onChange={(e) => setTvPremiumValue(e.currentTarget.value)}
+                      onChange={onChange}
                     >
                       {Premium.name}
                     </ToggleButton>
@@ -152,13 +188,11 @@ export default function Cotizador() {
                         id={`Television-${idx}`}
                         type="radio"
                         variant={idx % 2 ? "outline-success" : "outline-danger"}
-                        name="Telev"
+                        name="televisionValue"
                         value={Television.value}
-                        checked={televisionValue === Television.value}
+                        checked={formState.televisionValue === Television.value}
                         disabled={toggleState === 2}
-                        onChange={(e) =>
-                          setTelevisionValue(e.currentTarget.value)
-                        }
+                        onChange={onChange}
                       >
                         {Television.name}
                       </ToggleButton>
@@ -179,10 +213,10 @@ export default function Cotizador() {
                       id={`Stream-${idx}`}
                       type="radio"
                       variant={idx % 2 ? "outline-success" : "outline-danger"}
-                      name="Stream"
+                      name="streamingValue"
                       value={Stream.value}
-                      checked={streamingValue === Stream.value}
-                      onChange={(e) => setStreamingValue(e.currentTarget.value)}
+                      checked={formState.streamingValue === Stream.value}
+                      onChange={onChange}
                     >
                       {Stream.name}
                     </ToggleButton>
@@ -199,11 +233,11 @@ export default function Cotizador() {
                       id={`canal-${idx}`}
                       type="radio"
                       variant={idx % 2 ? "outline-success" : "outline-danger"}
-                      name="canal"
+                      name="canalesValue"
                       value={canal.value}
-                      checked={canalesValue === canal.value}
+                      checked={formState.canalesValue === canal.value}
                       disabled={toggleState === 2}
-                      onChange={(e) => setCanalesValue(e.currentTarget.value)}
+                      onChange={onChange}
                     >
                       {canal.name}
                     </ToggleButton>
@@ -218,18 +252,16 @@ export default function Cotizador() {
                 <div className="button_container">
                   <Button
                     variant="primary"
-                    onClick={() => setWifiExtenderValue(wifiExtenderValue - 1)}
-                    disabled={wifiExtenderValue <= 0 ? true : false}
+                    onClick={onDecrementWifi}
+                    disabled={formState.wifiExtenderValue <= 0 ? true : false}
                   >
                     -
                   </Button>
-                  <h3>{wifiExtenderValue}</h3>
+                  <h3>{formState.wifiExtenderValue}</h3>
                   <Button
                     variant="primary"
-                    onClick={() => setWifiExtenderValue(wifiExtenderValue + 1)}
-                    disabled={
-                      wifiExtenderValue >= 5 ? true : false || toggleState === 2
-                    }
+                    onClick={onIncrementWifi}
+                    disabled={formState.wifiExtenderValue >= 5 ? true : false}
                   >
                     +
                   </Button>
@@ -240,20 +272,16 @@ export default function Cotizador() {
                 <div className="button_container">
                   <Button
                     variant="primary"
-                    onClick={() => setTvExtraValue(tvExtraValue - 1)}
-                    disabled={
-                      tvExtraValue <= 0 ? true : false || toggleState === 2
-                    }
+                    onClick={onDecrementTvExtra}
+                    disabled={formState.tvExtraValue <= 0 ? true : false || toggleState === 2}
                   >
                     -
                   </Button>
-                  <h3>{tvExtraValue}</h3>
+                  <h3>{formState.tvExtraValue}</h3>
                   <Button
                     variant="primary"
-                    onClick={() => setTvExtraValue(tvExtraValue + 1)}
-                    disabled={
-                      tvExtraValue >= 5 ? true : false || toggleState === 2
-                    }
+                    onClick={onIncrementTvExtra}
+                    disabled={formState.tvExtraValue >= 5 ? true : false || toggleState === 2}
                   >
                     +
                   </Button>
@@ -268,15 +296,15 @@ export default function Cotizador() {
                       <Form.Control
                         type="email"
                         placeholder="Correo (Opcional)"
-                        value={correo}
-                        onChange={(e) => setCorreo(e.target.value)}
+                        value={formState.correo}
+                        onChange={onChange}
                       />
                     </Col>
                     <Col>
                       <Form.Control
                         placeholder="Telefono (Opcional)"
-                        value={telefono}
-                        onChange={(e) => setTelefono(e.target.value)}
+                        value={formState.telefono}
+                        onChange={onChange}
                       />
                     </Col>
                     <Col>
