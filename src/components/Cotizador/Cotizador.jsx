@@ -42,6 +42,11 @@ export default function Cotizador() {
     };
 
     guardarCotizacion( paquete, formState.telefono, formState.correo );
+    
+    alert('OOPS!', 'Todos must be over 3 chars long',[
+      {text: 'Understood', onPress:()=>console.log('alert closed')}
+    ]);
+    return;
   };
 
   const onChange = (event) =>{

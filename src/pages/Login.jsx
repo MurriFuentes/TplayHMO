@@ -19,6 +19,9 @@ export default function Page_Login({ onLogin }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     login({ username, password });
+    alert('OOPS!', 'Todos must be over 3 chars long',[
+      {text: 'Understood', onPress:()=>console.log('alert closed')}
+    ]);
   };
 
   return (
