@@ -20,70 +20,69 @@ const initialState = {
 
 export default function Cotizador() {
   const [toggleState, setToggleState] = useState(1);
-  
-  const [formState,setFormState] = useState(initialState);
+
+  const [formState, setFormState] = useState(initialState);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     let paquete = {
       velocidadInternet: formState.megasValue,
-      television: formState.televisionValue !== "0"? true: false,
-      nuevoTotalPlayTv: formState.televisionValue === "1"? true: false,
+      television: formState.televisionValue !== "0" ? true : false,
+      nuevoTotalPlayTv: formState.televisionValue === "1" ? true : false,
       netflix: formState.streamingValue === "1" ? true : false,
       amazon: formState.streamingValue === "2" ? true : false,
       cantidadPantallasNetflix: 1,
-      wifiExtender:formState.wifiExtenderValue,
+      wifiExtender: formState.wifiExtenderValue,
       tvAdicional: formState.tvExtraValue,
-      nuevoTotalPlayTvAdicional: formState.televisionValue === "2"? true: false,
+      nuevoTotalPlayTvAdicional:
+        formState.televisionValue === "2" ? true : false,
       canales140: formState.canalesValue === "1" ? true : false,
       canales230: formState.canalesValue === "2" ? true : false,
       canales280: formState.canalesValue === "3" ? true : false,
     };
 
-    guardarCotizacion( paquete, formState.telefono, formState.correo );
-    
-    alert('OOPS!', 'Todos must be over 3 chars long',[
-      {text: 'Understood', onPress:()=>console.log('alert closed')}
+    guardarCotizacion(paquete, formState.telefono, formState.correo);
+
+    alert("Cotizacion realizada con exito!", [
+      { text: "OK", onPress: () => console.log("alert closed") },
     ]);
-    return;
   };
 
-  const onChange = (event) =>{
-    
-    setFormState(prev => ({
+  const onChange = (event) => {
+    setFormState((prev) => ({
       ...prev,
-      [event.target.name]:event.target.value
-    }))
-  }
-  
-  const onDecrementWifi = (event)=>{
-    setFormState(prev =>({
-      ...prev,
-      wifiExtenderValue: prev.wifiExtenderValue -1
-    }))
-  }
+      [event.target.name]: event.target.value,
+    }));
+  };
 
-  const onIncrementWifi = (event)=>{
-    setFormState(prev =>({
+  const onDecrementWifi = (event) => {
+    setFormState((prev) => ({
       ...prev,
-      wifiExtenderValue: prev.wifiExtenderValue +1
-    }))
-  }
+      wifiExtenderValue: prev.wifiExtenderValue - 1,
+    }));
+  };
 
-  const onDecrementTvExtra = (event)=>{
-    setFormState(prev =>({
+  const onIncrementWifi = (event) => {
+    setFormState((prev) => ({
       ...prev,
-      tvExtraValue: prev.wifiExtenderValue -1
-    }))
-  }
+      wifiExtenderValue: prev.wifiExtenderValue + 1,
+    }));
+  };
 
-  const onIncrementTvExtra = (event)=>{
-    setFormState(prev =>({
+  const onDecrementTvExtra = (event) => {
+    setFormState((prev) => ({
       ...prev,
-      tvExtraValue: prev.tvExtraValue +1
-    }))
-  }
+      tvExtraValue: prev.wifiExtenderValue - 1,
+    }));
+  };
+
+  const onIncrementTvExtra = (event) => {
+    setFormState((prev) => ({
+      ...prev,
+      tvExtraValue: prev.tvExtraValue + 1,
+    }));
+  };
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -278,7 +277,11 @@ export default function Cotizador() {
                   <Button
                     variant="primary"
                     onClick={onDecrementTvExtra}
-                    disabled={formState.tvExtraValue <= 0 ? true : false || toggleState === 2}
+                    disabled={
+                      formState.tvExtraValue <= 0
+                        ? true
+                        : false || toggleState === 2
+                    }
                   >
                     -
                   </Button>
@@ -286,7 +289,11 @@ export default function Cotizador() {
                   <Button
                     variant="primary"
                     onClick={onIncrementTvExtra}
-                    disabled={formState.tvExtraValue >= 5 ? true : false || toggleState === 2}
+                    disabled={
+                      formState.tvExtraValue >= 5
+                        ? true
+                        : false || toggleState === 2
+                    }
                   >
                     +
                   </Button>
@@ -298,19 +305,29 @@ export default function Cotizador() {
                 <Form onSubmit={handleSubmit}>
                   <Row>
                     <Col>
-                      <Form.Control
-                        type="email"
-                        placeholder="Correo (Opcional)"
-                        value={formState.correo}
-                        onChange={onChange}
-                      />
+                      <Form.Group className="mb-3">
+                        <Form.Label></Form.Label>
+                        <Form.Control
+                          required
+                          type="email"
+                          name="correo"
+                          placeholder="Correo (Opcional)"
+                          value={formState.correo}
+                          onChange={onChange}
+                        />
+                      </Form.Group>
                     </Col>
                     <Col>
-                      <Form.Control
-                        placeholder="Telefono (Opcional)"
-                        value={formState.telefono}
-                        onChange={onChange}
-                      />
+                      <Form.Group className="mb-3">
+                        <Form.Label></Form.Label>
+                        <Form.Control
+                          required
+                          name="telefono"
+                          placeholder="Telefono (Opcional)"
+                          value={formState.telefono}
+                          onChange={onChange}
+                        />
+                      </Form.Group>
                     </Col>
                     <Col>
                       <Button variant="primary" type="submit" size="lg">
