@@ -1,4 +1,5 @@
 
+
 .Section{
   max-width: 1590px;
   min-height: 90vh;
@@ -15,6 +16,11 @@
   align-content: space-around;
   justify-content: space-around;
   padding-bottom: 15px;
+}
+
+.Carrousel_Container{
+  margin: auto;
+  max-width: 1590px;
 }
 
 label{

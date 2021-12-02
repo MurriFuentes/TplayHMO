@@ -12,28 +12,28 @@ export default function ControlledCarousel() {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={Slide01}
-          alt="First slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={Slide02}
-          alt="Second slide"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={Slide03}
-          alt="Third slide"
-        />
-      </Carousel.Item>
-    </Carousel>
+      <Carousel activeIndex={index} onSelect={handleSelect}>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={Slide01}
+            alt="First slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={Slide02}
+            alt="Second slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src={Slide03}
+            alt="Third slide"
+          />
+        </Carousel.Item>
+      </Carousel>
   );
 }
