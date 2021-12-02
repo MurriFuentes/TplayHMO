@@ -26,7 +26,7 @@ export default function Navbar() {
             }
 
         };
-
+        
         window.addEventListener("resize", handleResize);
 
         return () => {

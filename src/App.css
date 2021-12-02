@@ -53,13 +53,4 @@ label{
   margin: 5%;
   align-items: center;
 }
-.tabla-items{
-  border: 1px solid black;
-  background: #71DFE7;
-  color: #191a10;
-  font-size: 16px;;
-}
-.tabla-elemento{
-  padding: 10px;
-  border: 2px solid black;
-}
+

@@ -7,11 +7,12 @@ export default function Page_Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { isLogginLoading, hasLoginError, login, isLogged } = useUser();
+  
   let history = useHistory();
 
   useEffect(() => {
     if (isLogged) {
-      history.push("./");
+      history.replace("./");
       onLogin && onLogin();
     }
   }, [history, onLogin, isLogged]);
@@ -19,9 +20,6 @@ export default function Page_Login({ onLogin }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     login({ username, password });
-    alert('OOPS!', 'Todos must be over 3 chars long',[
-      {text: 'Understood', onPress:()=>console.log('alert closed')}
-    ]);
   };
 
   return (

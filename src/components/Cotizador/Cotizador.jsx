@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
 
 const initialState = {
-  megasValue: "1",
+  megasValue: "10",
   canalesValue: "0",
   televisionValue: "0",
   tvExtraValue: 0,
@@ -86,6 +86,7 @@ export default function Cotizador() {
 
   const toggleTab = (index) => {
     setToggleState(index);
+    setFormState(initialState);
   };
 
   const Canales = [
