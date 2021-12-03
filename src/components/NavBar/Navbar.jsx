@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { navItems } from './NavbarItems';
 import NavButton from './NavButton';
 import useUser from '../../hooks/useUser';
+import Logo from "../../images/LOGO-BLANCO.png"
 import * as icons from 'react-icons/ri';
 import * as icons2 from 'react-icons/fa';
 
@@ -47,8 +48,7 @@ export default function Navbar() {
         <>
             <nav id="navbar">
                 <Link to="/" className="navbar-logo" onClick={() => setTogglebar(false)}>
-                    <icons.RiGooglePlayLine />
-                    Totalplay
+                    <img src={Logo} alt="logo" />
                 </Link>
                 
                 {!mobile && (

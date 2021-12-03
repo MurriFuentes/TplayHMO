@@ -1,4 +1,4 @@
-import * as icons from 'react-icons/ri';
+import Logo from "../images/LOGO-BLANCO.png"
 import { Link } from 'react-router-dom';
 
 export default function Footer(){
@@ -6,8 +6,7 @@ export default function Footer(){
         <>
             <div id="footer">
                 <Link to="/" className="navbar-logo">
-                    <icons.RiGooglePlayLine/>
-                    Totalplay
+                    <img src={Logo} alt="logo" className="Logo"/>
                 </Link>
                 <div className="nav-items">
                     <p className="pFooter"> Terminos</p>
