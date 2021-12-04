@@ -111,13 +111,12 @@ export default function Cotizador() {
   ];
 
   const MegasDisp = [
-    { name: "10 Mb", value: "10" },
     { name: "20 Mb", value: "20" },
-    { name: "50 Mb", value: "50" },
+    { name: "40 Mb", value: "40" },
     { name: "100 Mb", value: "100" },
-    { name: "150 Mb", value: "150" },
+    { name: "200 Mb", value: "200" },
+    { name: "500 Mb", value: "500" },
   ];
-
   return (
     <>
       <div className="cotizador_container">
