@@ -13,7 +13,7 @@ import PageCotizador from './pages/Cotizar';
 import PageTvInternet from './pages/Tv+Internet';
 import PageInternet from './pages/Internet';
 import PageLogin from './pages/Login';
-import PageListar from './pages/Listar';
+import PageListar from './pages/ListarContactos';
 import PageListarCotizacion from './pages/ListarCotizaciones';
 import PageContratar from './pages/Contratar';
 import { UserContextProvider } from './context/UserContext';
