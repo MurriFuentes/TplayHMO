@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getList } from "../services/contactListService";
+import { getList } from "../services/API/contactList";
 import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import useUser from "../hooks/useUser";
