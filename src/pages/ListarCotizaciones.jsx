@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getListCotizaciones } from "../services/contactListService"
+import { getListCotizaciones } from "../services/API/userQuotation"
 import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import useUser from "../hooks/useUser";

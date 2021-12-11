@@ -1,6 +1,6 @@
 import { useState} from "react";
 import { Form, FormGroup, Label , Button } from "reactstrap";
-import { guardarCliente } from "../services/contactListService";
+import { guardarCliente } from "../services/API/contactList";
 export default function Page_Contratar() {
     
     const [nombre, setNombre] = useState("");

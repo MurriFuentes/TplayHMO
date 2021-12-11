@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Cotizador.css";
-import { guardarCotizacion } from "../../services/Service_Cotizar";
+import { guardarCotizacion } from "../../services/API/userQuotation";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { ToggleButton } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
