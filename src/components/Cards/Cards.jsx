@@ -5,21 +5,25 @@ export default function Card(){
         <>
             <div className="cardContainer">
                 <div className="cardHeader">
+                    Inicial
+                    <br></br>
                     Internet 20 megas   
                 </div>
                 <div className="cardBody">
                     <p className="cardPrice">
-                        $500
+                        $459
                     </p>
                     <div>
                         <icons.BsArrowDown/>
                         <icons.BsArrowUp/>
                     </div>
                     <div className="Megas">
-                        100 40
+                        20 2
                     </div>
                     <div className="cardInfo">
-                        Informacion Extra
+                    Descuento de por vida
+                    <br></br>
+                    -$20 a partir del 6º mes
                     </div>
                     <Button href="./Contratar" className="btnContratar">Contratar</Button>
                 </div>

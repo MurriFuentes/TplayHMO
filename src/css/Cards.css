@@ -33,9 +33,12 @@
 .cardHeader{
     display: flex;
     font-size: 120%;
+    font-weight: bold;;
     min-height: 12%;
     color: rgb(34, 32, 32);
     align-items: center;
+    text-align: center;
+    padding: 1em;
 }
 
 .cardBody{
@@ -46,9 +49,10 @@
     margin: top 15px;
     display: flex;
     flex-direction: column;
-    padding: 0px 24px;
+    padding: 20px 24px;
     align-items: center;
     justify-content: space-around;
+
 }
 
 .cardInfo{

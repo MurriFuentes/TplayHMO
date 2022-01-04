@@ -9,6 +9,9 @@
   justify-content: center;
   align-items: center;
 }
+.colorverde{
+  background: #cfc;
+}
 
 .Row{
   flex-direction: row;

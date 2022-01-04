@@ -116,6 +116,7 @@ export default function Cotizador() {
     { name: "100 Mb", value: "100" },
     { name: "200 Mb", value: "200" },
     { name: "500 Mb", value: "500" },
+    { name: "1000 Mb", value: "1000" },
   ];
   return (
     <>

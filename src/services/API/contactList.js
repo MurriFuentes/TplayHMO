@@ -52,15 +52,13 @@ export const getList = async () => {
 
 export const guardarCliente = (nombre, paquete, telefono) => {
   try {
+    console.log(nombre);
+    console.log(paquete);
+    console.log(telefono)
     axios.post(`${DEV_ENDPOINT}/guardar`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
         nombre,
         paquete,
         telefono,
-      }),
     });
   } catch (error) {
     console.log(error);

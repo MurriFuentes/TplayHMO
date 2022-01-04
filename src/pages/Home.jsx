@@ -7,17 +7,6 @@ export default function Page_Home() {
             <div className="Carrousel_Container">
                 <ControlledCarousel/>
             </div>
-            <div className="SectionCards">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-            </div>
-            <div className="SectionCards">
-                <Card />
-                <Card />
-                <Card />
-            </div>
         </>
     );
 }
