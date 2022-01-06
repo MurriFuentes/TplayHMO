@@ -2,8 +2,6 @@ const ENDPOINT ="http://localhost:8080";
 
 export default function login ({username,password}) {
     
-    //return Promise.resolve("sdafwerq")
-    
     return fetch(`${ENDPOINT}/authenticate`, {
         method: "POST",
         headers: {

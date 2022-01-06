@@ -1,7 +1,7 @@
 
 
 .Section{
-  max-width: 1590px;
+  max-width: 80%;
   min-height: 90vh;
   margin: 0 auto 0 auto;
   display: flex;
@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .colorverde{
   background: #cfc;
 }
@@ -23,7 +24,7 @@
 
 .Carrousel_Container{
   margin: auto;
-  max-width: 1590px;
+  max-width: 80%;
 }
 
 label{

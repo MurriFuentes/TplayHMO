@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
 
 const initialState = {
-  megasValue: "10",
+  megasValue: "20",
   canalesValue: "0",
   televisionValue: "0",
   tvExtraValue: 0,
@@ -20,7 +20,6 @@ const initialState = {
 
 export default function Cotizador() {
   const [toggleState, setToggleState] = useState(1);
-
   const [formState, setFormState] = useState(initialState);
 
   const handleSubmit = (event) => {
@@ -52,7 +51,7 @@ export default function Cotizador() {
   const onChange = (event) => {
     setFormState((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value,
+        [event.target.name]: event.target.value,
     }));
   };
 
@@ -73,7 +72,7 @@ export default function Cotizador() {
   const onDecrementTvExtra = (event) => {
     setFormState((prev) => ({
       ...prev,
-      tvExtraValue: prev.wifiExtenderValue - 1,
+      tvExtraValue: prev.tvExtraValue - 1,
     }));
   };
 
@@ -118,6 +117,7 @@ export default function Cotizador() {
     { name: "500 Mb", value: "500" },
     { name: "1000 Mb", value: "1000" },
   ];
+
   return (
     <>
       <div className="cotizador_container">
@@ -143,18 +143,18 @@ export default function Cotizador() {
                 <h2>Elige tu velocidad de internet</h2>
                 <div className="button_container"></div>
                 <ButtonGroup>
-                  {MegasDisp.map((radio, idx) => (
+                  {MegasDisp.map((MegasDisp, idx) => (
                     <ToggleButton
                       key={idx}
-                      id={`radio-${idx}`}
+                      id={`MegasDisp-${idx}`}
                       type="radio"
                       variant={idx % 2 ? "outline-success" : "outline-danger"}
                       name="megasValue"
-                      value={radio.value}
-                      checked={formState.megasValue === radio.value}
+                      value={MegasDisp.value}
+                      checked={formState.megasValue === MegasDisp.value}
                       onChange={onChange}
                     >
-                      {radio.name}
+                      {MegasDisp.name}
                     </ToggleButton>
                   ))}
                 </ButtonGroup>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { navItems } from './NavbarItems';
+import { AdmonDrop } from './Dropdown';
 import NavButton from './NavButton';
 import useUser from '../../hooks/useUser';
 import Logo from "../../images/LOGO-BLANCO.png"
@@ -10,6 +11,7 @@ export default function Navbar() {
     const [mobile, setMobile] = useState(false);
     const [togglebar, setTogglebar] = useState(false);
     const { isLogged } = useUser();
+    const [dropdown, setDropdown] = useState(false);
     var [navOptions, setNavOptions] = useState(navItems) ;
 
     useEffect(() => {
@@ -50,16 +52,32 @@ export default function Navbar() {
                     <img src={Logo} alt="logo" className="Logo"/>
                 </Link>
                 
+               
                 {!mobile && (
                     <>
                         <ul className="nav-items">
                             {navOptions.map((item) => (
-                                <li key={item.id} className={item.cName}>
-                                    <Link to={item.path}>{item.title}</Link>
-                                </li>
+                                item.title === "ADMON" ?
+                                <>
+                                    <li 
+                                        key={item.id} 
+                                        className={item.cName}
+                                        onMouseLeave={()=> setDropdown(false)} 
+                                        onMouseEnter={()=> setDropdown(true)}
+                                    >
+                                    <Link className={item.dName} to={item.path} >{item.title}</Link>
+                                    {dropdown && <AdmonDrop/>}
+                                    </li> 
+                                </>
+                                :
+                                    <li key={item.id} className={item.cName}>
+                                        <Link className={item.dName} to={item.path}>{item.title}</Link>
+                                    </li>
                             ))}
                         </ul>
                         <NavButton />
+                         
+           
                     </>
                 )}
 
@@ -75,7 +93,6 @@ export default function Navbar() {
                 )}
 
             </nav>
-
             <div className="ToggleMenu">
                 <ul className={togglebar ? "nav-items-toggled active" : "nav-items-toggled"}>
                     {navOptions
@@ -89,6 +106,7 @@ export default function Navbar() {
                         );
                     })}
                     <div onClick={() => setTogglebar(false)}>
+                        
                         <NavButton />
                     </div>
                 </ul>
