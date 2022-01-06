@@ -1,22 +1,28 @@
 import {Form} from "react-bootstrap";
 import { useState } from "react";
-import Registrar_Usuario from "../services/API/UsersSignUp"
+//import { guardarCliente } from "../services/API/contactList";
+import {Registrar_Usuario} from "../services/API/UsersSignUp"
 export default function Page_Usuarios() {
 
     const [nombre, setNombre] = useState("");
     const [apellidoPaterno, setApellidoPaterno] = useState("");
     const [apellidoMaterno, setApellidoMaterno] = useState("");
     const [fechaNacimiento, setFechaNacimiento] = useState("");
-    const [numeroDeEmpleado, setNumeroDeEmpleado] = useState("");
+    const [numeroEmpleado, setNumeroEmpleado] = useState("");
 
     const handleSubmit = (event) => {
+        console.log(nombre);
+        console.log(apellidoPaterno);
+        console.log(apellidoMaterno);
+        console.log(fechaNacimiento);
+        console.log(numeroEmpleado);
         event.preventDefault();
         Registrar_Usuario(
             nombre,
             apellidoPaterno,
             apellidoMaterno,
             fechaNacimiento,
-            numeroDeEmpleado)
+            numeroEmpleado)
         alert("Usuario registrado con exito!", [
           { text: "OK", onPress: () => console.log("alert closed") },
         ]);
@@ -49,7 +55,7 @@ export default function Page_Usuarios() {
 
                 <div className="form-group">
                     <label>Numero de empleado</label>
-                    <input type="text" className="form-control" onChange={(e) => setNumeroDeEmpleado(e.target.value)}/>
+                    <input type="text" className="form-control" onChange={(e) => setNumeroEmpleado(e.target.value)}/>
                 </div>
 
                 <button type="submit" className="btn btn-primary">Registrar</button>
