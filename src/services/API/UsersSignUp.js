@@ -1,14 +1,15 @@
 import axios from "axios";
-const DEV_ENDPOINT ="http://localhost:8080";
+const DEV_ENDPOINT = "http://localhost:8080";
 
-
-export const guardarCotizacion = (
+export const Registrar_Usuario = (
     nombre,
     apellidoPaterno,
     apellidoMaterno,
     fechaNacimiento,
-    numeroEmpleado) => {
+    numeroEmpleado
+) => {
     try {
+        console.log(numeroEmpleado);
       axios.post(`${DEV_ENDPOINT}/guardarUsuario`, {
         nombre,
         apellidoPaterno,
@@ -21,5 +22,3 @@ export const guardarCotizacion = (
       throw error;
     }
   };
-
-  export default guardarCotizacion;

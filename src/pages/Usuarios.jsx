@@ -1,6 +1,7 @@
 import {Form} from "react-bootstrap";
 import { useState , useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getUsers } from "../services/UsersAdmon";
 import {
   Table,
   Button,
@@ -16,7 +17,8 @@ import useUser from "../hooks/useUser";
 import { useHistory } from "react-router-dom";
 
 export default function Page_Usuarios() {
-
+    const [dataList, setDataList] = useState([]);
+    const [dataLoaded, setDataLoaded] = useState(false);
     const { isLogged } = useUser();
     
     let history = useHistory();
@@ -27,6 +29,18 @@ export default function Page_Usuarios() {
       }
     }, [history, isLogged]);
 
+    const getListUsers = async () => {
+        const data = await getUsers();
+        setDataList(data ? data : []);
+        setDataLoaded(true);
+    };
+    
+    useEffect(() => {
+        if (!dataLoaded) {
+            getListUsers();
+        }
+    }, [dataList, dataLoaded]);
+    
 
     const data = [
         { numeroEmpleado: 1, nombre: "Naruto", apellidopaterno: "Naruto", apellidomaterno: "uzumaki", fechaNacimiento: "2016/06/06"},
@@ -108,7 +122,7 @@ export default function Page_Usuarios() {
 
     const onSubmit= (event)=>{
         event.preventDefault();
-        //Registrar_Usuario(userState)
+        Registrar_Usuario(userState)
         setuserState(userInitialState);
     }
     
