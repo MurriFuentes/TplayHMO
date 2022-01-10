@@ -1,5 +1,6 @@
 import axios from "axios";
 const DEV_ENDPOINT = "http://localhost:8080";
+
 const mockResponseListar = [
   {
     id: 4,
@@ -27,12 +28,33 @@ const mockResponseListar = [
   },
 ];
 
+export const DeleteContact = (contact_id) => {
+
+  let jwt = sessionStorage.getItem("jwt");
+
+  try {
+    axios.delete(`${DEV_ENDPOINT}/listar`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
+      data: {
+        source: contact_id
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+
+};
+
 export const getList = async () => {
   
   let jwt = sessionStorage.getItem("jwt");
   if (!jwt) return [];
 
-  //return mockResponseListar;
+  return mockResponseListar;
 
   try {
     const resp = await axios.get(`${DEV_ENDPOINT}/listar`, {
@@ -52,9 +74,6 @@ export const getList = async () => {
 
 export const guardarCliente = (nombre, paquete, telefono) => {
   try {
-    console.log(nombre);
-    console.log(paquete);
-    console.log(telefono)
     axios.post(`${DEV_ENDPOINT}/guardar`, {
         nombre,
         paquete,

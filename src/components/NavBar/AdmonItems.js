@@ -1,20 +1,20 @@
-export const AdmonDropdown = [
+export const AdmonItems = [
     {
         id: 1,
-        title: "LISTAR",
-        path: "./Listar",
+        title: "CONTACTOS",
+        path: "/Listar",
         dName: "submenu-item",
     },
     {
         id: 2,
         title: "COTIZACIONES",
-        path: "./Cotizaciones",
+        path: "/Cotizaciones",
         dName: "submenu-item",
     },
     {
         id: 3,
         title: 'USUARIOS',
-        path: './Usuarios',
+        path: '/Usuarios',
         dName: "submenu-item",
     }
   ];

@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
+import { DeleteContact } from "../services/API/contactList";
+import { Button } from "react-bootstrap";
 import { getList } from "../services/API/contactList";
 import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
+import { BsFillTrashFill } from "react-icons/bs";
 import useUser from "../hooks/useUser";
 
 export default function Page_Listar() {
   const [dataList, setDataList] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
+
   const { isLogged } = useUser();
   let history = useHistory();
 
@@ -28,6 +32,15 @@ export default function Page_Listar() {
     }
   }, [dataList, dataLoaded]);
 
+  const handleClick = (contact_id) => {
+    DeleteContact(contact_id);
+    setDataLoaded(false);
+  };
+
+  const borrarTodo = () => {
+    setDataLoaded(false);
+  };
+
   return (
     <>
       {dataList.length > 0 && isLogged && (
@@ -43,6 +56,7 @@ export default function Page_Listar() {
                 <th>Nombre</th>
                 <th>Paquete</th>
                 <th>Telefono</th>
+                <th style={{display:"flex", justifyContent: "center"}}><Button variant="danger" onClick={borrarTodo}>Borrar Todo < BsFillTrashFill  /></Button></th>
               </tr>
             </thead>
             <tbody>
@@ -51,6 +65,7 @@ export default function Page_Listar() {
                   <td>{item.nombre}</td>
                   <td>{item.paquete}</td>
                   <td>{item.telefono}</td>
+                  <td style={{display:"flex", justifyContent: "center"}}><Button onClick={() => handleClick(item.id)}>< BsFillTrashFill  /></Button></td>
                 </tr>
               ))}
             </tbody>

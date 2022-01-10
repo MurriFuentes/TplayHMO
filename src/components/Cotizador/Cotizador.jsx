@@ -43,9 +43,12 @@ export default function Cotizador() {
 
     guardarCotizacion(paquete, formState.telefono, formState.correo);
 
+    setFormState(initialState);
+
     alert("Cotizacion realizada con exito!", [
       { text: "OK", onPress: () => console.log("alert closed") },
     ]);
+
   };
 
   const onChange = (event) => {
@@ -195,7 +198,7 @@ export default function Cotizador() {
                         variant={idx % 2 ? "outline-success" : "outline-danger"}
                         name="televisionValue"
                         value={Television.value}
-                        checked={formState.televisionValue === Television.value}
+                        checked={formState.televisionValue === Television.value }
                         disabled={toggleState === 2}
                         onChange={onChange}
                       >
@@ -209,7 +212,7 @@ export default function Cotizador() {
 
             <div className="Row">
               <div className="tab_InnerSection">
-                <h2>¿Servicio de Streaming?</h2>
+                <h3>¿Servicio de Streaming?</h3>
                 <div className="button_container"></div>
                 <ButtonGroup>
                   {Streaming.map((Stream, idx) => (
@@ -229,7 +232,7 @@ export default function Cotizador() {
                 </ButtonGroup>
               </div>
               <div className="tab_InnerSection">
-                <h2>¿Mas canales?</h2>
+                <h3>¿Mas canales?</h3>
                 <div className="button_container"></div>
                 <ButtonGroup>
                   {Canales.map((canal, idx) => (
@@ -312,6 +315,7 @@ export default function Cotizador() {
                           required
                           type="email"
                           name="correo"
+                          minLength={10}
                           placeholder="Correo (Opcional)"
                           value={formState.correo}
                           onChange={onChange}
@@ -322,6 +326,13 @@ export default function Cotizador() {
                       <Form.Group className="mb-3">
                         <Form.Label></Form.Label>
                         <Form.Control
+                          onKeyPress={(event) => {
+                            if (!/[0-9]/.test(event.key)) {
+                              event.preventDefault();
+                            }
+                          }}
+                          maxLength={10}
+                          minLength={10}
                           required
                           name="telefono"
                           placeholder="Telefono (Opcional)"

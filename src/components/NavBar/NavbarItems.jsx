@@ -9,14 +9,14 @@ export const navItems = [
     {
         id: 2,
         title: "INTERNET",
-        path: "./Internet",
+        path: "/Internet",
         cName: "nav-item",
         dName: "a",
     },
     {
         id: 3,
         title: "COTIZADOR",
-        path: "./Cotizador",
+        path: "/Cotizador",
         cName: "nav-item",
         dName: "a",
     },

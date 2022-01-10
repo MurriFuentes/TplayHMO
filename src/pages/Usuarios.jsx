@@ -1,60 +1,244 @@
 import {Form} from "react-bootstrap";
-import { useState } from "react";
+import { useState , useEffect} from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Table,
+  Button,
+  Container,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  ModalFooter,
+} from "reactstrap";
 import Registrar_Usuario from "../services/API/UsersSignUp"
+import useUser from "../hooks/useUser";
+import { useHistory } from "react-router-dom";
+
 export default function Page_Usuarios() {
 
-    const [nombre, setNombre] = useState("");
-    const [apellidoPaterno, setApellidoPaterno] = useState("");
-    const [apellidoMaterno, setApellidoMaterno] = useState("");
-    const [fechaNacimiento, setFechaNacimiento] = useState("");
-    const [numeroDeEmpleado, setNumeroDeEmpleado] = useState("");
+    const { isLogged } = useUser();
+    
+    let history = useHistory();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        Registrar_Usuario(
-            nombre,
-            apellidoPaterno,
-            apellidoMaterno,
-            fechaNacimiento,
-            numeroDeEmpleado)
-        alert("Usuario registrado con exito!", [
-          { text: "OK", onPress: () => console.log("alert closed") },
-        ]);
+    useEffect(() => {
+      if (!isLogged) {
+        history.replace("./");
+      }
+    }, [history, isLogged]);
+
+
+    const data = [
+        { numeroEmpleado: 1, nombre: "Naruto", apellidopaterno: "Naruto", apellidomaterno: "uzumaki", fechaNacimiento: "2016/06/06"},
+        { numeroEmpleado: 2, nombre: "Naruto", apellidopaterno: "Naruto", apellidomaterno: "uzumaki", fechaNacimiento: "2016/06/06"},
+    ];
+
+    const userInitialState = {
+        numeroEmpleado: 0,
+        nombre : "",
+        apellidopaterno: "",
+        apellidomaterno: "",
+        fechaNacimiento: "",
+    };
+
+    const initialState = {
+        data: data,
+        modalActualizar: false,
+        modalInsertar: false,
+        form: {
+            numeroEmpleado: 0,
+            nombre: "", 
+            apellidopaterno: "", 
+            apellidomaterno: "", 
+            fechaNacimiento: "",
+        }
+      };
+    
+    
+    const [userState, setuserState] = useState(userInitialState);
+    const [userSelected, setuserSelected] = useState(initialState);
+    
+    const onChange = (name, value) => {
+        setuserState((prev) => ({
+          ...prev,
+            [name]: value,
+        }));
+    };
+    
+    const mostrarModalInsertar = () => {
+        setuserSelected((prev) => ({
+            ...prev,
+            modalInsertar: true,
+          }));
+    };
+
+    const cerrarModalInsertar = () => {
+        setuserSelected((prev) => ({
+            ...prev,
+            modalInsertar: false,
+          }));
+    };
+
+    const mostrarModalActualizar = (dato) => {
+        console.log("TEST")
       };
 
+    const eliminar = (dato) => {
+        var opcion = window.confirm("Estás Seguro que deseas Eliminar al usuario "+ dato.numeroEmpleado+ "?");
+        if (opcion === true) {
+            var contador = 0;
+            var arreglo = userSelected.data;
+            arreglo.map((registro) => {
+            if (dato.numeroEmpleado === registro.numeroEmpleado) {
+                arreglo.splice(contador, 1);
+            }
+                contador++;
+            });
+            setuserSelected({ data: arreglo, modalActualizar: false });
+        }
+    };
+    
+    const insertar= ()=>{
+        var valorNuevo= {...userState};
+        valorNuevo.numeroEmpleado = userState.numeroEmpleado;
+        var lista = userSelected.data;
+        lista.push(valorNuevo);
+        setuserSelected({ data: lista, modalInsertar: false });
+    }
+
+    const onSubmit= (event)=>{
+        event.preventDefault();
+        //Registrar_Usuario(userState)
+        setuserState(userInitialState);
+    }
+    
     return(
-        <div className="Section">
-            <Form onSubmit={handleSubmit}>
-                <h3>Registrar un Usuario</h3>
+    <>
+        <Container>
+        <br />
+          <Button color="success" onClick={() => mostrarModalInsertar()}>Crear nuevo usuario</Button>
+          <br />
+          <br />
+          <Table>
+            <thead>
+              <tr>
+                <th>Numero Empleado</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Fecha Nacimiento</th>
+              </tr>
+            </thead>
 
-                <div className="form-group">
-                    <label>Nombre</label>
-                    <input type="text" className="form-control" onChange={(e) => setNombre(e.target.value)}/>
-                </div>
+            <tbody>
+              {userSelected.data.map((dato) => (
+                <tr key={dato.numeroEmpleado}>
+                  <td>{dato.numeroEmpleado}</td>
+                  <td>{dato.nombre}</td>
+                  <td>{dato.apellidopaterno}</td>
+                  <td>{dato.apellidomaterno}</td>
+                  <td>{dato.fechaNacimiento}</td>
+                  <td>
+                    <Button color="primary"onClick={() => mostrarModalActualizar(dato)}>
+                      Editar
+                    </Button>
+                    <Button color="danger" onClick={()=> eliminar(dato)}>Eliminar</Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Container>
+        
+        <Modal  isOpen={userSelected.modalInsertar}>
+          <ModalHeader>
+           <div><h3>Registrar nuevo usuario</h3></div>
+          </ModalHeader>
 
-                <div className="form-group">
-                    <label>Apellido Paterno</label>
-                    <input type="text" className="form-control" onChange={(e) => setApellidoPaterno(e.target.value)}/>
-                </div>
+          <ModalBody>
+            <Form onSubmit={onSubmit}>
+                <FormGroup>
+                    <label>
+                        Numero de Empleado: 
+                    </label>
+                    
+                    <Form.Control
+                        required
+                        className="form-control"
+                        type="number"
+                        name="numeroEmpleado"
+                        onChange={(e) => onChange( e.target.name ,e.target.value)}
+                    />
+                </FormGroup>
                 
-                <div className="form-group">
-                    <label>Apellido Materno</label>
-                    <input type="text" className="form-control" onChange={(e) => setApellidoMaterno(e.target.value)}/>
-                </div>
+                <FormGroup >
+                    <label>
+                        Nombre: 
+                    </label>
+                    <Form.Control 
+                        required 
+                        className="form-control"
+                        type="text"
+                        name="nombre" 
+                        onChange={(e) => onChange( e.target.name ,e.target.value)} />
+                </FormGroup>
+                    
+                <FormGroup>
+                    <label>
+                            Apellido Paterno: 
+                    </label>
+                    <Form.Control 
+                        required 
+                        className="form-control"
+                        type="text"
+                        name="apellidopaterno" 
+                        onChange={(e) => onChange( e.target.name ,e.target.value)} />
+                    </FormGroup>
 
-                <div className="form-group">
-                    <label>Fecha de Nacimiento</label>
-                    <input type="date" className="form-control" onChange={(e) => setFechaNacimiento(e.target.value)}/>
-                </div>
+                <FormGroup>
+                    <label>
+                        Apellido Materno: 
+                    </label>
+                    <Form.Control 
+                        required 
+                        className="form-control"
+                        type="text"
+                        name="apellidomaterno" 
+                        onChange={(e) => onChange( e.target.name ,e.target.value)} />
+                    </FormGroup>
 
-                <div className="form-group">
-                    <label>Numero de empleado</label>
-                    <input type="text" className="form-control" onChange={(e) => setNumeroDeEmpleado(e.target.value)}/>
-                </div>
-
-                <button type="submit" className="btn btn-primary">Registrar</button>
-                
+                <FormGroup>
+                    <label>
+                        Fecha de Nacimiento: 
+                    </label>
+                    <Form.Control 
+                        required 
+                        className="form-control"
+                        type="date"
+                        name="fechaNacimiento" 
+                        onChange={(e) => onChange( e.target.name ,e.target.value)} />
+                    </FormGroup>
+                <Button
+                    type="submit"
+                    color="primary"
+                    onClick={() => insertar()}
+                    >
+                    Insertar
+                </Button>
+                <Button
+                    className="btn btn-danger"
+                    onClick={() => cerrarModalInsertar()}
+                    >
+                    Cancelar
+                </Button>
             </Form>
-        </div>
+            
+          </ModalBody>
+
+          <ModalFooter>
+           
+          </ModalFooter>
+        </Modal>
+    </>  
     );
 }
