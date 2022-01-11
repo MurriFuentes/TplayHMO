@@ -36,12 +36,11 @@ export default function Page_Usuarios() {
       history.replace("./");
     }
     console.log("Componente renderizado")
-    if (isLogged && dataList.length == 0) {
+    if (isLogged && dataList.length === 0) {
       getListUsers();
     }
     if(window["users"]){
       userSelected.data = window["users"].data
-      console.log(userSelected)
     }
 
     console.log(window["users"])

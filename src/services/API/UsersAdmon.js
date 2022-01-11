@@ -2,18 +2,18 @@ import axios from "axios";
 const DEV_ENDPOINT ="http://localhost:8080";
 
 export const getUsers = async () => {
-  
+    console.log(window['username'])
     let jwt = sessionStorage.getItem("jwt");
     if (!jwt) return [];
   
     try {
-      const resp = await axios.get(`${DEV_ENDPOINT}/usuarios`, {
+      const resp = await axios.get(`${DEV_ENDPOINT}/listarUsuarios`, {
         headers: {
           Authorization: `Bearer ${jwt}`,
           "Content-Type": "application/json",
         },
       });
-  
+      window["users"] = {data:resp.data};
       return resp.data;
     } catch (error) {
       console.log(error);
@@ -27,7 +27,7 @@ export const getUsers = async () => {
     let jwt = sessionStorage.getItem("jwt");
   
     try {
-      axios.delete(`${DEV_ENDPOINT}/usuarios`, {
+      axios.delete(`${DEV_ENDPOINT}/eliminarUsuario`, {
         headers: {
           Authorization: `Bearer ${jwt}`,
           "Content-Type": "application/json",

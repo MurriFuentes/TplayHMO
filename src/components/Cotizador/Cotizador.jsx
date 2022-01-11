@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Cotizador.css";
-import { guardarCotizacion } from "../../services/API/userQuotation";
+import { guardarCotizacion, guardarCotizacionUsuario } from "../../services/API/userQuotation";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { ToggleButton } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -41,8 +41,17 @@ export default function Cotizador() {
       canales280: formState.canalesValue === "3" ? true : false,
     };
 
-    guardarCotizacion(paquete, formState.telefono, formState.correo);
+    var username = window["username"];
+    var data = {
+      numeroEmpleado: username,
+    }
 
+    if(username==="admin" | username===null){
+      guardarCotizacion(paquete, formState.telefono, formState.correo);
+    }else{
+      guardarCotizacionUsuario(paquete, formState.telefono, formState.correo, data);
+    }
+  
     setFormState(initialState);
   };
 

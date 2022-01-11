@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getListCotizaciones } from "../services/API/userQuotation"
+import { getListCotizaciones, getListCotizacionesUsuario } from "../services/API/userQuotation"
 import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import useUser from "../hooks/useUser";
@@ -18,7 +18,20 @@ export default function PageListarCotizacion() {
     }, [history, isLogged])
 
     const getListData = async () => {
-        const data = await getListCotizaciones();
+        var username = window["username"];
+        
+        var usuar = {
+            numeroEmpleado: username
+        }
+        console.log(usuar)
+
+        var data;
+        if (username === "admin" | username === null){
+            data = await getListCotizaciones();
+        }else{
+            data = await getListCotizacionesUsuario(usuar);
+        }
+        console.log(data)
         setDataList(data ? data : []);
         setDataLoaded(true);
     }

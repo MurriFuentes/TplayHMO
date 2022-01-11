@@ -14,6 +14,7 @@ export default function Navbar() {
     const [dropdown, setDropdown] = useState(false);
     var [navOptions, setNavOptions] = useState(navItems) ;
 
+
     useEffect(() => {
         if (window.innerWidth < 1065) {
             setMobile(true);
@@ -30,7 +31,6 @@ export default function Navbar() {
         };
         
         window.addEventListener("resize", handleResize);
-
         return () => {
             window.removeEventListener("resize", handleResize);
         }

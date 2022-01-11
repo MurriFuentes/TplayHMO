@@ -19,7 +19,9 @@ export default function Page_Login({ onLogin }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    login({ username, password });
+    login({ username, password }); 
+    
+    console.log(window["username"])
   };
 
   return (
