@@ -25,7 +25,7 @@ export default function Page_Login({ onLogin }) {
   return (
     <div className="Section">
       <h1>Inicia sesión</h1>
-      {isLogginLoading && <strong>Comprobando Credenciales</strong>}
+      {isLogginLoading && <strong>Comprobando Credenciales...</strong>}
 
       {!isLogginLoading && (
         <Form onSubmit={handleSubmit}>
@@ -42,7 +42,7 @@ export default function Page_Login({ onLogin }) {
           <Form.Group className="mb-3">
             <Form.Label>Contraseña</Form.Label>
             <Form.Control
-              type="user"
+              type="password"
               placeholder="Ej: 123"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

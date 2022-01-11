@@ -11,10 +11,6 @@ export default function Page_Contratar() {
     const handleSubmit = (event) => {
         event.preventDefault();
         guardarCliente(nombre,paquete,telefono);
-        
-        alert('Contratacion realizada exitosamente!',[
-            {text: 'OK', onPress:()=>console.log('alert closed')}
-        ]);
     }
 
     return(

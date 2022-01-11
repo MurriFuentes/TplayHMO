@@ -44,11 +44,6 @@ export default function Cotizador() {
     guardarCotizacion(paquete, formState.telefono, formState.correo);
 
     setFormState(initialState);
-
-    alert("Cotizacion realizada con exito!", [
-      { text: "OK", onPress: () => console.log("alert closed") },
-    ]);
-
   };
 
   const onChange = (event) => {
@@ -165,8 +160,8 @@ export default function Cotizador() {
             </div>
 
             <div className="Row">
-              <div className="tab_InnerSection">
-                <h2>¿TV Premium?</h2>
+              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
+                <h3>¿TV Premium?</h3>
                 <div className="button_container"></div>
                 <ButtonGroup>
                   {Premium.map((Premium, idx) => (
@@ -186,8 +181,8 @@ export default function Cotizador() {
                   ))}
                 </ButtonGroup>
               </div>
-              <div className="tab_InnerSection">
-                <h2>Television</h2>
+              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
+                <h3>Television</h3>
                 <div className="button_container">
                   <ButtonGroup>
                     {Television.map((Television, idx) => (
@@ -231,7 +226,7 @@ export default function Cotizador() {
                   ))}
                 </ButtonGroup>
               </div>
-              <div className="tab_InnerSection">
+              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
                 <h3>¿Mas canales?</h3>
                 <div className="button_container"></div>
                 <ButtonGroup>
@@ -275,7 +270,7 @@ export default function Cotizador() {
                   </Button>
                 </div>
               </div>
-              <div className="tab_InnerSection">
+              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
                 <h2>¿Television Extra?</h2>
                 <div className="button_container">
                   <Button

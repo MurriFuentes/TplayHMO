@@ -31,13 +31,13 @@ export default function Page_Usuarios() {
     console.log(dataList);
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!isLogged) {
       history.replace("./");
     }
     console.log("Componente renderizado")
     if (isLogged && dataList.length == 0) {
-      await getListUsers();
+      getListUsers();
     }
     if(window["users"]){
       userSelected.data = window["users"].data

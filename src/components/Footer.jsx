@@ -9,8 +9,7 @@ export default function Footer(){
                     <img src={Logo} alt="logo" className="Logo"/>
                 </Link>
                 <div className="nav-items">
-                    <p className="pFooter"> Terminos</p>
-                    <p className="pFooter">Aviso legal</p>
+                    <p className="pFooter"> Terminos y condiciones</p>
                 </div>
             </div>
         </>

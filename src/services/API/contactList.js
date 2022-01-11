@@ -79,9 +79,17 @@ export const guardarCliente = (nombre, paquete, telefono) => {
         paquete,
         telefono,
     });
+    
+    alert('Contratacion realizada exitosamente!',[
+      {text: 'OK', onPress:()=>console.log('alert closed')}
+  ]);
   } catch (error) {
     console.log(error);
+    alert('Contratacion fallida intente nuevamente',[
+      {text: 'OK', onPress:()=>console.log('alert closed')}
+  ]);
     throw error;
+    
   }
 };
 

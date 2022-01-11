@@ -8,7 +8,14 @@ export const guardarCotizacion = (paquete, numeroTelefono, correoElectronico) =>
       numeroTelefono,
       correoElectronico,
     });
-  } catch (error) {
+    
+    alert("Cotizacion realizada con exito!", [
+      { text: "OK", onPress: () => console.log("alert closed") },
+    ]);
+  } catch (error) { 
+    alert("Cotizacion Fallida, porfavor intente mas tarde", [
+      { text: "OK", onPress: () => console.log("alert closed") },
+    ]);
     console.log(error);
     throw error;
   }
@@ -27,9 +34,10 @@ export const getListCotizaciones = async () => {
     });
 
     return resp.data;
+    
   } catch (error) {
+    
     console.log(error);
-
     throw error;
   }
 };

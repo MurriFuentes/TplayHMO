@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { guardarCliente } from "../services/API/contactList";
 
+
 export default function Contratar() {
   const [Nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
