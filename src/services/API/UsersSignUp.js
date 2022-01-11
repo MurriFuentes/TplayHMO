@@ -24,4 +24,20 @@ export const Registrar_Usuario = ({
     }
   };
 
-  export default Registrar_Usuario;
+  export const Registrar_Cliente = (Userinfo) => {
+    console.log("USERINFO")
+    console.log(Userinfo);
+    var data = {Userinfo}
+    
+    console.log(data);
+    try {
+      axios.post(`${DEV_ENDPOINT}/guardarCliente`, {
+        data
+      });
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
+  

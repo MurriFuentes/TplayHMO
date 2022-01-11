@@ -1,7 +1,7 @@
 import {Form} from "react-bootstrap";
 import { useState , useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getClients } from "../services/API/UsersClient";
+import { getClients } from "../services/API/UsersClients";
 import {
   Table,
   Button,
@@ -15,18 +15,25 @@ import {
 import {Registrar_Cliente} from "../services/API/UsersSignUp"
 import useUser from "../hooks/useUser";
 import { useHistory } from "react-router-dom";
+import { Empty } from "antd";
 
 export default function Page_Clientes() {
     const [dataList, setDataList] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
     const { isLogged } = useUser();
     let history = useHistory();
-    
+    var username = window["username"];
+    var usuar = {
+        numeroEmpleado: username
+    }
 
   const getListUsers = async () => {
-    const data = await getClients();
+
+    const data = await getClients(usuar);
+
     setDataList(data);
     setDataLoaded(true);
+
     console.log(dataList);
   };
 
@@ -41,34 +48,33 @@ export default function Page_Clientes() {
     if(window["clients"]){
       userSelected.data = window["clients"].data
     }
-
+    console.log("WINDOW")
     console.log(window["clients"])
   }, [history, isLogged, dataList, dataLoaded]);
 
     const userInitialState = {
       nombre : "",
-      apellido_paterno: "",
-      apellido_materno: "",
-      fecha_contratacion: "",
-      paquete_contratado: "",
-      primer_pago: "",
-      segundo_pago: "",
-      id_usuario: 0
-  };
-
+      apellidoPaterno: "",
+      apellidoPaterno: "",
+      fechaNacimiento: "",
+      paqueteContratado: "",
+      primerPago: false,
+      segundoPago: false,
+      usuario: usuar
+    }
   const initialState = {
       data: dataList,
       modalActualizar: false,
       modalInsertar: false,
       form: {
         nombre : "",
-        apellido_paterno: "",
-        apellido_materno: "",
-        fecha_contratacion: "",
-        paquete_contratado: "",
-        primer_pago: "",
-        segundo_pago: "",
-        id_usuario: 0
+        apellidoPaterno: "",
+        apellidoPaterno: "",
+        fechaNacimiento: "",
+        paqueteContratado: "",
+        primerPago: false,
+        segundoPago: false,
+        usuario: usuar
       }
     };
 
@@ -81,7 +87,7 @@ export default function Page_Clientes() {
             [name]: value,
         }));
     };
-    
+
     const mostrarModalInsertar = () => {
         setuserSelected((prev) => ({
             ...prev,
@@ -117,10 +123,9 @@ export default function Page_Clientes() {
     
     const insertar= ()=>{
         var valorNuevo= {...userState};
-        valorNuevo.id_usuario = userState.id_usuario;
+        valorNuevo.id = userState.id +1;
         var lista = userSelected.data;
         lista.push(valorNuevo);
-        console.log(lista);
         setuserSelected({ data: lista, modalInsertar: false });
     }
 
@@ -144,22 +149,24 @@ export default function Page_Clientes() {
                 <th>Nombre</th>
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
-                <th>Fecha Nacimiento</th>
+                <th>Fecha contratacion</th>
+                <th>Paquete Contratado</th>
+                <th>Primer pago</th>
+                <th>Segundo pago</th>
                 <th>Numero Empleado</th>
               </tr>
             </thead>
             {isLogged &&
             <tbody>
               {userSelected.data.map((dato) => (
-                <tr key={dato.id_usuario}>
+                <tr key={dato.id}>
                   <td>{dato.nombre}</td>
-                  <td>{dato.apellido_paterno}</td>
-                  <td>{dato.apellido_materno}</td>
-                  <td>{dato.fecha_contratacion}</td>
-                  <td>{dato.paquete_contratado}</td>
-                  <td>{dato.primer_pago}</td>
-                  <td>{dato.segundo_pago}</td>
-                  <td>{dato.id_usuario}</td>
+                  <td>{dato.apellidoPaterno}</td>
+                  <td>{dato.apellidoMaterno}</td>
+                  <td>{dato.fechaNacimiento}</td>
+                  <td>{dato.paqueteContratado}</td>
+                  <td>{dato.primerPago}</td>
+                  <td>{dato.segundoPago}</td>
                   <td>
                     <Button color="primary"onClick={() => mostrarModalActualizar(dato)}>
                       Editar
@@ -180,21 +187,6 @@ export default function Page_Clientes() {
 
           <ModalBody>
             <Form onSubmit={onSubmit}>
-               
-                <FormGroup>
-                    <label>
-                        Empleado: 
-                    </label>
-                    
-                    <Form.Control
-                        required
-                        className="form-control"
-                        type="number"
-                        name="id_usuario"
-                        minlenght={7}
-                        onChange={(e) => onChange( e.target.name ,e.target.value)}
-                    />
-                </FormGroup>
                 
                 <FormGroup >
                     <label>
@@ -216,7 +208,7 @@ export default function Page_Clientes() {
                         required 
                         className="form-control"
                         type="text"
-                        name="apellido_paterno" 
+                        name="apellidoPaterno" 
                         onChange={(e) => onChange( e.target.name ,e.target.value)} />
                 </FormGroup>
 
@@ -228,7 +220,7 @@ export default function Page_Clientes() {
                         required 
                         className="form-control"
                         type="text"
-                        name="apellido_materno" 
+                        name="apellidoMaterno" 
                         onChange={(e) => onChange( e.target.name ,e.target.value)} />
                 </FormGroup>
 
@@ -240,7 +232,7 @@ export default function Page_Clientes() {
                         required 
                         className="form-control"
                         type="date"
-                        name="fecha_contratacion" 
+                        name="fechaNacimiento" 
                         onChange={(e) => onChange( e.target.name ,e.target.value)} />
                 </FormGroup>
 
@@ -248,7 +240,7 @@ export default function Page_Clientes() {
                     <label>
                         paquete: 
                     </label>
-                    <select name="paquete_contratado" required onChange={(e) => onChange( e.target.name ,e.target.value)}>
+                    <select value="Internet 40 megas" name="paqueteContratado" required onChange={(e) => onChange( e.target.name ,e.target.value)}>
                         <option selected value="Internet 20 megas">Internet 20 megas</option>
                         <option value="Internet 40 megas">Internet 40 megas</option>
                         <option value="Internet 100 megas">Internet 100 megas</option>
@@ -268,11 +260,10 @@ export default function Page_Clientes() {
                       <label>
                           Primer pago: 
                       </label>
-                      <Form.Control 
-                          required 
+                      <Form.Control
                           className="form-control"
-                          type="text"
-                          name="primer_pago" 
+                          type="checkbox"
+                          name="primerPago" 
                           onChange={(e) => onChange( e.target.name ,e.target.value)} />
                     </FormGroup>
 
@@ -280,11 +271,10 @@ export default function Page_Clientes() {
                     <label>
                         Segundo pago: 
                     </label>
-                    <Form.Control 
-                        required 
+                    <Form.Control
                         className="form-control"
-                        type="text"
-                        name="segundo_pago" 
+                        type="checkbox"
+                        name="segundoPago" 
                         onChange={(e) => onChange( e.target.name ,e.target.value)} />
                     </FormGroup>
 

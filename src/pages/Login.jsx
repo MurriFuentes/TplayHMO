@@ -21,7 +21,6 @@ export default function Page_Login({ onLogin }) {
     event.preventDefault();
     login({ username, password }); 
     
-    console.log(window["username"])
   };
 
   return (

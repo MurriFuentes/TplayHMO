@@ -23,7 +23,6 @@ export default function PageListarCotizacion() {
         var usuar = {
             numeroEmpleado: username
         }
-        console.log(usuar)
 
         var data;
         if (username === "admin" | username === null){
