@@ -1,15 +1,16 @@
 import axios from "axios";
+
 const DEV_ENDPOINT = "http://localhost:8080";
 
-export const Registrar_Usuario = (
+
+export const Registrar_Usuario = ({ 
     nombre,
     apellidoPaterno,
     apellidoMaterno,
     fechaNacimiento,
     numeroEmpleado
-) => {
+  }) => {
     try {
-        console.log(numeroEmpleado);
       axios.post(`${DEV_ENDPOINT}/guardarUsuario`, {
         nombre,
         apellidoPaterno,
@@ -22,3 +23,5 @@ export const Registrar_Usuario = (
       throw error;
     }
   };
+
+  export default Registrar_Usuario;

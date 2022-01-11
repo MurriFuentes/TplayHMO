@@ -33,7 +33,7 @@ export const DeleteContact = (contact_id) => {
   let jwt = sessionStorage.getItem("jwt");
 
   try {
-    axios.delete(`${DEV_ENDPOINT}/listar`, {
+    axios.delete(`${DEV_ENDPOINT}/borrarProspectoPorId`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export const getList = async () => {
   //return mockResponseListar;
 
   try {
-    const resp = await axios.get(`${DEV_ENDPOINT}/listar`, {
+    const resp = await axios.get(`${DEV_ENDPOINT}/listarProspectos`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const getList = async () => {
 
 export const guardarCliente = (nombre, paquete, telefono) => {
   try {
-    axios.post(`${DEV_ENDPOINT}/guardar`, {
+    axios.post(`${DEV_ENDPOINT}/guardarProspecto`, {
         nombre,
         paquete,
         telefono,

@@ -1,7 +1,7 @@
 import {Form} from "react-bootstrap";
 import { useState , useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getUsers } from "../services/UsersAdmon";
+import { getUsers } from "../services/API/UsersAdmon";
 import {
   Table,
   Button,
@@ -12,7 +12,8 @@ import {
   FormGroup,
   ModalFooter,
 } from "reactstrap";
-import Registrar_Usuario from "../services/API/UsersSignUp"
+//import Registrar_Usuario from "../services/API/UsersSignUp"
+import {Registrar_Usuario} from "../services/API/UsersSignUp"
 import useUser from "../hooks/useUser";
 import { useHistory } from "react-router-dom";
 
@@ -20,58 +21,56 @@ export default function Page_Usuarios() {
     const [dataList, setDataList] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
     const { isLogged } = useUser();
-    
     let history = useHistory();
-
-    useEffect(() => {
-      if (!isLogged) {
-        history.replace("./");
-      }
-    }, [history, isLogged]);
-
-    const getListUsers = async () => {
-        const data = await getUsers();
-        setDataList(data ? data : []);
-        setDataLoaded(true);
-    };
-    
-    useEffect(() => {
-        if (!dataLoaded) {
-            getListUsers();
-        }
-    }, [dataList, dataLoaded]);
     
 
-    const data = [
-        { numeroEmpleado: 1, nombre: "Naruto", apellidopaterno: "Naruto", apellidomaterno: "uzumaki", fechaNacimiento: "2016/06/06"},
-        { numeroEmpleado: 2, nombre: "Naruto", apellidopaterno: "Naruto", apellidomaterno: "uzumaki", fechaNacimiento: "2016/06/06"},
-    ];
+  const getListUsers = async () => {
+    const data = await getUsers();
+    setDataList(data);
+    setDataLoaded(true);
+    console.log(dataList);
+  };
+
+  useEffect(async () => {
+    if (!isLogged) {
+      history.replace("./");
+    }
+    console.log("Componente renderizado")
+    if (isLogged && dataList.length == 0) {
+      await getListUsers();
+    }
+    if(window["users"]){
+      userSelected.data = window["users"].data
+      console.log(userSelected)
+    }
+
+    console.log(window["users"])
+  }, [history, isLogged, dataList, dataLoaded]);
 
     const userInitialState = {
-        numeroEmpleado: 0,
-        nombre : "",
-        apellidopaterno: "",
-        apellidomaterno: "",
-        fechaNacimiento: "",
+      nombre : "",
+      apellidoPaterno: "",
+      apellidoMaterno: "",
+      fechaNacimiento: "",
+      numeroEmpleado: 0
+  };
+
+  const initialState = {
+      data: dataList,
+      modalActualizar: false,
+      modalInsertar: false,
+      form: {
+          nombre: "", 
+          apellidoPaterno: "", 
+          apellidoMaterno: "", 
+          fechaNacimiento: "",
+          numeroEmpleado: 0
+      }
     };
 
-    const initialState = {
-        data: data,
-        modalActualizar: false,
-        modalInsertar: false,
-        form: {
-            numeroEmpleado: 0,
-            nombre: "", 
-            apellidopaterno: "", 
-            apellidomaterno: "", 
-            fechaNacimiento: "",
-        }
-      };
-    
-    
     const [userState, setuserState] = useState(userInitialState);
     const [userSelected, setuserSelected] = useState(initialState);
-    
+  
     const onChange = (name, value) => {
         setuserState((prev) => ({
           ...prev,
@@ -98,7 +97,7 @@ export default function Page_Usuarios() {
       };
 
     const eliminar = (dato) => {
-        var opcion = window.confirm("Estás Seguro que deseas Eliminar al usuario "+ dato.numeroEmpleado+ "?");
+        var opcion = window.confirm("Estás Seguro que deseas Eliminar al usuario "+ dato.id+ "?");
         if (opcion === true) {
             var contador = 0;
             var arreglo = userSelected.data;
@@ -117,6 +116,7 @@ export default function Page_Usuarios() {
         valorNuevo.numeroEmpleado = userState.numeroEmpleado;
         var lista = userSelected.data;
         lista.push(valorNuevo);
+        console.log(lista);
         setuserSelected({ data: lista, modalInsertar: false });
     }
 
@@ -128,6 +128,7 @@ export default function Page_Usuarios() {
     
     return(
     <>
+        
         <Container>
         <br />
           <Button color="success" onClick={() => mostrarModalInsertar()}>Crear nuevo usuario</Button>
@@ -136,22 +137,22 @@ export default function Page_Usuarios() {
           <Table>
             <thead>
               <tr>
-                <th>Numero Empleado</th>
                 <th>Nombre</th>
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
                 <th>Fecha Nacimiento</th>
+                <th>Numero Empleado</th>
               </tr>
             </thead>
-
+            {isLogged &&
             <tbody>
               {userSelected.data.map((dato) => (
-                <tr key={dato.numeroEmpleado}>
-                  <td>{dato.numeroEmpleado}</td>
+                <tr key={dato.id}>
                   <td>{dato.nombre}</td>
-                  <td>{dato.apellidopaterno}</td>
-                  <td>{dato.apellidomaterno}</td>
+                  <td>{dato.apellidoPaterno}</td>
+                  <td>{dato.apellidoMaterno}</td>
                   <td>{dato.fechaNacimiento}</td>
+                  <td>{dato.numeroEmpleado}</td>
                   <td>
                     <Button color="primary"onClick={() => mostrarModalActualizar(dato)}>
                       Editar
@@ -161,6 +162,7 @@ export default function Page_Usuarios() {
                 </tr>
               ))}
             </tbody>
+            }
           </Table>
         </Container>
         
@@ -171,6 +173,7 @@ export default function Page_Usuarios() {
 
           <ModalBody>
             <Form onSubmit={onSubmit}>
+               
                 <FormGroup>
                     <label>
                         Numero de Empleado: 
@@ -181,6 +184,7 @@ export default function Page_Usuarios() {
                         className="form-control"
                         type="number"
                         name="numeroEmpleado"
+                        minlenght={7}
                         onChange={(e) => onChange( e.target.name ,e.target.value)}
                     />
                 </FormGroup>
@@ -205,7 +209,7 @@ export default function Page_Usuarios() {
                         required 
                         className="form-control"
                         type="text"
-                        name="apellidopaterno" 
+                        name="apellidoPaterno" 
                         onChange={(e) => onChange( e.target.name ,e.target.value)} />
                     </FormGroup>
 
@@ -217,7 +221,7 @@ export default function Page_Usuarios() {
                         required 
                         className="form-control"
                         type="text"
-                        name="apellidomaterno" 
+                        name="apellidoMaterno" 
                         onChange={(e) => onChange( e.target.name ,e.target.value)} />
                     </FormGroup>
 
