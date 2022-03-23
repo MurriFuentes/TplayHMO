@@ -9,7 +9,6 @@ export default function NavButton() {
         e.preventDefault();
         sessionStorage.removeItem("jwt")
         logout()
-
     }
     
     const renderLoginButtons = ({isLogged}) => {

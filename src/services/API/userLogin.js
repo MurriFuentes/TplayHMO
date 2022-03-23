@@ -2,7 +2,7 @@ const ENDPOINT ="http://localhost:8080";
 
 export default function login ({username,password}) {
     
-    //return Promise.resolve("sdafwerq")
+    window['username'] = username;
     
     return fetch(`${ENDPOINT}/authenticate`, {
         method: "POST",
@@ -14,8 +14,7 @@ export default function login ({username,password}) {
         if (!res.ok) throw new Error("Response is NOT ok");
         return res.json()
     }).then(res =>{
-        const {token} = res
-        console.log(token)        
+        const {token} = res        
         return token
     })
 }

@@ -6,7 +6,6 @@
   position: relative;
   background: #f1f1f1;
   margin: auto;
-  word-break: break-all;
   border: 1px solid rgba(0, 0, 0, 0.274);
 }
 
@@ -80,6 +79,7 @@ button {
   flex-direction: column;
   margin: 10px 20px 0 20px;
   text-align: center;
+  justify-content: flex-end;
 }
 
 .tab_infoContainer{
@@ -97,5 +97,6 @@ button {
 }
 
 .disabled{
-  background-color: gray;
+  background-color: rgb(199, 190, 190);
+  border-radius: 5px;
 }

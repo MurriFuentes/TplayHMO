@@ -1,25 +1,29 @@
 import * as icons from 'react-icons/bs';
 import {Button} from "reactstrap"
-export default function Card(){
+export default function Card(props){
     return(
         <>
             <div className="cardContainer">
                 <div className="cardHeader">
-                    Internet 20 megas   
+                    {props.titulo}
+                    <br></br>
+                    {props.subtitulo}   
                 </div>
                 <div className="cardBody">
                     <p className="cardPrice">
-                        $500
+                        {props.precio}
                     </p>
                     <div>
                         <icons.BsArrowDown/>
                         <icons.BsArrowUp/>
                     </div>
                     <div className="Megas">
-                        100 40
+                        {props.velbajada} {props.velsubida}
                     </div>
                     <div className="cardInfo">
-                        Informacion Extra
+                    {props.descripcion}
+                    <br></br>
+                    {props.descripcion2}
                     </div>
                     <Button href="./Contratar" className="btnContratar">Contratar</Button>
                 </div>

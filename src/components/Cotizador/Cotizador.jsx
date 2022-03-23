@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./Cotizador.css";
-import { guardarCotizacion } from "../../services/API/userQuotation";
+import { guardarCotizacion, guardarCotizacionUsuario } from "../../services/API/userQuotation";
 import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import { ToggleButton } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
 
 const initialState = {
-  megasValue: "10",
+  megasValue: "20",
   canalesValue: "0",
   televisionValue: "0",
   tvExtraValue: 0,
@@ -20,7 +20,6 @@ const initialState = {
 
 export default function Cotizador() {
   const [toggleState, setToggleState] = useState(1);
-
   const [formState, setFormState] = useState(initialState);
 
   const handleSubmit = (event) => {
@@ -42,17 +41,24 @@ export default function Cotizador() {
       canales280: formState.canalesValue === "3" ? true : false,
     };
 
-    guardarCotizacion(paquete, formState.telefono, formState.correo);
+    var username = window["username"];
+    var data = {
+      numeroEmpleado: username,
+    }
 
-    alert("Cotizacion realizada con exito!", [
-      { text: "OK", onPress: () => console.log("alert closed") },
-    ]);
+    if(username==="admin" | username===null){
+      guardarCotizacion(paquete, formState.telefono, formState.correo);
+    }else{
+      guardarCotizacionUsuario(paquete, formState.telefono, formState.correo, data);
+    }
+  
+    setFormState(initialState);
   };
 
   const onChange = (event) => {
     setFormState((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value,
+        [event.target.name]: event.target.value,
     }));
   };
 
@@ -73,7 +79,7 @@ export default function Cotizador() {
   const onDecrementTvExtra = (event) => {
     setFormState((prev) => ({
       ...prev,
-      tvExtraValue: prev.wifiExtenderValue - 1,
+      tvExtraValue: prev.tvExtraValue - 1,
     }));
   };
 
@@ -111,11 +117,12 @@ export default function Cotizador() {
   ];
 
   const MegasDisp = [
-    { name: "10 Mb", value: "10" },
     { name: "20 Mb", value: "20" },
-    { name: "50 Mb", value: "50" },
+    { name: "40 Mb", value: "40" },
     { name: "100 Mb", value: "100" },
-    { name: "150 Mb", value: "150" },
+    { name: "200 Mb", value: "200" },
+    { name: "500 Mb", value: "500" },
+    { name: "1000 Mb", value: "1000" },
   ];
 
   return (
@@ -143,18 +150,18 @@ export default function Cotizador() {
                 <h2>Elige tu velocidad de internet</h2>
                 <div className="button_container"></div>
                 <ButtonGroup>
-                  {MegasDisp.map((radio, idx) => (
+                  {MegasDisp.map((MegasDisp, idx) => (
                     <ToggleButton
                       key={idx}
-                      id={`radio-${idx}`}
+                      id={`MegasDisp-${idx}`}
                       type="radio"
                       variant={idx % 2 ? "outline-success" : "outline-danger"}
                       name="megasValue"
-                      value={radio.value}
-                      checked={formState.megasValue === radio.value}
+                      value={MegasDisp.value}
+                      checked={formState.megasValue === MegasDisp.value}
                       onChange={onChange}
                     >
-                      {radio.name}
+                      {MegasDisp.name}
                     </ToggleButton>
                   ))}
                 </ButtonGroup>
@@ -162,8 +169,8 @@ export default function Cotizador() {
             </div>
 
             <div className="Row">
-              <div className="tab_InnerSection">
-                <h2>¿TV Premium?</h2>
+              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
+                <h3>¿TV Premium?</h3>
                 <div className="button_container"></div>
                 <ButtonGroup>
                   {Premium.map((Premium, idx) => (
@@ -183,8 +190,8 @@ export default function Cotizador() {
                   ))}
                 </ButtonGroup>
               </div>
-              <div className="tab_InnerSection">
-                <h2>Television</h2>
+              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
+                <h3>Television</h3>
                 <div className="button_container">
                   <ButtonGroup>
                     {Television.map((Television, idx) => (
@@ -195,7 +202,7 @@ export default function Cotizador() {
                         variant={idx % 2 ? "outline-success" : "outline-danger"}
                         name="televisionValue"
                         value={Television.value}
-                        checked={formState.televisionValue === Television.value}
+                        checked={formState.televisionValue === Television.value }
                         disabled={toggleState === 2}
                         onChange={onChange}
                       >
@@ -209,7 +216,7 @@ export default function Cotizador() {
 
             <div className="Row">
               <div className="tab_InnerSection">
-                <h2>¿Servicio de Streaming?</h2>
+                <h3>¿Servicio de Streaming?</h3>
                 <div className="button_container"></div>
                 <ButtonGroup>
                   {Streaming.map((Stream, idx) => (
@@ -228,8 +235,8 @@ export default function Cotizador() {
                   ))}
                 </ButtonGroup>
               </div>
-              <div className="tab_InnerSection">
-                <h2>¿Mas canales?</h2>
+              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
+                <h3>¿Mas canales?</h3>
                 <div className="button_container"></div>
                 <ButtonGroup>
                   {Canales.map((canal, idx) => (
@@ -272,7 +279,7 @@ export default function Cotizador() {
                   </Button>
                 </div>
               </div>
-              <div className="tab_InnerSection">
+              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
                 <h2>¿Television Extra?</h2>
                 <div className="button_container">
                   <Button
@@ -312,6 +319,7 @@ export default function Cotizador() {
                           required
                           type="email"
                           name="correo"
+                          minLength={10}
                           placeholder="Correo (Opcional)"
                           value={formState.correo}
                           onChange={onChange}
@@ -322,6 +330,13 @@ export default function Cotizador() {
                       <Form.Group className="mb-3">
                         <Form.Label></Form.Label>
                         <Form.Control
+                          onKeyPress={(event) => {
+                            if (!/[0-9]/.test(event.key)) {
+                              event.preventDefault();
+                            }
+                          }}
+                          maxLength={10}
+                          minLength={10}
                           required
                           name="telefono"
                           placeholder="Telefono (Opcional)"

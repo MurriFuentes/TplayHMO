@@ -1,5 +1,6 @@
 import axios from "axios";
 const DEV_ENDPOINT = "http://localhost:8080";
+
 const mockResponseListar = [
   {
     id: 4,
@@ -27,6 +28,27 @@ const mockResponseListar = [
   },
 ];
 
+export const DeleteContact = (contact_id) => {
+
+  let jwt = sessionStorage.getItem("jwt");
+
+  try {
+    axios.delete(`${DEV_ENDPOINT}/borrarProspectoPorId`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
+      data: {
+        source: contact_id
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+
+};
+
 export const getList = async () => {
   
   let jwt = sessionStorage.getItem("jwt");
@@ -35,7 +57,7 @@ export const getList = async () => {
   //return mockResponseListar;
 
   try {
-    const resp = await axios.get(`${DEV_ENDPOINT}/listar`, {
+    const resp = await axios.get(`${DEV_ENDPOINT}/listarProspectos`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
@@ -52,19 +74,22 @@ export const getList = async () => {
 
 export const guardarCliente = (nombre, paquete, telefono) => {
   try {
-    axios.post(`${DEV_ENDPOINT}/guardar`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    axios.post(`${DEV_ENDPOINT}/guardarProspecto`, {
         nombre,
         paquete,
         telefono,
-      }),
     });
+    
+    alert('Contratacion realizada exitosamente!',[
+      {text: 'OK', onPress:()=>console.log('alert closed')}
+  ]);
   } catch (error) {
     console.log(error);
+    alert('Contratacion fallida intente nuevamente',[
+      {text: 'OK', onPress:()=>console.log('alert closed')}
+  ]);
     throw error;
+    
   }
 };
 
