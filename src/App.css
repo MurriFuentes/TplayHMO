@@ -1,7 +1,7 @@
 
 
 .Section{
-  max-width: 1590px;
+  max-width: 80%;
   min-height: 90vh;
   margin: 0 auto 0 auto;
   display: flex;
@@ -20,7 +20,7 @@
 
 .Carrousel_Container{
   margin: auto;
-  max-width: 1590px;
+  max-width: 80%;
 }
 
 label{
@@ -52,7 +52,7 @@ label{
 }
 
 .Cot_Message_Container{
-  max-width: 25%;
+  max-width: 30%;
   background-color:rgba(23, 110, 192, 0.5);
   border-radius: 5px;
   padding: 3rem;
