@@ -96,9 +96,9 @@ export default function Navbar() {
             <div className="ToggleMenu">
                 <ul className={togglebar ? "nav-items-toggled active" : "nav-items-toggled"}>
                     {navOptions
-                    .map((item) => {
+                    .map((item,index) => {
                         return (
-                                <li key={item.id} className={item.dName} onClick={() => setTogglebar(false)}>
+                                <li key={index} className={item.dName} onClick={() => setTogglebar(false)}>
                                     <Link to={item.path}>
                                         {item.title}
                                     </Link>

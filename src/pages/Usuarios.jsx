@@ -1,5 +1,5 @@
-import {Form} from "react-bootstrap";
-import { useState , useEffect} from "react";
+import { Form } from "react-bootstrap";
+import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getUsers } from "../services/API/UsersAdmon";
 import {
@@ -13,16 +13,15 @@ import {
   ModalFooter,
 } from "reactstrap";
 //import Registrar_Usuario from "../services/API/UsersSignUp"
-import {Registrar_Usuario} from "../services/API/UsersSignUp"
+import { Registrar_Usuario } from "../services/API/UsersSignUp";
 import useUser from "../hooks/useUser";
 import { useHistory } from "react-router-dom";
 
 export default function Page_Usuarios() {
-    const [dataList, setDataList] = useState([]);
-    const [dataLoaded, setDataLoaded] = useState(false);
-    const { isLogged } = useUser();
-    let history = useHistory();
-    
+  const [dataList, setDataList] = useState([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const { isLogged } = useUser();
+  let history = useHistory();
 
   const getListUsers = async () => {
     const data = await getUsers();
@@ -35,115 +34,118 @@ export default function Page_Usuarios() {
     if (!isLogged) {
       history.replace("./");
     }
-    console.log("Componente renderizado")
+    console.log("Componente renderizado");
     if (isLogged && dataList.length === 0) {
       getListUsers();
     }
-    if(window["users"]){
-      userSelected.data = window["users"].data
+    if (window["users"]) {
+      userSelected.data = window["users"].data;
     }
 
-    console.log(window["users"])
+    console.log(window["users"]);
   }, [history, isLogged, dataList, dataLoaded]);
 
-    const userInitialState = {
-      nombre : "",
-      apellidoPaterno: "",
-      apellidoMaterno: "",
-      fechaNacimiento: "",
-      numeroEmpleado: 0
+  const userInitialState = {
+    nombre: "",
+    apellidoPaterno: "",
+    apellidoMaterno: "",
+    fechaNacimiento: "",
+    numeroEmpleado: 0,
   };
 
   const initialState = {
-      data: dataList,
-      modalActualizar: false,
+    data: dataList,
+    modalActualizar: false,
+    modalInsertar: false,
+    form: {
+      nombre: "",
+      apellidoPaterno: "",
+      apellidoMaterno: "",
+      fechaNacimiento: "",
+      numeroEmpleado: 0,
+    },
+  };
+
+  const [userState, setuserState] = useState(userInitialState);
+  const [userSelected, setuserSelected] = useState(initialState);
+
+  const onChange = (name, value) => {
+    setuserState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const mostrarModalInsertar = () => {
+    setuserSelected((prev) => ({
+      ...prev,
+      modalInsertar: true,
+    }));
+  };
+
+  const cerrarModalInsertar = () => {
+    setuserSelected((prev) => ({
+      ...prev,
       modalInsertar: false,
-      form: {
-          nombre: "", 
-          apellidoPaterno: "", 
-          apellidoMaterno: "", 
-          fechaNacimiento: "",
-          numeroEmpleado: 0
-      }
-    };
+    }));
+  };
 
-    const [userState, setuserState] = useState(userInitialState);
-    const [userSelected, setuserSelected] = useState(initialState);
-  
-    const onChange = (name, value) => {
-        setuserState((prev) => ({
-          ...prev,
-            [name]: value,
-        }));
-    };
-    
-    const mostrarModalInsertar = () => {
-        setuserSelected((prev) => ({
-            ...prev,
-            modalInsertar: true,
-          }));
-    };
+  const mostrarModalActualizar = (dato) => {
+    console.log("TEST");
+  };
 
-    const cerrarModalInsertar = () => {
-        setuserSelected((prev) => ({
-            ...prev,
-            modalInsertar: false,
-          }));
-    };
-
-    const mostrarModalActualizar = (dato) => {
-        console.log("TEST")
-      };
-
-    const eliminar = (dato) => {
-        var opcion = window.confirm("Estás Seguro que deseas Eliminar al usuario "+ dato.id+ "?");
-        if (opcion === true) {
-            var contador = 0;
-            var arreglo = userSelected.data;
-            arreglo.map((registro) => {
-            if (dato.numeroEmpleado === registro.numeroEmpleado) {
-                arreglo.splice(contador, 1);
-            }
-                contador++;
-            });
-            setuserSelected({ data: arreglo, modalActualizar: false });
+  const eliminar = (dato) => {
+    var opcion = window.confirm(
+      "Estás Seguro que deseas Eliminar al usuario " + dato.id + "?"
+    );
+    if (opcion === true) {
+      var contador = 0;
+      var arreglo = userSelected.data;
+      arreglo.map((registro) => {
+        if (dato.numeroEmpleado === registro.numeroEmpleado) {
+          arreglo.splice(contador, 1);
         }
-    };
-    
-    const insertar= ()=>{
-        var valorNuevo= {...userState};
-        valorNuevo.numeroEmpleado = userState.numeroEmpleado;
-        var lista = userSelected.data;
-        lista.push(valorNuevo);
-        console.log(lista);
-        setuserSelected({ data: lista, modalInsertar: false });
+        contador++;
+      });
+      setuserSelected({ data: arreglo, modalActualizar: false });
     }
+  };
 
-    const onSubmit= (event)=>{
-        event.preventDefault();
-        Registrar_Usuario(userState)
-        setuserState(userInitialState);
-    }
-    
-    return(
+  const insertar = () => {
+    var valorNuevo = { ...userState };
+    valorNuevo.numeroEmpleado = userState.numeroEmpleado;
+    var lista = userSelected.data;
+    lista.push(valorNuevo);
+    console.log(lista);
+    setuserSelected({ data: lista, modalInsertar: false });
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    Registrar_Usuario(userState);
+    setuserState(userInitialState);
+  };
+
+  return (
     <>
-        
-        <Container>
+      <Container>
         <br />
-          <Button color="success" onClick={() => mostrarModalInsertar()}>Crear nuevo usuario</Button>
-          <br />
-          <br />
-          <Table>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Apellido Paterno</th>
-                <th>Apellido Materno</th>
-                <th>Fecha Nacimiento</th>
-                <th>Numero Empleado</th>
-              </tr>
-            </thead>
-            {isLogged &&
+        <Button color="success" onClick={() => mostrarModalInsertar()}>
+          Crear nuevo usuario
+        </Button>
+        <br />
+        <br />
+        <Table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido Paterno</th>
+              <th>Apellido Materno</th>
+              <th>Fecha Nacimiento</th>
+              <th>Numero Empleado</th>
+            </tr>
+          </thead>
+          {isLogged && (
             <tbody>
               {userSelected.data.map((dato) => (
                 <tr key={dato.id}>
@@ -153,109 +155,102 @@ export default function Page_Usuarios() {
                   <td>{dato.fechaNacimiento}</td>
                   <td>{dato.numeroEmpleado}</td>
                   <td>
-                    <Button color="primary"onClick={() => mostrarModalActualizar(dato)}>
+                    <Button
+                      color="primary"
+                      onClick={() => mostrarModalActualizar(dato)}
+                    >
                       Editar
                     </Button>
-                    <Button color="danger" onClick={()=> eliminar(dato)}>Eliminar</Button>
+                    <Button color="danger" onClick={() => eliminar(dato)}>
+                      Eliminar
+                    </Button>
                   </td>
                 </tr>
               ))}
             </tbody>
-            }
-          </Table>
-        </Container>
-        
-        <Modal  isOpen={userSelected.modalInsertar}>
-          <ModalHeader>
-           <div><h3>Registrar nuevo usuario</h3></div>
-          </ModalHeader>
+          )}
+        </Table>
+      </Container>
 
-          <ModalBody>
-            <Form onSubmit={onSubmit}>
-               
-                <FormGroup>
-                    <label>
-                        Numero de Empleado: 
-                    </label>
-                    
-                    <Form.Control
-                        required
-                        className="form-control"
-                        type="number"
-                        name="numeroEmpleado"
-                        minlenght={7}
-                        onChange={(e) => onChange( e.target.name ,e.target.value)}
-                    />
-                </FormGroup>
-                
-                <FormGroup >
-                    <label>
-                        Nombre: 
-                    </label>
-                    <Form.Control 
-                        required 
-                        className="form-control"
-                        type="text"
-                        name="nombre" 
-                        onChange={(e) => onChange( e.target.name ,e.target.value)} />
-                </FormGroup>
-                    
-                <FormGroup>
-                    <label>
-                            Apellido Paterno: 
-                    </label>
-                    <Form.Control 
-                        required 
-                        className="form-control"
-                        type="text"
-                        name="apellidoPaterno" 
-                        onChange={(e) => onChange( e.target.name ,e.target.value)} />
-                    </FormGroup>
+      <Modal isOpen={userSelected.modalInsertar}>
+        <ModalHeader>
+          <div>
+            <h3>Registrar nuevo usuario</h3>
+          </div>
+        </ModalHeader>
 
-                <FormGroup>
-                    <label>
-                        Apellido Materno: 
-                    </label>
-                    <Form.Control 
-                        required 
-                        className="form-control"
-                        type="text"
-                        name="apellidoMaterno" 
-                        onChange={(e) => onChange( e.target.name ,e.target.value)} />
-                    </FormGroup>
+        <ModalBody>
+          <Form onSubmit={onSubmit}>
+            <FormGroup>
+              <label>Numero de Empleado:</label>
 
-                <FormGroup>
-                    <label>
-                        Fecha de Nacimiento: 
-                    </label>
-                    <Form.Control 
-                        required 
-                        className="form-control"
-                        type="date"
-                        name="fechaNacimiento" 
-                        onChange={(e) => onChange( e.target.name ,e.target.value)} />
-                    </FormGroup>
-                <Button
-                    type="submit"
-                    color="primary"
-                    onClick={() => insertar()}
-                    >
-                    Insertar
-                </Button>
-                <Button
-                    className="btn btn-danger"
-                    onClick={() => cerrarModalInsertar()}
-                    >
-                    Cancelar
-                </Button>
-            </Form>
-            
-          </ModalBody>
+              <Form.Control
+                required
+                className="form-control"
+                type="number"
+                name="numeroEmpleado"
+                minlenght={7}
+                onChange={(e) => onChange(e.target.name, e.target.value)}
+              />
+            </FormGroup>
 
-          <ModalFooter>
-           
-          </ModalFooter>
-        </Modal>
-    </>  
-    );
+            <FormGroup>
+              <label>Nombre:</label>
+              <Form.Control
+                required
+                className="form-control"
+                type="text"
+                name="nombre"
+                onChange={(e) => onChange(e.target.name, e.target.value)}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <label>Apellido Paterno:</label>
+              <Form.Control
+                required
+                className="form-control"
+                type="text"
+                name="apellidoPaterno"
+                onChange={(e) => onChange(e.target.name, e.target.value)}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <label>Apellido Materno:</label>
+              <Form.Control
+                required
+                className="form-control"
+                type="text"
+                name="apellidoMaterno"
+                onChange={(e) => onChange(e.target.name, e.target.value)}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <label>Fecha de Nacimiento:</label>
+              <Form.Control
+                required
+                className="form-control"
+                type="date"
+                name="fechaNacimiento"
+                onChange={(e) => onChange(e.target.name, e.target.value)}
+              />
+            </FormGroup>
+            <Button type="submit" color="primary" onClick={() => insertar()}>
+              Insertar
+            </Button>
+            <Button
+              className="btn btn-danger"
+              onClick={() => cerrarModalInsertar()}
+            >
+              Cancelar
+            </Button>
+          </Form>
+        </ModalBody>
+
+        <ModalFooter></ModalFooter>
+      </Modal>
+    </>
+  );
 }
