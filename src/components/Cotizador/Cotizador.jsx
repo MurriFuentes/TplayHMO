@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Cotizador.css";
 import {
   guardarCotizacion,
@@ -192,7 +192,7 @@ export default function Cotizador() {
                 data={Streaming}
                 title="¿Servicio de Streaming?"
                 name="streamingValue"
-                toggleState={toggleState}
+                toggleState={1}
               />
 
               <InnerSectionInfo

@@ -25,8 +25,9 @@ export default function InnerSectionInfo({
               variant={idx % 2 ? "outline-success" : "outline-danger"}
               name={name}
               value={infoDisplay.value}
-              checked={formState.megasValue === infoDisplay.value}
+              checked={formState[name] === infoDisplay.value}
               onChange={onChange}
+              disabled={toggleState === 2}
             >
               {infoDisplay.name}
             </ToggleButton>
