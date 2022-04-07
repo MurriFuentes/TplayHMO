@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { getListCotizaciones, getListCotizacionesUsuario } from "../services/API/userQuotation"
+import { getListCotizaciones, getListCotizacionesUsuario } from "../services/API/UserQuotation"
 import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
-import useUser from "../hooks/useUser";
+import useUser from "../hooks/UseUser";
 
 
 export default function PageListarCotizacion() {

@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Cotizador.css";
 import {
   guardarCotizacion,
   guardarCotizacionUsuario,
-} from "../../services/API/userQuotation";
-import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
-import { ToggleButton } from "react-bootstrap";
+} from "../../services/API/UserQuotation";
 import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
 import InnerSectionInfo from "./InnerSectionInfo";

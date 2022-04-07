@@ -13,7 +13,7 @@ import {
   ModalFooter,
 } from "reactstrap";
 import { Registrar_Cliente } from "../services/API/UsersSignUp";
-import useUser from "../hooks/useUser";
+import useUser from "../hooks/UseUser";
 import { useHistory } from "react-router-dom";
 
 export default function Page_Clientes() {

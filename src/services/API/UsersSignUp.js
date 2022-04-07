@@ -2,7 +2,6 @@ import axios from "axios";
 
 const DEV_ENDPOINT = "http://localhost:8080";
 
-
 export const Registrar_Usuario = ({ 
     nombre,
     apellidoPaterno,

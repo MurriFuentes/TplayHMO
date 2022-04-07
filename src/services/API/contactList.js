@@ -54,8 +54,6 @@ export const getList = async () => {
   let jwt = sessionStorage.getItem("jwt");
   if (!jwt) return [];
 
-  //return mockResponseListar;
-
   try {
     const resp = await axios.get(`${DEV_ENDPOINT}/listarProspectos`, {
       headers: {

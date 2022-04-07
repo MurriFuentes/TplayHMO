@@ -1,4 +1,4 @@
-import useUser from "../hooks/useUser";
+import useUser from "../hooks/UseUser";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";

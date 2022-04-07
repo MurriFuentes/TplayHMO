@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { guardarCliente } from "../services/API/contactList";
+import { guardarCliente } from "../services/API/ContactList";
 
 
 export default function Contratar() {
