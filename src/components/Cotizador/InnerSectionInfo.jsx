@@ -14,9 +14,9 @@ export default function InnerSectionInfo({
       <div
         className={"tab_InnerSection " + (toggleState === 2 ? "disabled" : "")}
       >
-        <h2>{title}</h2>
+        <h5>{title}</h5>
         <div className="button_container"></div>
-        <ButtonGroup>
+        <ButtonGroup size="sm">
           {data.map((infoDisplay, idx) => (
             <ToggleButton
               key={idx}

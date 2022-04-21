@@ -7,6 +7,7 @@ import {
 import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
 import InnerSectionInfo from "./InnerSectionInfo";
+import { BsAlignCenter } from "react-icons/bs";
 
 const initialState = {
   megasValue: "20",
@@ -163,7 +164,7 @@ export default function Cotizador() {
               />
             </div>
 
-            <div className="Row">
+            <div className="vertical">
               <InnerSectionInfo
                 onChange={onChange}
                 formState={formState}
@@ -183,7 +184,7 @@ export default function Cotizador() {
               />
             </div>
 
-            <div className="Row">
+            <div className="vertical">
               <InnerSectionInfo
                 onChange={onChange}
                 formState={formState}
@@ -205,7 +206,7 @@ export default function Cotizador() {
 
             <div className="Row">
               <div className="tab_InnerSection">
-                <h2>¿Wifi Extender?</h2>
+                <h5>¿Wifi Extender?</h5>
                 <div className="button_container">
                   <Button
                     variant="primary"
@@ -229,7 +230,7 @@ export default function Cotizador() {
                   "tab_InnerSection " + (toggleState === 2 ? "disabled" : "")
                 }
               >
-                <h2>¿Television Extra?</h2>
+                <h5>¿Television Extra?</h5>
                 <div className="button_container">
                   <Button
                     variant="primary"
@@ -294,7 +295,7 @@ export default function Cotizador() {
                         />
                       </Form.Group>
                     </Col>
-                    <Col>
+                    <Col className="vertical">
                       <Button variant="primary" type="submit" size="lg">
                         Cotizar
                       </Button>
