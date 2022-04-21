@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { navItems } from './NavbarItems';
 import { AdmonDrop } from './Dropdown';
 import NavButton from './NavButton';
-import useUser from '../../hooks/useUser';
+import useUser from '../../hooks/UseUser';
 import Logo from "../../images/LOGO-BLANCO.png"
 import * as icons2 from 'react-icons/fa';
 
@@ -60,7 +60,7 @@ export default function Navbar() {
                                 item.title === "ADMON" ?
                                 <>
                                     <li 
-                                        key={item.id} 
+                                        
                                         className={item.cName}
                                         onMouseLeave={()=> setDropdown(false)} 
                                         onMouseEnter={()=> setDropdown(true)}
@@ -70,7 +70,7 @@ export default function Navbar() {
                                     </li> 
                                 </>
                                 :
-                                    <li key={item.id} className={item.cName}>
+                                    <li className={item.cName}>
                                         <Link className={item.dName} to={item.path}>{item.title}</Link>
                                     </li>
                             ))}
@@ -98,7 +98,7 @@ export default function Navbar() {
                     {navOptions
                     .map((item) => {
                         return (
-                                <li key={item.id} className={item.dName} onClick={() => setTogglebar(false)}>
+                                <li className={item.dName} onClick={() => setTogglebar(false)}>
                                     <Link to={item.path}>
                                         {item.title}
                                     </Link>

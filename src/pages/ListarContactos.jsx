@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { DeleteContact } from "../services/API/contactList";
+import { DeleteContact } from "../services/API/ContactList";
 import { Button } from "react-bootstrap";
-import { getList } from "../services/API/contactList";
+import { getList } from "../services/API/ContactList";
 import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import { BsFillTrashFill } from "react-icons/bs";
-import useUser from "../hooks/useUser";
+import useUser from "../hooks/UseUser";
 
 export default function Page_Listar() {
   const [dataList, setDataList] = useState([]);

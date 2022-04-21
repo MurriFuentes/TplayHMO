@@ -96,6 +96,12 @@ button {
   align-items: center;
 }
 
+.vertical{
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
+}
+
 .disabled{
   background-color: rgb(199, 190, 190);
   border-radius: 5px;

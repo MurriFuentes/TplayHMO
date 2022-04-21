@@ -1,10 +1,13 @@
 import { useState } from "react";
 import "./Cotizador.css";
-import { guardarCotizacion, guardarCotizacionUsuario } from "../../services/API/UserQuotation";
-import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
-import { ToggleButton } from "react-bootstrap";
+import {
+  guardarCotizacion,
+  guardarCotizacionUsuario,
+} from "../../services/API/UserQuotation";
 import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
+import InnerSectionInfo from "./InnerSectionInfo";
+import { BsAlignCenter } from "react-icons/bs";
 
 const initialState = {
   megasValue: "20",
@@ -44,21 +47,26 @@ export default function Cotizador() {
     var username = window["username"];
     var data = {
       numeroEmpleado: username,
+    };
+
+    if ((username === "admin") | (username === null)) {
+      guardarCotizacion(paquete, formState.telefono, formState.correo);
+    } else {
+      guardarCotizacionUsuario(
+        paquete,
+        formState.telefono,
+        formState.correo,
+        data
+      );
     }
 
-    if(username==="admin" | username===null){
-      guardarCotizacion(paquete, formState.telefono, formState.correo);
-    }else{
-      guardarCotizacionUsuario(paquete, formState.telefono, formState.correo, data);
-    }
-  
     setFormState(initialState);
   };
 
   const onChange = (event) => {
     setFormState((prev) => ({
       ...prev,
-        [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value,
     }));
   };
 
@@ -146,121 +154,59 @@ export default function Cotizador() {
         <div className="content-tabs">
           <div className="content  active-content">
             <div className="tab_infoContainer">
-              <div className="tab_InnerSection">
-                <h2>Elige tu velocidad de internet</h2>
-                <div className="button_container"></div>
-                <ButtonGroup>
-                  {MegasDisp.map((MegasDisp, idx) => (
-                    <ToggleButton
-                      key={idx}
-                      id={`MegasDisp-${idx}`}
-                      type="radio"
-                      variant={idx % 2 ? "outline-success" : "outline-danger"}
-                      name="megasValue"
-                      value={MegasDisp.value}
-                      checked={formState.megasValue === MegasDisp.value}
-                      onChange={onChange}
-                    >
-                      {MegasDisp.name}
-                    </ToggleButton>
-                  ))}
-                </ButtonGroup>
-              </div>
+              <InnerSectionInfo
+                onChange={onChange}
+                formState={formState}
+                data={MegasDisp}
+                title="Elige tu velocidad de internet"
+                name="megasValue"
+                toggleState={1}
+              />
             </div>
 
-            <div className="Row">
-              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
-                <h3>¿TV Premium?</h3>
-                <div className="button_container"></div>
-                <ButtonGroup>
-                  {Premium.map((Premium, idx) => (
-                    <ToggleButton
-                      key={idx}
-                      id={`Premium-${idx}`}
-                      type="radio"
-                      variant={idx % 2 ? "outline-success" : "outline-danger"}
-                      name="tvPremiumValue"
-                      value={Premium.value}
-                      checked={formState.tvPremiumValue === Premium.value}
-                      disabled={toggleState === 2}
-                      onChange={onChange}
-                    >
-                      {Premium.name}
-                    </ToggleButton>
-                  ))}
-                </ButtonGroup>
-              </div>
-              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
-                <h3>Television</h3>
-                <div className="button_container">
-                  <ButtonGroup>
-                    {Television.map((Television, idx) => (
-                      <ToggleButton
-                        key={idx}
-                        id={`Television-${idx}`}
-                        type="radio"
-                        variant={idx % 2 ? "outline-success" : "outline-danger"}
-                        name="televisionValue"
-                        value={Television.value}
-                        checked={formState.televisionValue === Television.value }
-                        disabled={toggleState === 2}
-                        onChange={onChange}
-                      >
-                        {Television.name}
-                      </ToggleButton>
-                    ))}
-                  </ButtonGroup>
-                </div>
-              </div>
+            <div className="vertical">
+              <InnerSectionInfo
+                onChange={onChange}
+                formState={formState}
+                data={Premium}
+                title="¿TV Premium?"
+                name="tvPremiumValue"
+                toggleState={toggleState}
+              />
+
+              <InnerSectionInfo
+                onChange={onChange}
+                formState={formState}
+                data={Television}
+                title="Television"
+                name="televisionValue"
+                toggleState={toggleState}
+              />
+            </div>
+
+            <div className="vertical">
+              <InnerSectionInfo
+                onChange={onChange}
+                formState={formState}
+                data={Streaming}
+                title="¿Servicio de Streaming?"
+                name="streamingValue"
+                toggleState={1}
+              />
+
+              <InnerSectionInfo
+                onChange={onChange}
+                formState={formState}
+                data={Canales}
+                title="¿Mas canales?"
+                name="canalesValue"
+                toggleState={toggleState}
+              />
             </div>
 
             <div className="Row">
               <div className="tab_InnerSection">
-                <h3>¿Servicio de Streaming?</h3>
-                <div className="button_container"></div>
-                <ButtonGroup>
-                  {Streaming.map((Stream, idx) => (
-                    <ToggleButton
-                      key={idx}
-                      id={`Stream-${idx}`}
-                      type="radio"
-                      variant={idx % 2 ? "outline-success" : "outline-danger"}
-                      name="streamingValue"
-                      value={Stream.value}
-                      checked={formState.streamingValue === Stream.value}
-                      onChange={onChange}
-                    >
-                      {Stream.name}
-                    </ToggleButton>
-                  ))}
-                </ButtonGroup>
-              </div>
-              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
-                <h3>¿Mas canales?</h3>
-                <div className="button_container"></div>
-                <ButtonGroup>
-                  {Canales.map((canal, idx) => (
-                    <ToggleButton
-                      key={idx}
-                      id={`canal-${idx}`}
-                      type="radio"
-                      variant={idx % 2 ? "outline-success" : "outline-danger"}
-                      name="canalesValue"
-                      value={canal.value}
-                      checked={formState.canalesValue === canal.value}
-                      disabled={toggleState === 2}
-                      onChange={onChange}
-                    >
-                      {canal.name}
-                    </ToggleButton>
-                  ))}
-                </ButtonGroup>
-              </div>
-            </div>
-
-            <div className="Row">
-              <div className="tab_InnerSection">
-                <h2>¿Wifi Extender?</h2>
+                <h5>¿Wifi Extender?</h5>
                 <div className="button_container">
                   <Button
                     variant="primary"
@@ -279,8 +225,12 @@ export default function Cotizador() {
                   </Button>
                 </div>
               </div>
-              <div className={"tab_InnerSection " + (toggleState === 2 ? 'disabled' : '')}>
-                <h2>¿Television Extra?</h2>
+              <div
+                className={
+                  "tab_InnerSection " + (toggleState === 2 ? "disabled" : "")
+                }
+              >
+                <h5>¿Television Extra?</h5>
                 <div className="button_container">
                   <Button
                     variant="primary"
@@ -345,7 +295,7 @@ export default function Cotizador() {
                         />
                       </Form.Group>
                     </Col>
-                    <Col>
+                    <Col className="vertical">
                       <Button variant="primary" type="submit" size="lg">
                         Cotizar
                       </Button>
