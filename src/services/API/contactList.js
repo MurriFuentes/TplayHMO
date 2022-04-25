@@ -33,18 +33,16 @@ export const DeleteContact = (contact_id) => {
   let jwt = sessionStorage.getItem("jwt");
 
   try {
-    axios.delete(`${DEV_ENDPOINT}/borrarProspectoPorId`, {
+    axios.post(`${DEV_ENDPOINT}/eliminarProspecto`, {
+      id: contact_id,
       headers: {
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
-      },
-      data: {
-        source: contact_id
       }
     });
   } catch (error) {
     console.log(error);
-    throw error;
+    throw error; 
   }
 
 };
