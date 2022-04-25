@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const DEV_ENDPOINT = "http://localhost:8080";
+const DEV_ENDPOINT = "https://sapient-tracer-347401.uw.r.appspot.com";
 
 export const Registrar_Usuario = ({ 
     nombre,
@@ -23,15 +23,42 @@ export const Registrar_Usuario = ({
     }
   };
 
-  export const Registrar_Cliente = (Userinfo) => {
-    console.log("USERINFO")
-    console.log(Userinfo);
-    var data = {Userinfo}
-    
-    console.log(data);
+  export const Registrar_Cliente = ({nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, paqueteContratado, primerPago, segundoPago, usuario}) => {
+    let jwt = sessionStorage.getItem("jwt");
+    if (!jwt) return [];
+
     try {
-      axios.post(`${DEV_ENDPOINT}/guardarCliente`, {
-        data
+      axios.post(`${DEV_ENDPOINT}/guardarCliente`,{
+        nombre,
+        apellidoPaterno,
+        apellidoMaterno,
+        paqueteContratado,
+        fechaNacimiento,
+        primerPago,
+        segundoPago,
+        usuario,
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json",
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
+  export const Eliminar_Cliente = (contact_id) => {
+    let jwt = sessionStorage.getItem("jwt");
+    if (!jwt) return [];
+    console.log(contact_id)
+    try {
+      axios.post(`${DEV_ENDPOINT}/eliminarCliente`,{
+        id: contact_id,
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json",
+        }
       });
     } catch (error) {
       console.log(error);
