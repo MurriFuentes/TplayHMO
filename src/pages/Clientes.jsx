@@ -12,7 +12,7 @@ import {
   FormGroup,
   ModalFooter,
 } from "reactstrap";
-import { Registrar_Cliente } from "../services/API/UsersSignUp";
+import { Registrar_Cliente, Eliminar_Cliente } from "../services/API/UsersSignUp";
 import useUser from "../hooks/UseUser";
 import { useHistory } from "react-router-dom";
 
@@ -105,21 +105,30 @@ export default function Page_Clientes() {
     console.log("TEST");
   };
 
-  const eliminar = (dato) => {
-    var opcion = window.confirm(
-      "Estás Seguro que deseas Eliminar al cliente " + dato.id + "?"
-    );
-    if (opcion === true) {
-      var contador = 0;
-      var arreglo = userSelected.data;
-      arreglo.map((registro) => {
-        if (dato.id_usuario === registro.id_usuario) {
-          arreglo.splice(contador, 1);
-        }
-        contador++;
-      });
-      setuserSelected({ data: arreglo, modalActualizar: false });
+  useEffect(() => {
+    if (!dataLoaded) {
+      getListUsers();
     }
+  }, [dataList, dataLoaded]);
+
+  const eliminar = (dato) => {
+    Eliminar_Cliente(dato);
+    setDataLoaded(false);    
+    
+    // var opcion = window.confirm(
+    //   "Estás Seguro que deseas Eliminar al cliente " + dato.id + "?"
+    // );
+    // if (opcion === true) {
+    //   var contador = 0;
+    //   var arreglo = userSelected.data;
+    //   arreglo.map((registro) => {
+    //     if (dato.id_usuario === registro.id_usuario) {
+    //       arreglo.splice(contador, 1);
+    //     }
+    //     contador++;
+    //   });
+    //   setuserSelected({ data: arreglo, modalActualizar: false });
+    // }
   };
 
   const insertar = () => {
@@ -176,7 +185,7 @@ export default function Page_Clientes() {
                     >
                       Editar
                     </Button>
-                    <Button color="danger" onClick={() => eliminar(dato)}>
+                    <Button color="danger" onClick={() => eliminar(dato.id)}>
                       Eliminar
                     </Button>
                   </td>
