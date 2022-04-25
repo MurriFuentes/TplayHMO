@@ -1,7 +1,10 @@
 import axios from "axios";
 const DEV_ENDPOINT ="https://sapient-tracer-347401.uw.r.appspot.com";
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 7e014b290f137f32ceabe4b0c8f922984a1db719
 
 export const getClients = async (usuario) => {
   let jwt = sessionStorage.getItem("jwt");
