@@ -48,4 +48,22 @@ export const Registrar_Usuario = ({
     }
   };
 
+  export const Eliminar_Cliente = (contact_id) => {
+    let jwt = sessionStorage.getItem("jwt");
+    if (!jwt) return [];
+    console.log(contact_id)
+    try {
+      axios.post(`${DEV_ENDPOINT}/eliminarCliente`,{
+        id: contact_id,
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json",
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
   
