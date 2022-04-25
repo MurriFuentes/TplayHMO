@@ -1,3 +1,7 @@
+#root{
+    height: 100vh;
+    background-color: white;;
+}
 .principal{
     align-items: center;
     justify-content: center;
@@ -10,8 +14,26 @@
     background-color: rgb(119, 192, 226);
     min-width: 30%;
     min-height: 30%;
-    
+    padding: 1.3rem;
     border-radius: 1rem;
+    border: dashed 5px rgb(17, 0, 255)
+}
+.margenDerecha{
+    margin-right: 8px;
+}
+
+.paqueteMostrado{
+    background-color: #55D8C1;
+    color: black;
+    padding: 1.2rem;
+    width: 100%;
+    text-align: center;
+    border: 1px solid black ;
+    border-radius: 5px;
+}
+.nombrePaquete{
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .Formulario{

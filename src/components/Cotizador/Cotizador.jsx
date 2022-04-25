@@ -7,7 +7,6 @@ import {
 import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
 import InnerSectionInfo from "./InnerSectionInfo";
-import { BsAlignCenter } from "react-icons/bs";
 
 const initialState = {
   megasValue: "20",
