@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react"
-import { getListCotizaciones, getListCotizacionesUsuario } from "../services/API/UserQuotation"
+import { getListCotizaciones, getListCotizacionesUsuario, DeleteQuotation, EditQuotation } from "../services/API/UserQuotation"
 import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import useUser from "../hooks/UseUser";
+import { Dropdown } from "react-bootstrap";
 
+import { Button } from "react-bootstrap";
+import Fila from '../components/FilaCotizacion/Fila'
 
 export default function PageListarCotizacion() {
     const [dataList, setDataList] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
     const { isLogged } = useUser();
+    const [filtroF, setFiltroF] = useState((elemento) => (elemento) => true);
+    const [filtroP, setFiltroP] = useState((elemento) => (elemento) => true);
+    const [filtroV, setFiltroV] = useState((elemento) => (elemento) => true);
+    const [filtro, setFiltro] = useState(0);
+    const [filtro2, setFiltro2] = useState("");
+    const [filtro3, setFiltro3] = useState("");
     let history = useHistory();
-    
+
     useEffect(() => {
         if (!isLogged) {
             history.replace("./")
@@ -19,15 +28,16 @@ export default function PageListarCotizacion() {
 
     const getListData = async () => {
         var username = window["username"];
-        
+        console.log(username)
+
         var usuar = {
             numeroEmpleado: username
         }
 
         var data;
-        if (username === "admin" | username === null){
+        if (username === "admin" | username === null) {
             data = await getListCotizaciones();
-        }else{
+        } else {
             data = await getListCotizacionesUsuario(usuar);
         }
         console.log(data)
@@ -41,21 +51,100 @@ export default function PageListarCotizacion() {
         }
     }, [dataList, dataLoaded])
 
+    // const handleClick = (contact_id) => {
+    //     DeleteQuotation(contact_id);
+    //     setDataLoaded(false);
+    // };
+
+    // const handleClick2 = (contact_id) => {
+    //     EditQuotation(contact_id);
+    //     setDataLoaded(false);
+    // };
+    // const handleClick3 = (contact_id) => {
+    //     // EditQuotation(contact_id);
+    //     setDataLoaded(false);
+    // };
+
+    const actualizarFiltro = () => {
+        setFiltro(filtro + 1);
+        switch (filtro % 3) {
+            case 0:
+                setFiltroP(() => (elemento) => elemento.activo)
+                break;
+            case 1:
+                setFiltroP(() => (elemento) => !elemento.activo)
+                break;
+            case 2:
+                setFiltroP(() => () => true)
+                break;
+            default:
+                break;
+        }
+    };
+
+    const actualizarFiltroTelevision = (dato) => {
+        console.log(dato)
+
+        if (dato == "") {
+            setFiltroF(() => (elemento) => true)
+        } else {
+            setFiltroF(() => (elemento) => elemento.paquete.television == dato)
+        }
+    }
+
+    const actualizarFiltroInternet = (dato) => {
+        if (dato == "") {
+            setFiltroV(() => (elemento) => true)
+        } else {
+            setFiltroV(() => (elemento) => elemento.paquete.velocidadInternet == dato)
+        }
+    }
     return (
         <>
             {dataList.length > 0 && isLogged &&
                 <div
-                    className="Section"
+                    className="w-100 bg-success"
                     style={{
-                    justifyContent: "initial",
+                        justifyContent: "initial",
                     }}
                 >
-                    <Table striped bordered hover size="xl">
+                    <h1 className="bg-success text-center p-3">Lista de cotizaciones</h1>
+                    <div className="m-auto w-50">
+                        <Button className="text-center p-3 inline-block" variant="dark" onClick={actualizarFiltro}>Revisado</Button>
+                        <Dropdown className="bg-success w-75 text-center p-3 d-inline">
+                            <Dropdown.Toggle variant="danger" id="dropdown-basic">
+                                Television
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={() => actualizarFiltroTelevision("")}>Sin filtro</Dropdown.Item>
+                                <Dropdown.Item onClick={() => actualizarFiltroTelevision("0")}>No</Dropdown.Item>
+                                <Dropdown.Item onClick={() => actualizarFiltroTelevision("1")}>TV Normal</Dropdown.Item>
+                                <Dropdown.Item onClick={() => actualizarFiltroTelevision("2")}></Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <Dropdown className="bg-success w-75 text-center p-3 d-inline">
+                            <Dropdown.Toggle variant="danger" id="dropdown-basic">
+                                Internet
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={() => actualizarFiltroInternet("")}>Sin filtro</Dropdown.Item>
+                                <Dropdown.Item onClick={() => actualizarFiltroInternet("20")}>20</Dropdown.Item>
+                                <Dropdown.Item onClick={() => actualizarFiltroInternet("40")}>40</Dropdown.Item>
+                                <Dropdown.Item onClick={() => actualizarFiltroInternet("100")}>100</Dropdown.Item>
+                                <Dropdown.Item onClick={() => actualizarFiltroInternet("200")}>200</Dropdown.Item>
+                                <Dropdown.Item onClick={() => actualizarFiltroInternet("500")}>500</Dropdown.Item>
+                                <Dropdown.Item onClick={() => actualizarFiltroInternet("1000")}>1000</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                    <Table striped bordered hover size="xl" className="bg-light w-75 m-auto">
                         <thead>
                             <tr>
                                 <th className="tabla-elemento">Velocidad Internet</th>
-                                <th className="tabla-elemento">Televison</th>
-                                <th className="tabla-elemento">NTPlay TV</th>
+                                <th className="tabla-elemento">Television</th>
+                                {/* <th className="tabla-elemento">NTPlay TV</th>
                                 <th className="tabla-elemento">Netflix</th>
                                 <th className="tabla-elemento">Amazon</th>
                                 <th className="tabla-elemento">Can Pant Netflix</th>
@@ -64,35 +153,22 @@ export default function PageListarCotizacion() {
                                 <th className="tabla-elemento">NTPlay TV Adic</th>
                                 <th className="tabla-elemento">140 canales</th>
                                 <th className="tabla-elemento">230 canales</th>
-                                <th className="tabla-elemento">280 Canales</th>
+                                <th className="tabla-elemento">280 Canales</th> */}
                                 <th className="tabla-elemento">Numero Telefono</th>
                                 <th className="tabla-elemento">Correo Electronico</th>
+                                <th>Revisado{(filtro % 3 == 0) ? "" : (filtro % 3 == 1) ? ":Si" : ":No"}</th>
+                                <th className="tabla-elemento">Funciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {dataList.map((item) => (
-                                <tr key={item.idCotizacion} >
-                                    <td className="tabla-elemento">{item.paquete.velocidadInternet}</td>
-                                    <td className="tabla-elemento">{item.paquete.television?"Si":"NO"}</td>
-                                    <td className="tabla-elemento">{item.paquete.nuevoTotalPlayTv?"Si":"NO"}</td>
-                                    <td className="tabla-elemento">{item.paquete.netflix?"Si":"NO"}</td>
-                                    <td className="tabla-elemento">{item.paquete.amazon?"Si":"NO"}</td>
-                                    <td className="tabla-elemento">{item.paquete.cantidadPantallasNetflix}</td>
-                                    <td className="tabla-elemento">{item.paquete.wifiExtender}</td>
-                                    <td className="tabla-elemento">{item.paquete.tvAdicional}</td>
-                                    <td className="tabla-elemento">{item.paquete.nuevoTotalPlayTvAdicional}</td>
-                                    <td className="tabla-elemento">{item.paquete.canales140?"Si":"NO"}</td>
-                                    <td className="tabla-elemento">{item.paquete.canales230?"Si":"NO"}</td>
-                                    <td className="tabla-elemento">{item.paquete.canales280?"Si":"NO"}</td>
-                                    <td className="tabla-elemento">{item.numeroTelefono}</td>
-                                    <td className="tabla-elemento">{item.correoElectronico}</td>
-                                </tr>
+                            {dataList.filter(filtroF).filter(filtroP).filter(filtroV).map((item) => (
+                                <Fila item={item} setDataLoaded={setDataLoaded}/>
                             ))}
                         </tbody>
                     </Table>
                 </div>
             }
-        
+
         </>
     )
 }
