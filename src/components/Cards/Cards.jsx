@@ -1,8 +1,19 @@
 import * as icons from "react-icons/bs";
-import { Button } from "reactstrap";
+import { Button} from "reactstrap";
+import { Modal } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import Page_Contratar from '../../../src/pages/Contratar'
 
 export default function Card(props) {
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+//     guardarCliente(nombre,paquete,telefono);
+// }
   return (
     <>
       <div className="cardContainer">
@@ -26,14 +37,20 @@ export default function Card(props) {
             {props.descripcion2}
           </div>
           <Button
-            onClick={() =>{window.localStorage.setItem('SelectedOption', props.subtitulo)}}
-            href="./Contratar"
+            onClick={handleShow}
             className="btnContratar"
           >
             Contratar
           </Button>
+
         </div>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton className="bg-success">
+          <div className="h1 m-auto">Solicitar Llamada</div>
+        </Modal.Header>
+        <Page_Contratar paqueteC={props.subtitulo} handleC={handleClose}/>
+      </Modal>
     </>
   );
 }
