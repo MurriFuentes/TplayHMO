@@ -2,12 +2,12 @@ import axios from "axios";
 const DEV_ENDPOINT = "https://sapient-tracer-347401.uw.r.appspot.com";
 
 const mockResponseListar = [
-  {
+  { 
     id: 4,
     nombre: "Albano",
     paquete: "TV + Internet 20 megas",
     telefono: "6623804420",
-  },
+  }, 
   {
     id: 5,
     nombre: "Jorge",
@@ -34,6 +34,25 @@ export const DeleteContact = (contact_id) => {
 
   try {
     axios.post(`${DEV_ENDPOINT}/eliminarProspecto`, {
+      id: contact_id,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error; 
+  }
+
+};
+
+export const EditContact = (contact_id) => {
+
+  let jwt = sessionStorage.getItem("jwt");
+
+  try {
+    axios.post(`${DEV_ENDPOINT}/editarProspecto`, {
       id: contact_id,
       headers: {
         Authorization: `Bearer ${jwt}`,
