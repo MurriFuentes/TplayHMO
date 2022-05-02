@@ -43,6 +43,7 @@ class App extends React.Component {
       <UserContextProvider>
         <BrowserRouter>
           <Navbar />
+          <div className="alturaMinima">
           <Switch>
             <Route path="/" exact component={PageHome}></Route>
             <Route path="/Tv-Internet" exact component={PageTvInternet}></Route>
@@ -55,6 +56,7 @@ class App extends React.Component {
             <Route path="/Usuarios" exact component={PageUsuarios}></Route>
             <Route path="/Clientes" exact component={PageClientes}></Route>
           </Switch>
+          </div>
           <Footer />
         </BrowserRouter>
       </UserContextProvider>
