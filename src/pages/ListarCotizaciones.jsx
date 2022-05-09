@@ -103,64 +103,54 @@ export default function PageListarCotizacion() {
         <>
             {dataList.length > 0 && isLogged &&
                 <div
-                    className="w-100 bg-success"
+                    className="w-100 bg-dark"
                     style={{
                         justifyContent: "initial",
                     }}
                 >
-                    <h1 className="bg-success text-center p-3">Lista de cotizaciones</h1>
-                    <div className="m-auto w-50">
-                        <Button className="text-center p-3 inline-block" variant="dark" onClick={actualizarFiltro}>Revisado</Button>
-                        <Dropdown className="bg-success w-75 text-center p-3 d-inline">
+                    <h1 className="bg-dark text-center p-3 h1 text-white">Lista de cotizaciones</h1>
+                    <div className="bg-dark w-75 m-auto h5">
+                        <Button className="text-center p-3 inline-block bg-danger " onClick={actualizarFiltro}>Revisado</Button>
+                        <Dropdown className="bg-dark w-75 text-center p-3 d-inline">
                             <Dropdown.Toggle variant="danger" id="dropdown-basic">
                                 Television
                             </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => actualizarFiltroTelevision("")}>Sin filtro</Dropdown.Item>
-                                <Dropdown.Item onClick={() => actualizarFiltroTelevision("0")}>No</Dropdown.Item>
-                                <Dropdown.Item onClick={() => actualizarFiltroTelevision("1")}>TV Normal</Dropdown.Item>
-                                <Dropdown.Item onClick={() => actualizarFiltroTelevision("2")}></Dropdown.Item>
+                            <Dropdown.Menu className="bg-success text-black">
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroTelevision("")}>Sin filtro</Dropdown.Item>
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroTelevision("0")}>No</Dropdown.Item>
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroTelevision("1")}>TV Normal</Dropdown.Item>
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroTelevision("2")}>Nuevo TotalPlay TV</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Dropdown className="bg-success w-75 text-center p-3 d-inline">
+                        <Dropdown className="bg-dark w-75 text-center p-3 d-inline">
                             <Dropdown.Toggle variant="danger" id="dropdown-basic">
                                 Internet
                             </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item onClick={() => actualizarFiltroInternet("")}>Sin filtro</Dropdown.Item>
-                                <Dropdown.Item onClick={() => actualizarFiltroInternet("20")}>20</Dropdown.Item>
-                                <Dropdown.Item onClick={() => actualizarFiltroInternet("40")}>40</Dropdown.Item>
-                                <Dropdown.Item onClick={() => actualizarFiltroInternet("100")}>100</Dropdown.Item>
-                                <Dropdown.Item onClick={() => actualizarFiltroInternet("200")}>200</Dropdown.Item>
-                                <Dropdown.Item onClick={() => actualizarFiltroInternet("500")}>500</Dropdown.Item>
-                                <Dropdown.Item onClick={() => actualizarFiltroInternet("1000")}>1000</Dropdown.Item>
+                            <Dropdown.Menu className="bg-success text-black">
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("")}>Sin filtro</Dropdown.Item>
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("20")}>20</Dropdown.Item>
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("40")}>40</Dropdown.Item>
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("100")}>100</Dropdown.Item>
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("200")}>200</Dropdown.Item>
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("500")}>500</Dropdown.Item>
+                                <Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("1000")}>1000</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-                    <Table striped bordered hover size="xl" className="bg-light w-75 m-auto">
+                    <Table className="bg-black w-75 m-auto h5">
                         <thead>
-                            <tr>
+                            <tr className="text-white">
                                 <th className="tabla-elemento">Velocidad Internet</th>
                                 <th className="tabla-elemento">Television</th>
-                                {/* <th className="tabla-elemento">NTPlay TV</th>
-                                <th className="tabla-elemento">Netflix</th>
-                                <th className="tabla-elemento">Amazon</th>
-                                <th className="tabla-elemento">Can Pant Netflix</th>
-                                <th className="tabla-elemento">WifiExtender</th>
-                                <th className="tabla-elemento">Tv Adicional</th>
-                                <th className="tabla-elemento">NTPlay TV Adic</th>
-                                <th className="tabla-elemento">140 canales</th>
-                                <th className="tabla-elemento">230 canales</th>
-                                <th className="tabla-elemento">280 Canales</th> */}
                                 <th className="tabla-elemento">Numero Telefono</th>
                                 <th className="tabla-elemento">Correo Electronico</th>
                                 <th>Revisado{(filtro % 3 == 0) ? "" : (filtro % 3 == 1) ? ":Si" : ":No"}</th>
                                 <th className="tabla-elemento">Funciones</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="text-white">
                             {dataList.filter(filtroF).filter(filtroP).filter(filtroV).map((item) => (
                                 <Fila item={item} setDataLoaded={setDataLoaded}/>
                             ))}

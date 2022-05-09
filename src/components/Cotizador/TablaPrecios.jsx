@@ -4,8 +4,8 @@ import { Table, Fila } from "react-bootstrap";
 function TablaPrecios({ formState }) {
     return (
         <>
-            <div className="border border-dark font-weight-bolder">
-                <Table striped bordered hover className="w-100 m-auto">
+            <div className="border border-dark font-weight-bolder p-3">
+                <Table className="w-100 m-auto bg-dark text-white">
                     <thead className="bg-success">
                         <tr>
                             <th className="tabla-elemento w-75">Concepto</th>
@@ -61,7 +61,7 @@ function TablaPrecios({ formState }) {
                             <td className="tabla-elemento">TV Extra: {formState.tvExtraValue}</td>
                             <td className="tabla-elemento">{formState.tvExtraValue*129}</td>
                         </tr>}
-                        <tr>
+                        <tr className='bg-success'>
                             <td className="tabla-elemento">Total</td>
                             <td className="tabla-elemento">Indefinido</td>
                         </tr>

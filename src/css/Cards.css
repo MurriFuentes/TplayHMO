@@ -2,18 +2,14 @@ body{
     background-color: white;
 }
 .SectionCards{
-    display: flex;
-    max-width: 1590px;
-    justify-content: center;
-    margin: auto;
-    background-color: whitesmoke;
+    background: rgb(37,37,41);
+    background: linear-gradient(86deg, rgba(37,37,41,1) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(37,37,41,1) 100%);
 }
 
 .cardContainer{
     margin: 2%;
     border-radius: 15px;
-    min-height: 300px;
-    min-width: 200px;
+
     box-shadow: 0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 
                 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 
                 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03);
@@ -22,8 +18,9 @@ body{
     align-items: center;
     justify-content: top;
     overflow: hidden;
-    background-color: #ffbf3f;
+    background-color: #000000;
     transition: all ease 200ms;
+    border: 3px solid white;
 }
 
 .cardContainer:hover {
@@ -38,7 +35,7 @@ body{
     font-size: 120%;
     font-weight: bold;;
     min-height: 12%;
-    color: rgb(34, 32, 32);
+    color: rgb(132, 173, 26);
     align-items: center;
     text-align: center;
     padding: 1em;
@@ -47,7 +44,7 @@ body{
 .cardBody{
     width: 100%;
     height: 100%;
-    background-color:white;
+    background-color:rgb(74, 74, 74);
     overflow: hidden;
     margin: top 15px;
     display: flex;
@@ -64,18 +61,21 @@ body{
 }
 
 .cardPrice{
-    color: black;
+    color: rgb(16, 145, 130);
     font: normal normal 800 40px/49px Montserrat;
     margin-block-start: 0%;
 }
+.Megas{
+    color: rgb(16, 145, 130);
+}
 
 .btnContratar{
-    color: black;
+    color: rgb(255, 255, 255);
     width: 80%;
     border-radius: 16px;
     padding: 6px;
     text-align: center;
-    background-color: tomato;
+    background-color: rgb(0, 0, 0);
     font-size: 1rem;
     text-decoration: none;
     font: normal normal 800 20px/19px Montserrat;
@@ -97,6 +97,20 @@ body{
         max-width: 1090px;
         justify-content: center;
         margin: auto;
-        background-color: whitesmoke;
+        /* background-color: rgb(29, 20, 20); */
     }
+
+}
+
+@media only screen and (min-width: 700px){
+    .w-80a{
+        width: 90%;
+    }
+}
+
+.h1{
+    margin-bottom: 0;
+}
+.w-80a{
+    width: 80%;
 }

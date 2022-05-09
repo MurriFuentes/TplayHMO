@@ -88,6 +88,9 @@ export const getList = async () => {
 };
 
 export const guardarCliente = (nombre, paquete, telefono) => {
+  if(paquete==null){
+    paquete="Solo contacto";
+  }
   try {
     axios.post(`${DEV_ENDPOINT}/guardarProspecto`, {
         nombre,

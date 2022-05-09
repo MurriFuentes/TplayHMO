@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Form, FormGroup, Label, Button } from "reactstrap";
+import * as icons from "react-icons/bs";
 
 import { guardarCliente } from "../services/API/ContactList";
 export default function Page_Contratar({ paqueteC, handleC }) {
@@ -10,27 +11,35 @@ export default function Page_Contratar({ paqueteC, handleC }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         guardarCliente(nombre, paquete, telefono);
-        handleC();
+        setTelefono("");
+        setNombre("");
+        if(paquete!=null){
+            handleC();
+        }
+            
     }
 
     return (
-
-        <div className="p-4 bg-primary">
+        <div className="p-4 bg-black text-white">
             <Form className="Formulario" onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label className="margenDerecha">Nombre:</Label>
-                    <input className="rounded" type="text" required value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder="Nombre" />
+                    <Label className="">Nombre:</Label>
+                    <input className="rounded fs-4 text-dark" type="text" required value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder="Juanito..." />
                 </FormGroup>
                 <FormGroup>
-                    <Label className="margenDerecha">Telefono: </Label>
-                    <input className="rounded" type="text" maxLength="10" minLength="10" required value={telefono} onChange={(e) => setTelefono(e.target.value)} placeholder="Telefono" />
+                    <Label className="margenDerecha w-100">Telefono: </Label>
+                    <input className="rounded fs-4 text-dark" type="text" maxLength="10" minLength="10" required value={telefono} onChange={(e) => setTelefono(e.target.value)} placeholder="662..." />
                 </FormGroup>
-                <FormGroup className="paqueteMostrado">
+
+                {paqueteC &&<FormGroup className="paqueteMostrado bg-light">
                     <Label >Paquete</Label>
                     <p className="nombrePaquete">{paquete}</p>
 
                 </FormGroup>
-                <Button className="btnContratar form-group" type="submit">Contratar</Button>
+
+                }
+                
+                <Button className="btnContratar form-group bg-primary p-2" type="submit">Enviar <icons.BsFillEnvelopeFill /></Button>
             </Form>
         </div>
 

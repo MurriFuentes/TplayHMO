@@ -49,13 +49,13 @@ function Fila({ item, setDataLoaded }) {
                     <Button onClick={handleShow}>< BsFillEyeFill /></Button>
                 </td>
             </tr>
+
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton className="bg-success">
+                <Modal.Header closeButton className="bg-dark text-success">
                     <div className="h1 m-auto">Cotizacion completa</div>
                 </Modal.Header>
                 <MostrarCotizacionFaltante  item={item} handleC={handleClose} />
             </Modal>
-
         </>
     )
 }

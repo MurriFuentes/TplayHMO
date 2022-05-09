@@ -1,8 +1,8 @@
 import { useCallback, useContext, useState } from "react";
 import Context from "../context/UserContext";
 import loginservice from "../services/API/UserLogin";
-
-export default function useUser (){
+ 
+export default function UseUser (){
     const {jwt, setJWT} = useContext(Context)
     const [state, setState] = useState({loading: false, error: false})
     
@@ -13,10 +13,16 @@ export default function useUser (){
                 window.sessionStorage.setItem('jwt', jwt)
                 setState({loading: false, error: false})        
                 setJWT(jwt);
+                alert("Login realizado con exito!", [
+                    { text: "OK", onPress: () => console.log("alert closed") },
+                  ]);
             })
             .catch(err =>{
                 window.sessionStorage.removeItem('jwt')
                 setState({loading: false, error: true})
+                alert("Usuario o contraseña incorrecto!", [
+                    { text: "OK", onPress: () => console.log("alert closed") },
+                  ]);
                 console.error(err)
             })
     }, [setJWT])

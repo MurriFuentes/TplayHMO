@@ -151,13 +151,10 @@ export default function Cotizador() {
 
   return (
     <>
-      <div className="container-fluid mt-5">
+      <div className="container-fluid">
         <div className="row">
-          <div className="col-6">
-            <TablaPrecios formState={formState} />
-          </div>
-          <div className="cotizador_container col-6">
-            <div className="bloc-tabs">
+          <div className="cotizador_container col-12 col-lg-7">
+            <div className="bloc-tabs h5">
               <button
                 className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
                 onClick={() => toggleTab(1)}
@@ -174,7 +171,7 @@ export default function Cotizador() {
 
             <div className="content-tabs">
               <div className="content active-content">
-                <div className="tab_infoContainer">
+                <div className="tab_infoContainer mb-3">
                   <InnerSectionInfo
                     onChange={onChange}
                     formState={formState}
@@ -185,7 +182,7 @@ export default function Cotizador() {
                   />
                 </div>
 
-                <div className="vertical">
+                <div className="vertical mb-3">
                   <InnerSectionInfo
                     onChange={onChange}
                     formState={formState}
@@ -205,7 +202,7 @@ export default function Cotizador() {
                   />
                 </div>
 
-                <div className="vertical">
+                <div className="vertical mb-3">
                   <InnerSectionInfo
                     onChange={onChange}
                     formState={formState}
@@ -225,9 +222,9 @@ export default function Cotizador() {
                   />
                 </div>
 
-                <div className="Row">
+                <div className="Row mb-3">
                   <div className="tab_InnerSection">
-                    <h5>¿Wifi Extender?</h5>
+                  <h5 className="text-white">¿Wifi Extender?</h5>
                     <div className="button_container">
                       <Button
                         variant="primary"
@@ -236,7 +233,7 @@ export default function Cotizador() {
                       >
                         -
                       </Button>
-                      <h3>{formState.wifiExtenderValue}</h3>
+                      <h3 className="text-white h2">{formState.wifiExtenderValue}</h3>
                       <Button
                         variant="primary"
                         onClick={onIncrementWifi}
@@ -251,7 +248,7 @@ export default function Cotizador() {
                       "tab_InnerSection " + (toggleState === 2 ? "disabled" : "")
                     }
                   >
-                    <h5>¿Television Extra?</h5>
+                    <h5 className="text-white">¿Television Extra?</h5>
                     <div className="button_container">
                       <Button
                         variant="primary"
@@ -264,7 +261,7 @@ export default function Cotizador() {
                       >
                         -
                       </Button>
-                      <h3>{formState.tvExtraValue}</h3>
+                      <h3 className="text-white h2">{formState.tvExtraValue}</h3>
                       <Button
                         variant="primary"
                         onClick={onIncrementTvExtra}
@@ -285,21 +282,20 @@ export default function Cotizador() {
                       <Row>
                         <Col className="col-6">
                           <Form.Group className="mb-3">
-                            <Form.Label></Form.Label>
                             <Form.Control
                               required
                               type="email"
                               name="correo"
                               minLength={10}
-                              placeholder="Correo"
+                              placeholder="Ejemplo@gmail.com"
                               value={formState.correo}
                               onChange={onChange}
+                              className="bg-dark text-white inputsCotizador p-2"
                             />
                           </Form.Group>
                         </Col>
                         <Col className="col-6">
                           <Form.Group className="mb-3">
-                            <Form.Label></Form.Label>
                             <Form.Control
                               onKeyPress={(event) => {
                                 if (!/[0-9]/.test(event.key)) {
@@ -310,22 +306,23 @@ export default function Cotizador() {
                               minLength={10}
                               required
                               name="telefono"
-                              placeholder="Telefono"
+                              placeholder="662..."
                               value={formState.telefono}
                               onChange={onChange}
+                              className="bg-dark text-white inputsCotizador p-2"
                             />
                           </Form.Group>
                         </Col>
                       </Row>
                       <Row>
                         <Col className="col-6">
-                          <Button variant="primary vertical" type="submit" size="lg">
+                          <Button variant="dark vertical" type="submit" size="lg">
                             Cotizar
                           </Button>
 
                         </Col>
                         <Col className="col-6">
-                          <Button variant="primary vertical" onClick={() => setFormState(initialState)} size="lg">
+                          <Button variant="dark vertical" onClick={() => setFormState(initialState)} size="lg">
                             Reiniciar
                           </Button>
                         </Col>
@@ -335,6 +332,9 @@ export default function Cotizador() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="col-12 col-lg-5">
+            <TablaPrecios formState={formState} />
           </div>
         </div>
       </div>
