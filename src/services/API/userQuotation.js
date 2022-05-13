@@ -111,3 +111,41 @@ export const getListCotizacionesUsuario = async (usuario) => {
     throw error;
   }
 };
+
+export const DeleteQuotation = (contact_id) => {
+
+  let jwt = sessionStorage.getItem("jwt");
+
+  try {
+    axios.post(`${DEV_ENDPOINT}/eliminarCotizacion`, {
+      idCotizacion: contact_id,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error; 
+  }
+
+};
+
+export const EditQuotation = (contact_id) => {
+
+  let jwt = sessionStorage.getItem("jwt");
+
+  try {
+    axios.post(`${DEV_ENDPOINT}/editarCotizacion`, {
+      idCotizacion: contact_id,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error; 
+  }
+
+};

@@ -148,15 +148,16 @@ export default function Page_Clientes() {
   return (
     <>
       <Container>
+        <h1 className="bg-dark text-center p-3 h1 text-white">Clientes</h1>
         <br />
         <Button color="success" onClick={() => mostrarModalInsertar()}>
           Crear nuevo cliente
         </Button>
         <br />
         <br />
-        <Table>
+        <Table className="bg-black m-auto h5">
           <thead>
-            <tr>
+            <tr className="text-white">
               <th>Nombre</th>
               <th>Apellido Paterno</th>
               <th>Apellido Materno</th>
@@ -168,9 +169,9 @@ export default function Page_Clientes() {
             </tr>
           </thead>
           {isLogged && (
-            <tbody>
+            <tbody className="text-white">
               {userSelected.data.map((dato) => (
-                <tr key={dato.id}>
+                <tr key={dato.id} className="text-white">
                   <td>{dato.nombre}</td>
                   <td>{dato.apellidoPaterno}</td>
                   <td>{dato.apellidoMaterno}</td>

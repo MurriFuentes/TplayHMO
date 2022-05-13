@@ -1,6 +1,6 @@
 import axios from "axios";
 const DEV_ENDPOINT = "https://sapient-tracer-347401.uw.r.appspot.com";
-//@ts-check
+
 /**
  * Es el metodo que se utilizara para borrar un posible prospecto de la BD.
  * @function
@@ -21,6 +21,23 @@ export const DeleteContact = (contact_id) => {
     throw error; 
   }
 };
+
+export const EditContact = (contact_id) => {
+  let jwt = sessionStorage.getItem("jwt");
+  try {
+    axios.post(`${DEV_ENDPOINT}/editarProspecto`, {
+      id: contact_id,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error; 
+  }
+};
+
 /**
  * Es el metodo que trae la lista de contactos actuales de la BD.
  * @method
@@ -54,6 +71,9 @@ export const getList = async () => {
  * @param {string} telefono 
  */
 export const guardarCliente = (nombre, paquete, telefono) => {
+  if(paquete==null){
+    paquete="Solo contacto";
+  }
   try {
     axios.post(`${DEV_ENDPOINT}/guardarProspecto`, {
         nombre,

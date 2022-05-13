@@ -1,10 +1,11 @@
 import React from 'react';
+import './reset.css'
 import './css/NavBar.css';
 import './css/Footer.css';
 import './css/Cards.css';
-import './App.css';
 import './css/PeticionContrato.css';
 import 'antd/dist/antd.css';
+import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from "./components/NavBar/Navbar";
 import Footer from './components/Footer';
@@ -21,15 +22,15 @@ import PageClientes from './pages/Clientes';
 import { UserContextProvider } from './context/UserContext';
 
 class App extends React.Component {
- 
-  authenticate(){
+
+  authenticate() {
     return new Promise(resolve => setTimeout(resolve, 300)) // 2 seconds
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.authenticate().then(() => {
       const ele = document.getElementById('ipl-progress-indicator')
-      if(ele){
+      if (ele) {
         ele.classList.add('available')
         setTimeout(() => {
           ele.outerHTML = ''
@@ -37,24 +38,26 @@ class App extends React.Component {
       }
     })
   }
-  
-  render() {  
+
+  render() {
     return (
       <UserContextProvider>
         <BrowserRouter>
           <Navbar />
-          <Switch>
-            <Route path="/" exact component={PageHome}></Route>
-            <Route path="/Tv-Internet" exact component={PageTvInternet}></Route>
-            <Route path="/Internet" exact component={PageInternet}></Route>
-            <Route path="/Cotizador" exact component={PageCotizador}></Route>
-            <Route path="/Login" exact component={PageLogin}></Route>
-            <Route path="/Listar" exact component={PageListar}></Route>
-            <Route path="/Cotizaciones" exact component={PageListarCotizacion}></Route>
-            <Route path="/Contratar" exact component={PageContratar}></Route>
-            <Route path="/Usuarios" exact component={PageUsuarios}></Route>
-            <Route path="/Clientes" exact component={PageClientes}></Route>
-          </Switch>
+          <div className='alturaMinima'>
+            <Switch>
+              <Route path="/" exact component={PageHome}></Route>
+              <Route path="/Tv-Internet" exact component={PageTvInternet}></Route>
+              <Route path="/Internet" exact component={PageInternet}></Route>
+              <Route path="/Cotizador" exact component={PageCotizador}></Route>
+              <Route path="/Login" exact component={PageLogin}></Route>
+              <Route path="/Listar" exact component={PageListar}></Route>
+              <Route path="/Cotizaciones" exact component={PageListarCotizacion}></Route>
+              <Route path="/Contratar" exact component={PageContratar}></Route>
+              <Route path="/Usuarios" exact component={PageUsuarios}></Route>
+              <Route path="/Clientes" exact component={PageClientes}></Route>
+            </Switch>
+          </div>
           <Footer />
         </BrowserRouter>
       </UserContextProvider>
