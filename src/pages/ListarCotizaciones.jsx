@@ -25,7 +25,11 @@ export default function PageListarCotizacion() {
             history.replace("./")
         }
     }, [history, isLogged])
-
+    /**
+     * Trae la lista de cotizaciones dependiendo si eres usuario o administrador.
+     * @async
+     * @returns {Array.<{idCotizacion:number, paquete: Array, usuario: Array, numeroTelefono:string, correoElectronico:string}>} Lista de cotizaciones en la BD.
+     */
     const getListData = async () => {
         var username = window["username"];
         console.log(username)
@@ -40,7 +44,6 @@ export default function PageListarCotizacion() {
         } else {
             data = await getListCotizacionesUsuario(usuar);
         }
-        console.log(data)
         setDataList(data ? data : []);
         setDataLoaded(true);
     }

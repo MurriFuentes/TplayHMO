@@ -1,7 +1,12 @@
 const ENDPOINT ="https://sapient-tracer-347401.uw.r.appspot.com";
-
+/**
+ * Este metodo verifica si el usuario y contraseña existe en la BD.
+ * @function
+ * @param {string} username
+ * @param {string} password
+ * @returns {string} Regresa un token de JWT.
+ */
 export default function login ({username,password}) {
-    
     window['username'] = username;
     
     return fetch(`${ENDPOINT}/authenticate`, {
