@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/ListarCotizaciones.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/ListarCotizaciones.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useEffect, useState } from "react"
+import { getListCotizaciones, getListCotizacionesUsuario, DeleteQuotation, EditQuotation } from "../services/API/UserQuotation"
+import { useHistory } from "react-router-dom";
+import { Table } from "react-bootstrap";
+import useUser from "../hooks/UseUser";
+import { Dropdown } from "react-bootstrap";
+
+import { Button } from "react-bootstrap";
+import Fila from '../components/FilaCotizacion/Fila'
+
+export default function PageListarCotizacion() {
+    const [dataList, setDataList] = useState([]);
+    const [dataLoaded, setDataLoaded] = useState(false);
+    const { isLogged } = useUser();
+    const [filtroF, setFiltroF] = useState((elemento) => (elemento) => true);
+    const [filtroP, setFiltroP] = useState((elemento) => (elemento) => true);
+    const [filtroV, setFiltroV] = useState((elemento) => (elemento) => true);
+    const [filtro, setFiltro] = useState(0);
+    const [filtro2, setFiltro2] = useState("");
+    const [filtro3, setFiltro3] = useState("");
+    let history = useHistory();
+
+    useEffect(() => {
+        if (!isLogged) {
+            history.replace("./")
+        }
+    }, [history, isLogged])
+    /**
+     * Trae la lista de cotizaciones dependiendo si eres usuario o administrador.
+     * @async
+     * @returns {Array.&lt;{idCotizacion:number, paquete: Array, usuario: Array, numeroTelefono:string, correoElectronico:string}>} Lista de cotizaciones en la BD.
+     */
+    const getListData = async () => {
+        var username = window["username"];
+        console.log(username)
+
+        var usuar = {
+            numeroEmpleado: username
+        }
+
+        var data;
+        if (username === "admin" | username === null) {
+            data = await getListCotizaciones();
+        } else {
+            data = await getListCotizacionesUsuario(usuar);
+        }
+        setDataList(data ? data : []);
+        setDataLoaded(true);
+    }
+
+    useEffect(() => {
+        if (!dataLoaded) {
+            getListData();
+        }
+    }, [dataList, dataLoaded])
+
+    // const handleClick = (contact_id) => {
+    //     DeleteQuotation(contact_id);
+    //     setDataLoaded(false);
+    // };
+
+    // const handleClick2 = (contact_id) => {
+    //     EditQuotation(contact_id);
+    //     setDataLoaded(false);
+    // };
+    // const handleClick3 = (contact_id) => {
+    //     // EditQuotation(contact_id);
+    //     setDataLoaded(false);
+    // };
+
+    const actualizarFiltro = () => {
+        setFiltro(filtro + 1);
+        switch (filtro % 3) {
+            case 0:
+                setFiltroP(() => (elemento) => elemento.activo)
+                break;
+            case 1:
+                setFiltroP(() => (elemento) => !elemento.activo)
+                break;
+            case 2:
+                setFiltroP(() => () => true)
+                break;
+            default:
+                break;
+        }
+    };
+
+    const actualizarFiltroTelevision = (dato) => {
+        console.log(dato)
+
+        if (dato == "") {
+            setFiltroF(() => (elemento) => true)
+        } else {
+            setFiltroF(() => (elemento) => elemento.paquete.television == dato)
+        }
+    }
+
+    const actualizarFiltroInternet = (dato) => {
+        if (dato == "") {
+            setFiltroV(() => (elemento) => true)
+        } else {
+            setFiltroV(() => (elemento) => elemento.paquete.velocidadInternet == dato)
+        }
+    }
+    return (
+        &lt;>
+            {dataList.length > 0 &amp;&amp; isLogged &amp;&amp;
+                &lt;div
+                    className="w-100 bg-dark"
+                    style={{
+                        justifyContent: "initial",
+                    }}
+                >
+                    &lt;h1 className="bg-dark text-center p-3 h1 text-white">Lista de cotizaciones&lt;/h1>
+                    &lt;div className="bg-dark w-75 m-auto h5">
+                        &lt;Button className="text-center p-3 inline-block bg-danger " onClick={actualizarFiltro}>Revisado&lt;/Button>
+                        &lt;Dropdown className="bg-dark w-75 text-center p-3 d-inline">
+                            &lt;Dropdown.Toggle variant="danger" id="dropdown-basic">
+                                Television
+                            &lt;/Dropdown.Toggle>
+
+                            &lt;Dropdown.Menu className="bg-success text-black">
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroTelevision("")}>Sin filtro&lt;/Dropdown.Item>
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroTelevision("0")}>No&lt;/Dropdown.Item>
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroTelevision("1")}>TV Normal&lt;/Dropdown.Item>
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroTelevision("2")}>Nuevo TotalPlay TV&lt;/Dropdown.Item>
+                            &lt;/Dropdown.Menu>
+                        &lt;/Dropdown>
+                        &lt;Dropdown className="bg-dark w-75 text-center p-3 d-inline">
+                            &lt;Dropdown.Toggle variant="danger" id="dropdown-basic">
+                                Internet
+                            &lt;/Dropdown.Toggle>
+
+                            &lt;Dropdown.Menu className="bg-success text-black">
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("")}>Sin filtro&lt;/Dropdown.Item>
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("20")}>20&lt;/Dropdown.Item>
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("40")}>40&lt;/Dropdown.Item>
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("100")}>100&lt;/Dropdown.Item>
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("200")}>200&lt;/Dropdown.Item>
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("500")}>500&lt;/Dropdown.Item>
+                                &lt;Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("1000")}>1000&lt;/Dropdown.Item>
+                            &lt;/Dropdown.Menu>
+                        &lt;/Dropdown>
+                    &lt;/div>
+                    &lt;Table className="bg-black w-75 m-auto h5">
+                        &lt;thead>
+                            &lt;tr className="text-white">
+                                &lt;th className="tabla-elemento">Velocidad Internet&lt;/th>
+                                &lt;th className="tabla-elemento">Television&lt;/th>
+                                &lt;th className="tabla-elemento">Numero Telefono&lt;/th>
+                                &lt;th className="tabla-elemento">Correo Electronico&lt;/th>
+                                &lt;th>Revisado{(filtro % 3 == 0) ? "" : (filtro % 3 == 1) ? ":Si" : ":No"}&lt;/th>
+                                &lt;th className="tabla-elemento">Funciones&lt;/th>
+                            &lt;/tr>
+                        &lt;/thead>
+                        &lt;tbody className="text-white">
+                            {dataList.filter(filtroF).filter(filtroP).filter(filtroV).map((item) => (
+                                &lt;Fila item={item} setDataLoaded={setDataLoaded}/>
+                            ))}
+                        &lt;/tbody>
+                    &lt;/Table>
+                &lt;/div>
+            }
+
+        &lt;/>
+    )
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#DeleteContact">DeleteContact</a></li><li><a href="global.html#DeleteQuotation">DeleteQuotation</a></li><li><a href="global.html#DeleteUser">DeleteUser</a></li><li><a href="global.html#DEV_ENDPOINT">DEV_ENDPOINT</a></li><li><a href="global.html#EditContact">EditContact</a></li><li><a href="global.html#EditQuotation">EditQuotation</a></li><li><a href="global.html#Eliminar_Cliente">Eliminar_Cliente</a></li><li><a href="global.html#getClients">getClients</a></li><li><a href="global.html#getList">getList</a></li><li><a href="global.html#getListCotizaciones">getListCotizaciones</a></li><li><a href="global.html#getListCotizacionesUsuario">getListCotizacionesUsuario</a></li><li><a href="global.html#getUsers">getUsers</a></li><li><a href="global.html#guardarCliente">guardarCliente</a></li><li><a href="global.html#guardarCotizacion">guardarCotizacion</a></li><li><a href="global.html#guardarCotizacionUsuario">guardarCotizacionUsuario</a></li><li><a href="global.html#Registrar_Cliente">Registrar_Cliente</a></li><li><a href="global.html#Registrar_Usuario">Registrar_Usuario</a></li><li><a href="global.html#UserContextProvider">UserContextProvider</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 13 2022 14:22:01 GMT-0700 (hora estándar del Pacífico de México)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

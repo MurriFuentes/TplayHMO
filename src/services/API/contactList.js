@@ -2,9 +2,9 @@ import axios from "axios";
 const DEV_ENDPOINT = "https://sapient-tracer-347401.uw.r.appspot.com";
 
 /**
- * Es el metodo que se utilizara para borrar un posible prospecto de la BD.
+ * Esta funcion se utiliza para borrar un posible prospecto de la BD mediante su ID.
  * @function
- * @param {number} contact_id - ID del contacto a borrar
+ * @param {number} contact_id - ID del prospecto a borrar
  */
 export const DeleteContact = (contact_id) => {
   let jwt = sessionStorage.getItem("jwt");
@@ -22,6 +22,11 @@ export const DeleteContact = (contact_id) => {
   }
 };
 
+/**
+ * Esta funcion permite editar un contacto de la lista segun su ID.
+ * @function
+ * @param {number} contact_id - ID del usuario que se editara en la BD
+ */
 export const EditContact = (contact_id) => {
   let jwt = sessionStorage.getItem("jwt");
   try {
@@ -66,9 +71,9 @@ export const getList = async () => {
 /**
  * Este medotodo se llama al momento que un cliente solicita una contratacion.
  * @method
- * @param {string} nombre 
- * @param {string} paquete 
- * @param {string} telefono 
+ * @param {string} nombre Nombre del cliente a guardar.
+ * @param {string} paquete Nombre del paquete a contratar.
+ * @param {string} telefono Numero de telefono del Cliente.
  */
 export const guardarCliente = (nombre, paquete, telefono) => {
   if(paquete==null){
@@ -92,5 +97,3 @@ export const guardarCliente = (nombre, paquete, telefono) => {
     throw error;
   }
 };
-
-

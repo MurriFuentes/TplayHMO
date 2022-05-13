@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: hooks/UseUser.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,69 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: hooks/UseUser.jsx</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useCallback, useContext, useState } from "react";
+import Context from "../context/UserContext";
+import loginservice from "../services/API/UserLogin";
+ 
+export default function UseUser (){
+    const {jwt, setJWT} = useContext(Context)
+    const [state, setState] = useState({loading: false, error: false})
     
+    /**
+     * Esta funcion se utiliza para hacer una consulta de un usuario y su contraseña dentro de la BD.
+     * @function
+     * @param {string} username
+     * @param {string} password
+      */
+    const login = useCallback((username, password) => {
+        setState({loading: true, error: false})
+        loginservice(username,password)
+            .then(jwt => {
+                window.sessionStorage.setItem('jwt', jwt)
+                setState({loading: false, error: false})        
+                setJWT(jwt);
+                alert("Login realizado con exito!", [
+                    { text: "OK", onPress: () => console.log("alert closed") },
+                  ]);
+            })
+            .catch(err =>{
+                window.sessionStorage.removeItem('jwt')
+                setState({loading: false, error: true})
+                alert("Usuario o contraseña incorrecto!", [
+                    { text: "OK", onPress: () => console.log("alert closed") },
+                  ]);
+                console.error(err)
+            })
+    }, [setJWT])
 
-
-
-
-
+    /**
+     * Esta funcion se utiliza para cerrar sesion en el la pagina.
+     * @function
+     */
+    const logout = useCallback(() => {
+        window.sessionStorage.removeItem('jwt')
+        setJWT(null)
+    }, [setJWT])
+    
+    return {
+        isLogged: Boolean(jwt),
+        isLogginLoading: state.loading,
+        hasLogginError: state.error,
+        login,
+        logout
+    }
+}</code></pre>
+        </article>
+    </section>
 
 
 

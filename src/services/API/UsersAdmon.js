@@ -9,7 +9,6 @@ const DEV_ENDPOINT ="https://sapient-tracer-347401.uw.r.appspot.com";
  * Este metodo se utiliza para traer una lista de usuarios desde la BD.
  * @method
  * @async
- * @returns 
  */
 export const getUsers = async () => {
     console.log(window['username'])
@@ -34,7 +33,7 @@ export const getUsers = async () => {
   /**
    * Esta funcion se utiliza para eliminar un contacto de la lista de contactos en la BD por medio del ID.
    * @function
-   * @param {integer} contact_id 
+   * @param {integer} contact_id ID del usuario a eliminar.
    */
   export const DeleteUser = (contact_id) => {
     let jwt = sessionStorage.getItem("jwt");
