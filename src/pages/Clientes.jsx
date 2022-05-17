@@ -175,10 +175,10 @@ export default function Page_Clientes() {
                   <td>{dato.nombre}</td>
                   <td>{dato.apellidoPaterno}</td>
                   <td>{dato.apellidoMaterno}</td>
-                  <td>{dato.fechaNacimiento}</td>
+                  <td>{dato.fechaNacimiento.slice(0,10)}</td>
                   <td>{dato.paqueteContratado}</td>
-                  <td>{dato.primerPago}</td>
-                  <td>{dato.segundoPago}</td>
+                  <td>{dato.primerPago==false?"No":"Si"}</td>
+                  <td>{dato.segundoPago==false?"No":"Si"}</td>
                   <td>
                     <Button
                       color="primary"

@@ -152,7 +152,7 @@ export default function Page_Usuarios() {
                   <td>{dato.nombre}</td>
                   <td>{dato.apellidoPaterno}</td>
                   <td>{dato.apellidoMaterno}</td>
-                  <td>{dato.fechaNacimiento}</td>
+                  <td>{dato.fechaNacimiento.slice(0, 10)}</td>
                   <td>{dato.numeroEmpleado}</td>
                   <td>
                     <Button
