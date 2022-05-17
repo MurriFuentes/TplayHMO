@@ -127,8 +127,8 @@ export default function Page_Usuarios() {
   };
 
   return (
-    <>
-      <Container>
+    <><div className="container-fluid alturaUsuarios">
+      <Container className="bg-dark text-white border">
         <br />
         <Button color="success" onClick={() => mostrarModalInsertar()}>
           Crear nuevo usuario
@@ -137,7 +137,7 @@ export default function Page_Usuarios() {
         <br />
         <Table>
           <thead>
-            <tr>
+            <tr className="text-white">
               <th>Nombre</th>
               <th>Apellido Paterno</th>
               <th>Apellido Materno</th>
@@ -148,7 +148,7 @@ export default function Page_Usuarios() {
           {isLogged && (
             <tbody>
               {userSelected.data.map((dato) => (
-                <tr key={dato.id}>
+                <tr key={dato.id} className="text-white h5">
                   <td>{dato.nombre}</td>
                   <td>{dato.apellidoPaterno}</td>
                   <td>{dato.apellidoMaterno}</td>
@@ -251,6 +251,7 @@ export default function Page_Usuarios() {
 
         <ModalFooter></ModalFooter>
       </Modal>
+      </div>
     </>
   );
 }

@@ -4,16 +4,16 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  background: #f1f1f1;
+  background: #460909;
   margin: auto;
-  border: 1px solid rgba(0, 0, 0, 0.274);
+  border: 3px solid rgb(4, 107, 171);;
 }
 
 .bloc-tabs {
   display: flex;
 }
 .tabs {
-  padding: 15px;
+  padding: 1em;
   text-align: center;
   width: 50%;
   background: rgba(128, 128, 128, 0.075);
@@ -28,8 +28,9 @@
 }
 
 .active-tabs {
-  background: white;
+  background: rgb(4, 107, 171);
   border-bottom: 1px solid transparent;
+  color: white;
 }
 
 .active-tabs::before {
@@ -40,8 +41,8 @@
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% + 2px);
-  height: 5px;
-  background: rgb(88, 147, 241);
+  height: 7px;
+  background: rgb(2, 88, 227);
 }
 
 button {
@@ -51,7 +52,7 @@ button {
   flex-grow: 1;
 }
 .content {
-  background: white;
+  background: rgb(0, 0, 0);
   padding: 20px;
   width: 100%;
   height: 100%;
@@ -94,6 +95,7 @@ button {
 
 .row{
   align-items: center;
+  margin: 0;
 }
 
 .vertical{
@@ -103,6 +105,10 @@ button {
 }
 
 .disabled{
-  background-color: rgb(199, 190, 190);
+  background: #460909;
   border-radius: 5px;
+}
+
+.inputsCotizador::placeholder{
+  color: rgb(83, 76, 76);
 }

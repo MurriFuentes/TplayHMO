@@ -14,9 +14,9 @@ export default function InnerSectionInfo({
       <div
         className={"tab_InnerSection " + (toggleState === 2 ? "disabled" : "")}
       >
-        <h5>{title}</h5>
+        <h5 className="text-white h4">{title}</h5>
         <div className="button_container"></div>
-        <ButtonGroup size="sm">
+        <ButtonGroup size="sm bg-dark h5">
           {data.map((infoDisplay, idx) => (
             <ToggleButton
               key={idx}
@@ -28,6 +28,7 @@ export default function InnerSectionInfo({
               checked={formState[name] === infoDisplay.value}
               onChange={onChange}
               disabled={toggleState === 2}
+              
             >
               {infoDisplay.name}
             </ToggleButton>
