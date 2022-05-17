@@ -114,6 +114,7 @@ export default function Page_Listar() {
                 <th>Nombre</th>
                 <th>Paquete</th>
                 <th>Telefono</th>
+                <th>Fecha</th>
                 <th>Revisado{(filtro % 3 == 0) ? "" : (filtro % 3 == 1) ? ":Si" : ":No"}</th>
                 <th>Funciones</th>
               </tr>
@@ -124,6 +125,7 @@ export default function Page_Listar() {
                   <td>{item.nombre}</td>
                   <td>{item.paquete}</td>
                   <td>{item.telefono}</td>
+                  <td>{item.fechaProspeccion.substr(0,10)}</td>
                   <td>{item.activo ? "Si" : "No"}</td>
 
                   <td style={{ display: "flex", justifyContent: "center" }}><Button onClick={() => handleClick2(item.id)}>< BsFillBrushFill /></Button><Button onClick={() => handleClick(item.id)}>< BsFillTrashFill /></Button></td>
