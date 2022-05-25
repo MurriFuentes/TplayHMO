@@ -16,21 +16,21 @@ export default function ControlledCarousel() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src={"."+Slide01}
+            src={"https://i.ibb.co/m5jfLM5/slider1.png"}
             alt="First slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src={"."+Slide02}
+            src={"https://i.ibb.co/pjG68Yg/slider2.jpg"}
             alt="Second slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src={"."+Slide03}
+            src={"https://i.ibb.co/5vnBrF6/slider3.png"}
             alt="Third slide"
           />
         </Carousel.Item>
