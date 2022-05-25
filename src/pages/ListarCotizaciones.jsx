@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getListCotizaciones, getListCotizacionesUsuario, DeleteQuotation, EditQuotation } from "../services/API/UserQuotation"
+import { getListCotizaciones, getListCotizacionesUsuario, DeleteQuotation, EditQuotation, EnviarCorreoos } from "../services/API/UserQuotation"
 import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import useUser from "../hooks/UseUser";
@@ -67,6 +67,10 @@ export default function PageListarCotizacion() {
     //     // EditQuotation(contact_id);
     //     setDataLoaded(false);
     // };
+
+    const enviarCorreo = () => {
+        EnviarCorreoos();
+    };
 
     const actualizarFiltro = () => {
         setFiltro(filtro + 1);
@@ -141,6 +145,7 @@ export default function PageListarCotizacion() {
                                 <Dropdown.Item className="text-white" onClick={() => actualizarFiltroInternet("1000")}>1000</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
+                        <Button className="text-center p-3 inline-block bg-danger " onClick={enviarCorreo}>Enviar recordatorios correo</Button>
                     </div>
                     <Table className="bg-black w-75 m-auto h5">
                         <thead>

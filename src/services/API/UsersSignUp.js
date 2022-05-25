@@ -91,4 +91,44 @@ export const Eliminar_Cliente = (client_id) => {
   }
 };
 
+export const Actualizar_ClientePrimer = (client_id, primerPagoo, segundoPagoo) => {
+  let jwt = sessionStorage.getItem("jwt");
+  if (!jwt) return [];
+  console.log(client_id)
+  try {
+    axios.post(`${DEV_ENDPOINT}/editarClientes`,{
+      id: client_id,
+      primerPago: !primerPagoo,
+      segundoPago: segundoPagoo,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const Actualizar_ClienteSegundo = (client_id, segundoPagoo, primerPagoo) => {
+  let jwt = sessionStorage.getItem("jwt");
+  if (!jwt) return [];
+  console.log(client_id)
+  try {
+    axios.post(`${DEV_ENDPOINT}/editarClientes`,{
+      id: client_id,
+      primerPago: primerPagoo,
+      segundoPago: !segundoPagoo,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
   

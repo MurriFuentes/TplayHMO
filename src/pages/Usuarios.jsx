@@ -111,19 +111,21 @@ export default function Page_Usuarios() {
     }
   };
 
-  const insertar = () => {
-    var valorNuevo = { ...userState };
-    valorNuevo.numeroEmpleado = userState.numeroEmpleado;
-    var lista = userSelected.data;
-    lista.push(valorNuevo);
-    console.log(lista);
-    setuserSelected({ data: lista, modalInsertar: false });
-  };
+  // const insertar = () => {
+  //   var valorNuevo = { ...userState };
+  //   valorNuevo.numeroEmpleado = userState.numeroEmpleado;
+  //   var lista = userSelected.data;
+  //   lista.push(valorNuevo);
+  //   console.log(lista);
+  //   setuserSelected({ data: lista, modalInsertar: false });
+  // };
 
   const onSubmit = (event) => {
     event.preventDefault();
     Registrar_Usuario(userState);
     setuserState(userInitialState);
+    setDataLoaded(false);
+    cerrarModalInsertar();
   };
 
   return (
@@ -152,7 +154,7 @@ export default function Page_Usuarios() {
                   <td>{dato.nombre}</td>
                   <td>{dato.apellidoPaterno}</td>
                   <td>{dato.apellidoMaterno}</td>
-                  <td>{dato.fechaNacimiento.slice(0, 10)}</td>
+                  <td>{dato.fechaNacimiento.slice(0,10)}</td>
                   <td>{dato.numeroEmpleado}</td>
                   <td>
                     <Button
@@ -189,7 +191,8 @@ export default function Page_Usuarios() {
                 className="form-control"
                 type="number"
                 name="numeroEmpleado"
-                minlenght={7}
+                maxLength="10" 
+                minLength="10"
                 onChange={(e) => onChange(e.target.name, e.target.value)}
               />
             </FormGroup>
@@ -237,7 +240,7 @@ export default function Page_Usuarios() {
                 onChange={(e) => onChange(e.target.name, e.target.value)}
               />
             </FormGroup>
-            <Button type="submit" color="primary" onClick={() => insertar()}>
+            <Button type="submit" color="primary">
               Insertar
             </Button>
             <Button

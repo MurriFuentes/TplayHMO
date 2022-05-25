@@ -28,6 +28,24 @@ export const guardarCotizacion = (paquete, numeroTelefono, correoElectronico) =>
   }
 };
 
+export const EnviarCorreoos = async () => {
+  let jwt = sessionStorage.getItem("jwt");
+  if (!jwt) return [];
+
+  try {
+    const resp = await axios.get(`${DEV_ENDPOINT}/enviarRecordatorios`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return resp.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 /**
  * Es un metodo que se utiliza cuando un usuario solicita una cotizacion, y queda guardada en la BD.
  * @method
