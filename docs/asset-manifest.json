@@ -16,9 +16,9 @@
     "static/js/2.5fbffdbd.chunk.js.LICENSE.txt": "./static/js/2.5fbffdbd.chunk.js.LICENSE.txt",
     "static/media/LOGO-BLANCO.75ce35e6.png": "./static/media/LOGO-BLANCO.75ce35e6.png",
     "static/media/App.css": "./static/media/PlaceHolder.60e4eaaf.jpg",
-    "static/media/slider1.5a593d28.png": "./static/media/slider1.5a593d28.png",
-    "static/media/slider2.574febf3.jpg": "./static/media/slider2.574febf3.jpg",
-    "static/media/slider3.ea3afda1.jpg": "./static/media/slider3.ea3afda1.jpg",
+    "static/media/slider1.5a593d28.png": "/static/media/slider1.5a593d28.png",
+    "static/media/slider2.574febf3.jpg": "/static/media/slider2.574febf3.jpg",
+    "static/media/slider3.ea3afda1.jpg": "/static/media/slider3.ea3afda1.jpg",
     "static/media/telefono.cd909ff5.png": "./static/media/telefono.cd909ff5.png"
   },
   "entrypoints": [
