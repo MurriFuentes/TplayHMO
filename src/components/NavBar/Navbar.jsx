@@ -49,7 +49,7 @@ export default function Navbar() {
         <>
             <nav id="navbar">
                 <Link to="/" className="navbar-logo" onClick={() => setTogglebar(false)}>
-                    <img src={Logo} alt="logo" className="Logo"/>
+                    <img src={"./"+Logo} alt="logo" className="Logo"/>
                 </Link>
                 
                
