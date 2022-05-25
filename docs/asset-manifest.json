@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "./static/css/main.ed9a7d46.chunk.css",
-    "main.js": "./static/js/main.8970f369.chunk.js",
-    "main.js.map": "./static/js/main.8970f369.chunk.js.map",
+    "main.js": ".static/js/main.9df443e0.chunk.js",
+    "main.js.map": "./static/js/main.9df443e0.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.53fd6026.js",
     "runtime-main.js.map": "./static/js/runtime-main.53fd6026.js.map",
     "static/css/2.f2273473.chunk.css": "./static/css/2.f2273473.chunk.css",
@@ -14,18 +14,18 @@
     "static/css/2.f2273473.chunk.css.map": "./static/css/2.f2273473.chunk.css.map",
     "static/css/main.ed9a7d46.chunk.css.map": "./static/css/main.ed9a7d46.chunk.css.map",
     "static/js/2.5fbffdbd.chunk.js.LICENSE.txt": "./static/js/2.5fbffdbd.chunk.js.LICENSE.txt",
-    "static/media/Cm_nacional_d.5a593d28.png": "./static/media/Cm_nacional_d.5a593d28.png",
     "static/media/LOGO-BLANCO.75ce35e6.png": "./static/media/LOGO-BLANCO.75ce35e6.png",
     "static/media/App.css": "./static/media/PlaceHolder.60e4eaaf.jpg",
-    "static/media/telefono.cd909ff5.png": "./static/media/telefono.cd909ff5.png",
-    "static/media/tp_banner_landing.574febf3.jpg": "./static/media/tp_banner_landing.574febf3.jpg",
-    "static/media/tp_promo-100megas.ea3afda1.jpg": "./static/media/tp_promo-100megas.ea3afda1.jpg"
+    "static/media/slider1.5a593d28.png": "./static/media/slider1.5a593d28.png",
+    "static/media/slider2.574febf3.jpg": "./static/media/slider2.574febf3.jpg",
+    "static/media/slider3.ea3afda1.jpg": "./static/media/slider3.ea3afda1.jpg",
+    "static/media/telefono.cd909ff5.png": "./static/media/telefono.cd909ff5.png"
   },
   "entrypoints": [
     "static/js/runtime-main.53fd6026.js",
     "static/css/2.f2273473.chunk.css",
     "static/js/2.5fbffdbd.chunk.js",
     "static/css/main.ed9a7d46.chunk.css",
-    "static/js/main.8970f369.chunk.js"
+    "static/js/main.9df443e0.chunk.js"
   ]
 }
