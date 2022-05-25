@@ -1,5 +1,5 @@
 import axios from "axios";
-const DEV_ENDPOINT = "https://sapient-tracer-347401.uw.r.appspot.com";
+const DEV_ENDPOINT = "https://springtotal.wl.r.appspot.com";
 
 /**
  * Es un metodo para que un administrador guarde una cotizacion de un posible cliente en la BD.
@@ -22,7 +22,7 @@ export const guardarCotizacion = (paquete, numeroTelefono, correoElectronico) =>
   } catch (error) { 
     alert("Cotizacion Fallida, porfavor intente mas tarde", [
       { text: "OK", onPress: () => console.log("alert closed") },
-    ]);
+    ]); 
     console.log(error);
     throw error;
   }

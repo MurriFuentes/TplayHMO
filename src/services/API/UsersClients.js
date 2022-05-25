@@ -3,7 +3,7 @@ import axios from "axios";
  * Es el EndPoint para llamar a la API
  * @type {string}
  */
-const DEV_ENDPOINT ="https://sapient-tracer-347401.uw.r.appspot.com";
+const DEV_ENDPOINT ="https://springtotal.wl.r.appspot.com";
 
 /**
  * Este metodo se utiliza para traer una lista de usuarios de la BD.

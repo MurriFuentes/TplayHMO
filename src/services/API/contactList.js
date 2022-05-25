@@ -1,5 +1,5 @@
 import axios from "axios";
-const DEV_ENDPOINT = "https://sapient-tracer-347401.uw.r.appspot.com";
+const DEV_ENDPOINT = "https://springtotal.wl.r.appspot.com";
 
 /**
  * Es el metodo que se utilizara para borrar un posible prospecto de la BD.
@@ -14,7 +14,7 @@ export const DeleteContact = (contact_id) => {
       headers: {
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
-      }
+      } 
     });
   } catch (error) {
     console.log(error);
