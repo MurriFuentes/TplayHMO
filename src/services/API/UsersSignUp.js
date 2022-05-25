@@ -1,5 +1,5 @@
 import axios from "axios";
-const DEV_ENDPOINT = "https://sapient-tracer-347401.uw.r.appspot.com";
+const DEV_ENDPOINT = "https://springtotal.wl.r.appspot.com";
 
 /**
  * Este metodo recibe un objeto que contiene la informacion necesaria para registrar un usuario nuevo en la BD.
