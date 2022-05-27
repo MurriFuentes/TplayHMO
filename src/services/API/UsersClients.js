@@ -1,4 +1,8 @@
 import axios from "axios";
+/**
+ * Es el EndPoint para llamar a la API
+ * @type {string}
+ */
 const DEV_ENDPOINT ="https://springtotal.wl.r.appspot.com";
 
 /**

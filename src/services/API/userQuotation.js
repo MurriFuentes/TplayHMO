@@ -22,7 +22,7 @@ export const guardarCotizacion = (paquete, numeroTelefono, correoElectronico) =>
   } catch (error) { 
     alert("Cotizacion Fallida, porfavor intente mas tarde", [
       { text: "OK", onPress: () => console.log("alert closed") },
-    ]);
+    ]); 
     console.log(error);
     throw error;
   }

@@ -14,7 +14,7 @@ export const DeleteContact = (contact_id) => {
       headers: {
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
-      }
+      } 
     });
   } catch (error) {
     console.log(error);

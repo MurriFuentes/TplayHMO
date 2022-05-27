@@ -21,7 +21,7 @@ export default function UseUser (){
                 setJWT(jwt);
                 alert("Login realizado con exito!", [
                     { text: "OK", onPress: () => console.log("alert closed") },
-                  ]);
+                  ]); 
             })
             .catch(err =>{
                 window.sessionStorage.removeItem('jwt')
