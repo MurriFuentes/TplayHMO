@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: services/API/UsersAdmon.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,72 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: services/API/UsersAdmon.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import axios from "axios";
+/**
+ * Es el EndPoint para llamar a la API
+ * @type {string}
+ */
+const DEV_ENDPOINT ="https://sapient-tracer-347401.uw.r.appspot.com";
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Este metodo se utiliza para traer una lista de usuarios desde la BD.
+ * @method
+ * @async
+ */
+export const getUsers = async () => {
+    console.log(window['username'])
+    let jwt = sessionStorage.getItem("jwt");
+    if (!jwt) return [];
+  
+    try {
+      const resp = await axios.get(`${DEV_ENDPOINT}/listarUsuarios`, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json",
+        },
+      });
+      window["users"] = {data:resp.data};
+      return resp.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+  
+  /**
+   * Esta funcion se utiliza para eliminar un contacto de la lista de contactos en la BD por medio del ID.
+   * @function
+   * @param {integer} contact_id ID del usuario a eliminar.
+   */
+  export const DeleteUser = (contact_id) => {
+    let jwt = sessionStorage.getItem("jwt");
+    try {
+      axios.delete(`${DEV_ENDPOINT}/eliminarUsuario`, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json",
+        },
+        data: {
+          source: contact_id
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  
+  };</code></pre>
+        </article>
+    </section>
 
 
 

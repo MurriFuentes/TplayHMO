@@ -6,7 +6,7 @@ export default function Footer(){
         <>
             <div id="footer">
                 <Link to="/" className="navbar-logo">
-                    <img src={Logo} alt="logo" className="Logo"/>
+                    <img src={"./"+Logo} alt="logo" className="Logo"/>
                 </Link>
                 <div className="nav-items">
                     <p className="pFooter"> Terminos y condiciones</p>

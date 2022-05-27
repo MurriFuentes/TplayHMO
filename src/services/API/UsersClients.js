@@ -7,8 +7,7 @@ const DEV_ENDPOINT ="https://springtotal.wl.r.appspot.com";
 
 /**
  * Este metodo se utiliza para traer una lista de usuarios de la BD.
- * @param {string} usuario 
- * @returns 
+ * @param {string} usuario
  */
 export const getClients = async (usuario) => {
   let jwt = sessionStorage.getItem("jwt");

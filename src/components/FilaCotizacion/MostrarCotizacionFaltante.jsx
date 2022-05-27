@@ -6,6 +6,7 @@ function MostrarCotizacionFaltante({ item }) {
         <>
             <Button className="bg-black text-white" size="lg">{item.numeroTelefono}</Button>
             <Button className="bg-black text-white" size="lg">{item.correoElectronico}</Button>
+            <Button className="bg-black text-white" size="lg">{item.fechaCotizacion.slice(0,10)}</Button>
             <Button variant={item.activo==false?"success":"danger"} size="lg">{item.activo==false?"Activo":"No Activo"}</Button>
             {item.paquete.velocidadInternet && <Button className="bg-black text-white" size="lg">{item.paquete.velocidadInternet} Megas</Button>}
             {item.paquete.amazon && <Button vclassName="bg-black text-white" size="lg">Amazon</Button>}

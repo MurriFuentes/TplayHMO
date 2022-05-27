@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: services/API/UserLogin.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,42 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: services/API/UserLogin.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const ENDPOINT ="https://sapient-tracer-347401.uw.r.appspot.com";
+/**
+ * Este metodo verifica si el usuario y contraseña existe en la BD.
+ * @function
+ * @param {string} username
+ * @param {string} password
+ * @returns {string} Regresa un token de JWT.
+ */
+export default function login ({username,password}) {
+    window['username'] = username;
     
-
-
-
-
-
+    return fetch(`${ENDPOINT}/authenticate`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({username,password})     
+    }).then(res =>{
+        if (!res.ok) throw new Error("Response is NOT ok");
+        return res.json()
+    }).then(res =>{
+        const {token} = res        
+        return token
+    })
+}</code></pre>
+        </article>
+    </section>
 
 
 

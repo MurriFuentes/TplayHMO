@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: context/UserContext.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,34 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: context/UserContext.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
+const Context = React.createContext({})
+/**
+ * Es un Context que se utiliza para traer la informacion del usuario desde cualquier parte de la aplicacion.
+ */
+export function UserContextProvider( { children }) {
+    const [jwt, setJWT] = useState(
+        () => window.sessionStorage.getItem('jwt'),
+    )
     
+    return &lt;Context.Provider value={{ jwt, setJWT }}>
+        {children}
+    &lt;/Context.Provider>
+}
 
-
-
-
-
+export default Context;</code></pre>
+        </article>
+    </section>
 
 
 
