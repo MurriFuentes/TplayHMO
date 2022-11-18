@@ -1,4 +1,4 @@
-import useUser from "../hooks/UseUser";
+import useUser from "../hooks/useUser";
 import * as icons from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";

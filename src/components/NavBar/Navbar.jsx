@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { navItems } from './NavbarItems';
 import { AdmonDrop } from './Dropdown';
 import NavButton from './NavButton';
-import useUser from '../../hooks/UseUser';
+import useUser from '../../hooks/useUser';
 import Logo from "../../images/LOGO-BLANCO.png"
 import * as icons2 from 'react-icons/fa';
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { getListCotizaciones, getListCotizacionesUsuario, DeleteQuotation, EditQuotation, EnviarCorreoos } from "../services/API/UserQuotation"
+import { getListCotizaciones, getListCotizacionesUsuario, DeleteQuotation, EditQuotation, EnviarCorreoos } from "../services/API/userQuotation"
 import { useHistory } from "react-router-dom";
 import { Table } from "react-bootstrap";
-import useUser from "../hooks/UseUser";
+import useUser from "../hooks/useUser";
 import { Dropdown } from "react-bootstrap";
 
 import { Button } from "react-bootstrap";

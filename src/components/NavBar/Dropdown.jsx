@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect ,useState } from 'react';
 import {AdmonItems} from './AdmonItems';
 import {UserItems} from './UserItems';
-import useUser from '../../hooks/UseUser';
+import useUser from '../../hooks/useUser';
 import './Dropdown.css';
 
 export function AdmonDrop () {

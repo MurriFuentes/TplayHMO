@@ -3,7 +3,7 @@ import "./Cotizador.css";
 import {
   guardarCotizacion,
   guardarCotizacionUsuario,
-} from "../../services/API/UserQuotation";
+} from "../../services/API/userQuotation";
 import Button from "react-bootstrap/Button";
 import { Form, Row, Col } from "react-bootstrap";
 import InnerSectionInfo from "./InnerSectionInfo";

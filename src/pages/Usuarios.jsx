@@ -14,13 +14,13 @@ import {
 } from "reactstrap";
 //import Registrar_Usuario from "../services/API/UsersSignUp"
 import { Registrar_Usuario } from "../services/API/UsersSignUp";
-import useUser from "../hooks/UseUser";
+import UseUser from "../hooks/useUser";
 import { useHistory } from "react-router-dom";
 
 export default function Page_Usuarios() {
   const [dataList, setDataList] = useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
-  const { isLogged } = useUser();
+  const { isLogged } = UseUser();
   let history = useHistory();
 
   const getListUsers = async () => {

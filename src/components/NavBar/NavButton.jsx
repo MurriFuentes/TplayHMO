@@ -1,4 +1,4 @@
-import useUser from "../../hooks/UseUser";
+import useUser from "../../hooks/useUser";
 import { Link, useRouteMatch} from "react-router-dom";
 
 export default function NavButton() {

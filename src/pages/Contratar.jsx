@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, FormGroup, Label, Button } from "reactstrap";
 import * as icons from "react-icons/bs";
 
-import { guardarCliente } from "../services/API/ContactList";
+import { guardarCliente } from "../services/API/contactList";
 export default function Page_Contratar({ paqueteC, handleC }) {
     const paquete = paqueteC;
     const [nombre, setNombre] = useState("");

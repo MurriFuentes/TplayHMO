@@ -14,7 +14,7 @@ import {
   Alert
 } from "reactstrap";
 import { Registrar_Cliente, Eliminar_Cliente, Actualizar_ClientePrimer, Actualizar_ClienteSegundo } from "../services/API/UsersSignUp";
-import useUser from "../hooks/UseUser";
+import useUser from "../hooks/useUser";
 import { useHistory } from "react-router-dom";
 import Push from 'push.js'
 import Notificaciones from './Notificaciones'

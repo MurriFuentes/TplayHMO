@@ -1,5 +1,5 @@
 import React from 'react'
-import { DeleteQuotation, EditQuotation } from "../../services/API/UserQuotation"
+import { DeleteQuotation, EditQuotation } from "../../services/API/userQuotation"
 import { BsFillTrashFill, BsFillBrushFill, BsFillEyeFill } from "react-icons/bs";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
