@@ -2,13 +2,11 @@ import { Link } from 'react-router-dom';
 import { useEffect ,useState } from 'react';
 import {AdmonItems} from './AdmonItems';
 import {UserItems} from './UserItems';
-import useUser from '../../hooks/useUser';
 import './Dropdown.css';
 
 export function AdmonDrop () {
     var [navOptions, setNavOptions] = useState(UserItems) ;
     const [dropdown, setDropdown] = useState(false);
-    const { isLogged } = useUser();
 
     useEffect(() => {
         var username = window["username"];
@@ -18,7 +16,7 @@ export function AdmonDrop () {
             setNavOptions(UserItems);
         }
 
-    }, [isLogged])
+    }, [])
 
     return (
         <>
